@@ -13,3 +13,7 @@ colors.
 You should also install [homebrew](https://github.com/mxcl/homebrew) if on OSX, this zshrc makes bad
 bad assumptions about your homebrew install and will probably need to be modded to work properly,
 until I fix it to make it more general.
+
+ZSH files provided by [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+VIMFILES are my collection of other peoples gitrepos as submodules with my own and others twists
+The rake file was modded from [ryanb's dotfiles](https://github.com/ryanb/dotfiles)
