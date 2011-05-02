@@ -16,6 +16,10 @@ until I fix it to make it more general. Also, I use [Chris Johnsen's tmux
 pasteboard](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard) to get tmux to play nice with
 pbcopy and pbpaste, I recommend installing that as well if you are using tmux.
 
+I would add megazoomer and mouseterm as SIMBL plugins to get fullscreen with mouse support.
+[http://bitheap.org/mouseterm/](http://bitheap.org/mouseterm/)
+[http://ianhenderson.org/megazoomer.html](http://ianhenderson.org/megazoomer.html)
+
 ZSH files provided by [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 VIMFILES are my collection of other peoples gitrepos as submodules with my own and others twists
 The rake file was modded from [ryanb's dotfiles](https://github.com/ryanb/dotfiles)
