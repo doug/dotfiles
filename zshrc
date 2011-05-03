@@ -16,7 +16,7 @@ export ZSH_THEME="skaro"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew pip gem osx)
+plugins=(git brew pip gem osx git-flow)
 
 source $ZSH/oh-my-zsh.sh
 
