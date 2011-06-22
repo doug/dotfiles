@@ -45,6 +45,8 @@ export NODE_PATH=/Users/dougfritz/Homebrew/lib/node
 # Python virtualenv
 #source $HOME/.python2.7/bin/activate
 #export PYTHONPATH=$HOME/.python2.7
+# Python
+export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
 
 # NPM
 export PATH=$HOMEBREW_PREFIX/share/npm/bin:$PATH
@@ -57,6 +59,9 @@ export PATH=$PATH:$HOME/.cljr/bin
 
 # pkg-config
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
+
+# Depot_tools
+export PATH=/Users/dougfritz/src/goog/depot_tools:$PATH
 
 # sbt-appengine-plugin
 export APPENGINE_SDK_HOME=`brew --prefix app-engine-java-sdk`/libexec
