@@ -33,6 +33,9 @@ export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
 
 export EDITOR=vim
 
+# Python from brew
+export PATH=$HOMEBREW_PREFIX/share/python:$PATH
+
 # JAVA
 export JAVA_HOME=$(/usr/libexec/java_home)
 
