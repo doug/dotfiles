@@ -27,6 +27,7 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 alias gvim=mvim
 alias python32="arch -i386 python"
+alias s="nocorrect git status"
 
 export HOMEBREW_PREFIX=/usr/local
 export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
@@ -80,4 +81,6 @@ export APPENGINE_SDK_HOME=`brew --prefix app-engine-java-sdk`/libexec
 
 # use .localrc for settings specific to one system
 [[ -f $HOME/.localrc ]] && source $HOME/.localrc
+
+[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
 
