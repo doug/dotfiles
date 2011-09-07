@@ -71,13 +71,15 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/in
 export PATH=/Users/dougfritz/src/goog/depot_tools:$PATH
 
 # sbt-appengine-plugin
-export APPENGINE_SDK_HOME=`brew --prefix app-engine-java-sdk`/libexec
 export JREBEL_JAR_PATH=/Applications/ZeroTurnaround/JRebel/jrebel.jar
 
 # Appengine
 export APPENGINE_SDK_HOME=`brew --prefix app-engine-java-sdk`/libexec
+export APPENGINE_HOME=$APPENGINE_SDK_HOME
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc # pythonbrew https://github.com/utahta/pythonbrew
 
 # use .localrc for settings specific to one system
 [[ -f $HOME/.localrc ]] && source $HOME/.localrc
