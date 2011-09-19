@@ -49,6 +49,9 @@ export GOBIN=$HOMEBREW_PREFIX/bin
 export GOARCH=amd64
 export GOOS=darwin
 
+# NACL
+export NACL_SDK_ROOT=/usr/local/Cellar/native-client-sdk/0.5
+
 # NODE
 export NODE_PATH=/Users/dougfritz/Homebrew/lib/node
 
