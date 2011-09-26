@@ -4,17 +4,15 @@
 [alias]
 	co = checkout
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+	ui = true
 [core]
 	excludesfile = <%= ENV['HOME'] %>/.gitignore
-	editor = vim
+	editor = mate
 	autocrlf = input
 [apply]
 	whitespace = nowarn
 [format]
-	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+	pretty = %C(yellow)%h%Creset %s %C(magenta)(%an, %cr)%Creset
 [github]
 	user = <%= print("GitHub Username: "); STDOUT.flush; STDIN.gets.chomp %>
 	token = <%= print("GitHub API Token: "); STDOUT.flush; STDIN.gets.chomp %>
