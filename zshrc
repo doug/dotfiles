@@ -25,6 +25,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+# don't use cdablevars
+unsetopt cdablevarS
+
 [[ -f $HOME/.useful-extras.sh ]] && source $HOME/.useful-extras.sh
 
 # Aliases
