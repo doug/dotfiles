@@ -40,9 +40,6 @@ export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
 
 export EDITOR=vim
 
-# Python from brew
-export PATH=$HOMEBREW_PREFIX/share/python:$PATH
-
 # JAVA
 export JAVA_HOME=$(/usr/libexec/java_home)
 
@@ -59,12 +56,6 @@ export NACL_SDK_ROOT=/usr/local/Cellar/native-client-sdk/0.5
 
 # NODE
 export NODE_PATH=/Users/dougfritz/Homebrew/lib/node
-
-# Python virtualenv
-#source $HOME/.python2.7/bin/activate
-#export PYTHONPATH=$HOME/.python2.7
-# Python
-export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
 
 # NPM
 export PATH=$HOMEBREW_PREFIX/share/npm/bin:$PATH
