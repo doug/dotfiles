@@ -49,7 +49,7 @@ export GOBIN=$HOMEBREW_PREFIX/bin
 export GOARCH=amd64
 export GOOS=darwin
 #export GOPATH=""
-export GOENGINE=/usr/local/Cellar/google-app-engine-go/1.6.0
+export GOENGINE=/usr/local/Cellar/google-app-engine-go/1.6.1
 
 # NACL
 export NACL_SDK_ROOT=/usr/local/Cellar/native-client-sdk/0.5
