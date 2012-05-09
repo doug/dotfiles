@@ -34,6 +34,12 @@ unsetopt cdablevarS
 alias gvim=mvim
 alias python32="arch -i386 python"
 alias s="nocorrect git status"
+alias noise="play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20"
+#play -n synth 60:00 brownnoise
+#play -n synth 2 sin 440-880 fade h 2 gain -5 : synth 2 sin 880-660 gain -5
+#play -r 32000 -t sl - synth $len pinknoise band -n 600 400 tremolo 20 .1 < /dev/zero
+#play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20
+# play -m "|sox -n -p synth sin " "|sox -n -p synth 2 tremolo 10" "|sox -n -p synth pinknoise band -n 2500 4000 reverb 20"
 
 export HOMEBREW_PREFIX=/usr/local
 export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
