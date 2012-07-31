@@ -23,7 +23,7 @@ platform=`uname`
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git github git-flow pip npm python gem)
+plugins=(git github git-flow pip python gem)
 if [[ "$platform"  == "Darwin" ]]; then
   plugins+=(osx brew)
   # OSX Aliases
