@@ -44,6 +44,15 @@ if [[ "$platform"  == "Darwin" ]]; then
   export APPENGINE_HOME=$APPENGINE_SDK_HOME
 elif [[ "$platform" == "Linux" ]]; then
   plugins+=(deb debian)
+  # Linux Aliases
+  alias pbcopy="xclip -selection clipboard"
+  alias pbpaste="xclip -selection clipboard -o"
+  alias open="xdg-open"
+  # GO
+  export GOROOT=/usr/local/src/go
+  export GOBIN=$GOROOT/bin
+  export GOARCH=amd64
+  export GOOS=linux
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -59,6 +68,7 @@ unsetopt cdablevarS
 [[ -f $HOME/.useful-extras.sh ]] && source $HOME/.useful-extras.sh
 
 alias s="nocorrect git status"
+
 alias noise="play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20"
 alias gamma="play -c 2 -n synth pinknoise band -n 315 365 reverb 20"
 alias beta="play -c 2 -n synth pinknoise band -n 315 340 reverb 20"
