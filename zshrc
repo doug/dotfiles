@@ -60,7 +60,13 @@ unsetopt cdablevarS
 
 alias s="nocorrect git status"
 alias noise="play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20"
-#play -n synth 60:00 brownnoise
+alias gamma="play -c 2 -n synth pinknoise band -n 315 365 reverb 20"
+alias beta="play -c 2 -n synth pinknoise band -n 315 340 reverb 20"
+alias alpha="play -c 2 -n synth pinknoise band -n 315 325 reverb 20"
+alias theta="play -c 2 -n synth pinknoise band -n 315 320 reverb 20"
+alias delta="play -c 2 -n synth pinknoise band -n 315 317 reverb 20"
+alias ocean="play -c 2 -r 41k -t sl - synth $len brownnoise tremolo .13 70 < /dev/zero"
+alias brown="play -c 2 -n synth 60:00 brownnoise"
 #play -n synth 2 sin 440-880 fade h 2 gain -5 : synth 2 sin 880-660 gain -5
 #play -r 32000 -t sl - synth $len pinknoise band -n 600 400 tremolo 20 .1 < /dev/zero
 #play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20
