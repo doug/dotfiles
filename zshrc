@@ -67,6 +67,8 @@ unsetopt cdablevarS
 
 [[ -f $HOME/.useful-extras.sh ]] && source $HOME/.useful-extras.sh
 
+# git aliases
+alias latestsubmodules="git submodule foreach \"(git checkout master; git pull)&\""
 alias s="nocorrect git status"
 
 alias noise="play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20"
