@@ -3,17 +3,16 @@ require 'erb'
 
 desc "install the dot files into user's home directory"
 task :install do
-  (Dir['irssi/*']).each do |file|
-    puts "FILE@@@ #{file}"
-    proccess_erb_file(file)
-  end
   Dir['*'].each do |file|
     next if %w[Rakefile README.md LICENSE setup.sh gfont.py].include? file
-    proccess_erb_file(file)
+    link_if_changed(file)
+  end
+  (Dir['irssi/*']).each do |file|
+    link_if_changed(file)
   end
 end
 
-def proccess_erb_file(file)
+def link_if_changed(file)
   replace_all = false
   if File.exist?(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"))
     if File.identical? file, File.join(ENV['HOME'], ".#{file.sub('.erb', '')}")
