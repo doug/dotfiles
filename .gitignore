@@ -3,3 +3,5 @@ vim/.VimballRecord
 fonts
 hgrc
 irssi/config
+irssi/fnotify
+irssi/config.autosave
