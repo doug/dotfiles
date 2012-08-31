@@ -59,6 +59,10 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+# keep the emacs start and end of line even if in vi-mode
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+
 # Add home bin
 export PATH=$PATH:$HOME/bin
 
