@@ -23,7 +23,7 @@ platform=`uname`
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git github git-flow pip python gem)
+plugins=(git github git-flow pip python gem rvm ruby vi-mode)
 if [[ "$platform"  == "Darwin" ]]; then
   plugins+=(osx brew)
   # OSX Aliases
@@ -70,6 +70,8 @@ unsetopt cdablevarS
 # git aliases
 alias update-submodules="git submodule foreach \"(git checkout master; git pull)&\""
 alias s="nocorrect git status"
+alias t="todo.sh"
+alias tt="todo.sh ls"
 
 alias noise="play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20"
 alias gamma="play -c 2 -n synth pinknoise band -n 315 365 reverb 20"
