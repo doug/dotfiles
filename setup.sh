@@ -11,6 +11,8 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     echo "Setting up Mac"
     curl -fsS https://raw.github.com/mxcl/homebrew/go | bash --ruby
     brew install wget node go ffmpeg gfortran macvim tmux
+    # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
+    # tmux pasteboard fixes issue of using macvim from tmux
   fi
 
   # Download fonts I like
