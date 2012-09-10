@@ -100,3 +100,5 @@ export EDITOR=vim
 [[ -f $HOME/.localrc ]] && source $HOME/.localrc
 
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
