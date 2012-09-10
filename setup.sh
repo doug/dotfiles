@@ -10,9 +10,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   elif [[ "$platform" == "Darwin" ]]; then
     echo "Setting up Mac"
     curl -fsS https://raw.github.com/mxcl/homebrew/go | bash --ruby
-    brew install wget node go ffmpeg gfortran macvim tmux
-    # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
-    # tmux pasteboard fixes issue of using macvim from tmux
   fi
 
   # Download fonts I like
@@ -51,8 +48,16 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     sudo apt-get install ffmpeg
     sudo apt-get install ctags
   elif [[ "$platform" == "Darwin" ]]; then
-    brew install ctags
+    brew install wget
+    brew install node
+    brew install go
     brew install ffmpeg
+    brew install gfortran
+    brew install macvim
+    brew install tmux
+    brew install ctags
+    # tmux pasteboard fixes issue of using macvim from tmux
+    brew install reattach-to-user-namespace
   fi
 
 fi
