@@ -53,6 +53,8 @@ elif [[ "$platform" == "Linux" ]]; then
   export GOBIN=$GOROOT/bin
   export GOARCH=amd64
   export GOOS=linux
+  # npm
+  export PATH=$PATH:/usr/local/share/bin
 fi
 
 source $ZSH/oh-my-zsh.sh
