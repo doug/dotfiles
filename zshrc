@@ -55,6 +55,8 @@ elif [[ "$platform" == "Linux" ]]; then
   export GOOS=linux
   # npm
   export PATH=$PATH:/usr/local/share/npm/bin
+  # 256 terminal
+  export TERM=xterm-256color
 fi
 
 source $ZSH/oh-my-zsh.sh
