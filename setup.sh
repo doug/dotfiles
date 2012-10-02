@@ -46,7 +46,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
   if [[ "$platform" == "Linux" ]]; then
     sudo apt-get install ffmpeg
-    sudo apt-get install ctags
+    sudo apt-get install exuberant-ctags
   elif [[ "$platform" == "Darwin" ]]; then
     brew install wget
     brew install node
