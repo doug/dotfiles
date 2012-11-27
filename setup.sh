@@ -9,7 +9,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     sudo apt-get install gfortran
   elif [[ "$platform" == "Darwin" ]]; then
     echo "Setting up Mac"
-    curl -fsS https://raw.github.com/mxcl/homebrew/go | bash --ruby
+    mkdir homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C .homebrew
   fi
 
   # Download fonts I like
@@ -32,8 +32,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   if [[ "$platform" == "Linux" ]]; then
     pythonbrew install 2.7.3
   elif [[ "$platform" == "Darwin" ]]; then
-    sudo pythonbrew install --framework --force --configure="--with-universal-archs=intel --enable-universalsdk" 2.7.3
-    sudo chown -R dougfritz $HOME/.pythonbrew
+    pythonbrew install --framework --configure="--with-universal-archs=intel --enable-universalsdk" 2.7.3
   fi
   pythonbrew switch 2.7.3
   easy_install readline

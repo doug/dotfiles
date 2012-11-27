@@ -30,7 +30,7 @@ if [[ "$platform"  == "Darwin" ]]; then
   alias gvim=mvim
   alias python32="arch -i386 python"
   # Homebrew
-  export HOMEBREW_PREFIX=/usr/local
+  export HOMEBREW_PREFIX=$HOME/.homebrew
   export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
   # GO
   export GOROOT=`brew --prefix go`
@@ -97,6 +97,7 @@ alias brown="play -c 2 -n synth 60:00 brownnoise"
 export EDITOR=vim
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc # pythonbrew https://github.com/utahta/pythonbrew
 
@@ -105,4 +106,3 @@ export EDITOR=vim
 
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
