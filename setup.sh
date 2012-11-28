@@ -9,6 +9,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     sudo apt-get install gfortran
   elif [[ "$platform" == "Darwin" ]]; then
     echo "Setting up Mac"
+    curl http://spectacleapp.com/updates/downloads/Spectacle%200.7.zip > spectacle.zip
+    unzip spectacle.zip
+    mv Spectacle.app /Applications
+    rm spectacle.zip
     mkdir homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C .homebrew
   fi
 
