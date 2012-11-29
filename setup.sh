@@ -13,7 +13,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     unzip spectacle.zip
     mv Spectacle.app /Applications
     rm spectacle.zip
-    mkdir homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C .homebrew
+    mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
   fi
 
   # Download fonts I like
@@ -34,8 +34,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   rake install
 
   if [[ "$platform" == "Linux" ]]; then
+    git config --global credential.helper cached
     pythonbrew install 2.7.3
   elif [[ "$platform" == "Darwin" ]]; then
+    git config --global credential.helper osxkeychain
     pythonbrew install --framework --configure="--with-universal-archs=intel --enable-universalsdk" 2.7.3
   fi
   pythonbrew switch 2.7.3
