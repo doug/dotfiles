@@ -54,6 +54,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     sudo apt-get install exuberant-ctags
     sudo apt-get install libclang-dev
   elif [[ "$platform" == "Darwin" ]]; then
+    brew install git
     brew install wget
     brew install node
     brew install go
