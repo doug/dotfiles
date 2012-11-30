@@ -21,6 +21,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   ./gfont.py "http://googlefontdirectory.googlecode.com/hg/ofl/dosis/METADATA.json"
   ./gfont.py "http://googlefontdirectory.googlecode.com/hg/ofl/anonymouspro/METADATA.json"
   ./gfont.py "http://googlefontdirectory.googlecode.com/hg/ofl/inconsolata/METADATA.json"
+  ./gfont.py "http://googlefontdirectory.googlecode.com/hg/ofl/sourcecodepro/METADATA.json"
 
   # Install rvm
   curl -L https://get.rvm.io | bash -s stable --ruby
