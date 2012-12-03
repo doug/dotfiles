@@ -29,7 +29,7 @@ if [[ "$platform"  == "Darwin" ]]; then
   # OSX Aliases
   alias gvim=mvim
   alias python32="arch -i386 python"
-  alias signalstrength='while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed -e 's/^.*://g' | xargs -I SIGNAL printf "\rRSSI dBm: SIGNAL"; sleep 0.5; done'
+  alias signalstrength="while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed -e 's/^.*://g' | xargs -I SIGNAL printf \"\rRSSI dBm: SIGNAL\"; sleep 0.5; done"
   # Homebrew
   export HOMEBREW_PREFIX=$HOME/.homebrew
   export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
