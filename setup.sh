@@ -51,19 +51,26 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
 
   if [[ "$platform" == "Linux" ]]; then
+    sudo apt-get install git
+    sudo apt-get install build-essential
     sudo apt-get install ffmpeg
+    sudo apt-get install node
     sudo apt-get install exuberant-ctags
     sudo apt-get install libclang-dev
   elif [[ "$platform" == "Darwin" ]]; then
     brew install git
+    brew install git-extras
+    brew install git-flow
     brew install wget
     brew install node
     brew install go
     brew install ffmpeg
-    brew install gfortran
     brew install macvim
     brew install tmux
     brew install ctags
+    brew install jpeg-turbo
+    brew link jpeg-turbo
+    brew install optipng
     # tmux pasteboard fixes issue of using macvim from tmux
     brew install reattach-to-user-namespace
   fi
