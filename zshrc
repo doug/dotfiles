@@ -30,6 +30,9 @@ if [[ "$platform"  == "Darwin" ]]; then
   alias gvim=mvim
   alias python32="arch -i386 python"
   alias signalstrength="while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed -e 's/^.*://g' | xargs -I SIGNAL printf \"\rRSSI dBm: SIGNAL\"; sleep 0.5; done"
+  alias pyengine="sudo brew unlink go-app-engine-64 && sudo brew link google-app-engine"
+  alias goengine="sudo brew unlink google-app-engine && sudo brew link go-app-engine-64"
+  alias subl="/Applications/Sublime\ Text\ 2.app/Contents/MacOS/Sublime\ Text\ 2 -w"
   # Homebrew
   export HOMEBREW_PREFIX=$HOME/.homebrew
   export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
