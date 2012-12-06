@@ -14,6 +14,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     mv Spectacle.app /Applications
     rm spectacle.zip
     mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
+    # echo $HOME/.homebrew/bin > /etc/paths.d/homebrew
   fi
 
   # Download fonts I like
