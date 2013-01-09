@@ -3,6 +3,7 @@
 	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
 [alias]
 	co = checkout
+	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 [color]
 	ui = true
 [core]
@@ -16,8 +17,8 @@
 [github]
 	user = <%= print("GitHub Username: "); STDOUT.flush; STDIN.gets.chomp %>
 [branch "master"]
-  remote = origin
+	remote = origin
 [push]
-  default = simple
+	default = simple
 # [credential]
-#  helper = osxkeychain
+#	helper = osxkeychain
