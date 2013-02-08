@@ -48,6 +48,7 @@ if [[ "$platform"  == "Darwin" ]]; then
   export APPENGINE_SDK_HOME=`brew --prefix app-engine-java-sdk`/libexec
   export APPENGINE_HOME=$APPENGINE_SDK_HOME
   # npm
+  export NODE_PATH=$HOMEBREW_PREFIX/lib/node
   export PATH=$PATH:$HOMEBREW_PREFIX/share/npm/bin
 elif [[ "$platform" == "Linux" ]]; then
   plugins+=(deb debian)
