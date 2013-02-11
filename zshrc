@@ -50,6 +50,11 @@ if [[ "$platform"  == "Darwin" ]]; then
   # npm
   export NODE_PATH=$HOMEBREW_PREFIX/lib/node
   export PATH=$PATH:$HOMEBREW_PREFIX/share/npm/bin
+  # compile path
+  export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOMEBREW_PREFIX/include
+  export CPP_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOMEBREW_PREFIX/include
+  export LIBRARY_PATH=$LIBRARY_PATH:$HOMEBREW_PREFIX/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOMEBREW_PREFIX/lib
 elif [[ "$platform" == "Linux" ]]; then
   plugins+=(deb debian)
   # Linux Aliases
