@@ -49,6 +49,7 @@ if [[ "$platform"  == "Darwin" ]]; then
   export APPENGINE_HOME=$APPENGINE_SDK_HOME
   # npm
   export NODE_PATH=$HOMEBREW_PREFIX/lib/node
+  export NODE_PATH=$NODE_PATH:`npm root -g`
   export PATH=$PATH:$HOMEBREW_PREFIX/share/npm/bin
   # compile path
   export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOMEBREW_PREFIX/include
