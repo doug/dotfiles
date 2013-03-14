@@ -35,18 +35,18 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
 
     setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc|zpreztorc)(.N); do
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc|zpreztorc)(.); do
         ln -fns "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
         echo "Linking $rcfile to ${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
 
     current=$(dirname "$0:A" )
-    for rcfile in "${current}"/^(bootstrap.sh|*.template)(.N); do
+    for rcfile in "${current}"/^(bootstrap.sh|*.template)*; do
         ln -fns "$rcfile" "$HOME/.${rcfile:t}"
         echo "Linking $rcfile to $HOME/.${rcfile:t}"
     done
-    
-    for rcfile in "${current}"/(*.template)(.N); do
+
+    for rcfile in "${current}"/(*.template)*; do
         cp "$rcfile" "$HOME/.${rcfile:t:s/.template//}"
         echo "Copying template $rcfile to $HOME/.${rcfile:t:s/.template//}"
     done
