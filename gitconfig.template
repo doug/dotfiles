@@ -15,3 +15,5 @@
 	remote = origin
 #[push]
 	#default = simple
+[push]
+    default = current
