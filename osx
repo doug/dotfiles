@@ -5,8 +5,8 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
 echo "Re-enable key repeat"
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-echo "Hide the dock"
-defaults write com.apple.Dock autohide-delay -float 10000 && killall Dock
+#echo "Hide the dock"
+#defaults write com.apple.Dock autohide-delay -float 10000 && killall Dock
 
 echo "Show the ~/Library folder"
 chflags nohidden ~/Library
@@ -32,10 +32,10 @@ echo "Disable press-and-hold for keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo "Set a blazingly fast keyboard repeat rate"
-defaults write NSGlobalDomain KeyRepeat -int 0.02
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 echo "Set a shorter Delay until key repeat"
-defaults write NSGlobalDomain InitialKeyRepeat -int 68
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 echo "Disable auto-correct"
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false

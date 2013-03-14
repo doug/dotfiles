@@ -12,6 +12,10 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
   alias open="xdg-open"
 fi
 
+function google {
+  open "https://www.google.com/#q=$1"
+}
+
 function tabs2spaces {
   for file in `find . -name "$1"`; do expand -t 2 $file > $file.new; mv $file.new $file; done
 }

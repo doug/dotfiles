@@ -95,9 +95,18 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     go get -u github.com/nsf/gocode
   fi
 
+  # install pythonz for python managment
+  read "pythonz?Install pythonz for python managment? [yN] "
+  if [[ "$pythonz" =~ ^[Yy]$ ]]; then
+    curl -kL https://raw.github.com/saghul/pythonz/master/pythonz-install | bash
+  fi
+
   # install spf13-vim3 vim files
   if [[ ! -d $HOME/.spf13-vim-3 ]]; then
-    curl http://j.mp/spf13-vim3 -L -o - | sh
+    read "vim?Install vim bundles? [yN] "
+    if [[ "$vim" =~ ^[Yy]$ ]]; then
+      curl http://j.mp/spf13-vim3 -L -o - | sh
+    fi
   fi
 
 fi
