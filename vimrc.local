@@ -1,6 +1,6 @@
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
-inoremap jj <Esc>
-inoremap kk <Esc>
+inoremap jj <esc>
+inoremap kk <esc>
 
 " Indentation
 set shiftwidth=2
@@ -8,24 +8,34 @@ set softtabstop=2
 set tabstop=2
 
 " Fast saving
-nmap ;w :w!<CR>
-"imap ;w <ESC>:w!<CR>a
-imap ;w <ESC>:w!<CR>
+nmap ;w :w!<cr>
+"imap ;w <esc>:w!<cr>a
+imap ;w <esc>:w!<cr>
 
 " set text width default
 set textwidth=100
 
 " Add emacs beginning and end of line
-map <C-A> ^
-map! <C-A> <C-O>^
-map <C-E> $
-map! <C-E> <C-O>$
+map <c-a> ^
+map! <c-a> <c-o>^
+map <c-e> $
+map! <c-e> <c-o>$
+
+" NERDTreeToggle
+nnoremap <c-n> :NERDTreeToggle<cr>
 
 " stop highlighting after I searched
-nmap <silent> // :nohlsearch<CR>
+nmap <silent> // :nohlsearch<cr>
 
 " rerun last command
 nmap <c-b> 1@:
+
+" Moving between split windows
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+
 
 " Set filetype for troublesome types
 augroup filetype
