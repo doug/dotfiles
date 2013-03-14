@@ -1,0 +1,65 @@
+" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
+inoremap jj <Esc>
+inoremap kk <Esc>
+
+" Indentation
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+" Fast saving
+nmap ;w :w!<CR>
+"imap ;w <ESC>:w!<CR>a
+imap ;w <ESC>:w!<CR>
+
+" set text width default
+set textwidth=100
+
+" Add emacs beginning and end of line
+map <C-A> ^
+map! <C-A> <C-O>^
+map <C-E> $
+map! <C-E> <C-O>$
+
+" stop highlighting after I searched
+nmap <silent> // :nohlsearch<CR>
+
+" rerun last command
+nmap <c-b> 1@:
+
+" Set filetype for troublesome types
+augroup filetype
+  autocmd!
+  autocmd BufRead,BufNewFile *.proto set ft=proto
+  autocmd BufRead,BufNewFile *.go set ft=go
+augroup end
+
+" Automatic formating on save
+augroup go
+  autocmd!
+  autocmd FileType go autocmd BufWritePre <buffer> Fmt
+  autocmd FileType go setlocal noexpandtab
+augroup end
+
+" remove trailing whitespace and pesky ^M
+augroup whitespace
+  autocmd!
+  autocmd BufWritePre * :%s/[ \t\r]\+$//e
+augroup end
+
+
+"jump to last cursor position when opening a file
+"don't do it when writing a commit log entry
+"augroup cursor
+  "autocmd!
+  "autocmd BufReadPost * call SetCursorPosition()
+"augroup end
+"function! SetCursorPosition()
+  "if &filetype !~ 'svn\|commit\c'
+    "if line("'\"") > 0 && line("'\"") <= line("$")
+      "exe "normal! g`\""
+      "normal! zz
+    "endif
+  "end
+"endfunction
+
