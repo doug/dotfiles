@@ -1,0 +1,17 @@
+if !exists('g:spf13_bundle_groups')
+    let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'ruby', 'python', 'javascript', 'html', 'misc', 'scala']
+endif
+
+let g:spf13_override_snippets = 1
+
+if !exists('g:doug_override_snippets')
+  " Snippets
+  Bundle 'doug/snipmate-snippets'
+endif
+
+if !exists('g:doug_override_go')
+  " Go
+  Bundle 'jnwhiteh/vim-golang'
+  Bundle 'nsf/gocode', {'rtp': 'vim/'}
+endif
+

@@ -7,11 +7,17 @@ platform=`uname`
 
 if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
+  current=$(dirname "$0:A" )
+
   if [[ "$platform" == "Linux" ]]; then
     echo "Setting up Linux"
     sudo apt-get install gfortran
   elif [[ "$platform" == "Darwin" ]]; then
     echo "Setting up Mac"
+    read "osx?Set new osx defaults? [yN] "
+    if [[ "$osx" =~ ^[Yy]$ ]]; then
+      zsh "$current/osx"
+    fi
     if [[ ! -d /Applications/Spectacle.app ]]; then
       curl http://spectacleapp.com/updates/downloads/Spectacle%200.7.zip > spectacle.zip
       unzip spectacle.zip
@@ -22,11 +28,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
     fi
     # echo $HOME/.homebrew/bin > /etc/paths.d/homebrew
-  fi
-
-  # install spf13-vim3 vim files
-  if [[ ! -d $HOME/.spf13-vim-3 ]]; then
-    curl http://j.mp/spf13-vim3 -L -o - | sh
   fi
 
   # install prezto
@@ -40,7 +41,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     echo "Linking $rcfile to ${ZDOTDIR:-$HOME}/.${rcfile:t}"
   done
 
-  current=$(dirname "$0:A" )
   for rcfile in "${current}"/^(bootstrap.sh|*.template)*; do
     ln -fns "$rcfile" "$HOME/.${rcfile:t}"
     echo "Linking $rcfile to $HOME/.${rcfile:t}"
@@ -52,9 +52,9 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     git config --global credential.helper osxkeychain
   fi
 
-  read "update?Update gitconfig? [yN] "
-  if [[ "$update" =~ ^[Yy]$ ]]; then
-    cp -f $current/.gitconfig.template $HOME/.gitconfig
+  read "gitconfig?Update gitconfig? [yN] "
+  if [[ "$gitconfig" =~ ^[Yy]$ ]]; then
+    cp -f $current/gitconfig.template $HOME/.gitconfig
     read "name?Your name: "
     git config --global user.name $name
     read "email?Your email: "
@@ -63,13 +63,14 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     git config --global github.user $github
   fi
 
-  read "update?Install base packages? [yN] "
-  if [[ "$update" =~ ^[Yy]$ ]]; then
+  read "base?Install base packages? [yN] "
+  if [[ "$base" =~ ^[Yy]$ ]]; then
     if [[ "$platform" == "Linux" ]]; then
       sudo apt-get install git
       sudo apt-get install build-essential
       sudo apt-get install ffmpeg
       sudo apt-get install node
+      sudo apt-get install golang
       sudo apt-get install exuberant-ctags
       sudo apt-get install libclang-dev
     elif [[ "$platform" == "Darwin" ]]; then
@@ -90,6 +91,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       # tmux pasteboard fixes issue of using macvim from tmux
       brew install reattach-to-user-namespace
     fi
+    # install Go utilities
+    go get -u github.com/nsf/gocode
+  fi
+
+  # install spf13-vim3 vim files
+  if [[ ! -d $HOME/.spf13-vim-3 ]]; then
+    curl http://j.mp/spf13-vim3 -L -o - | sh
   fi
 
 fi
