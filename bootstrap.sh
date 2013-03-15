@@ -11,7 +11,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
   if [[ "$platform" == "Linux" ]]; then
     echo "Setting up Linux"
-    sudo apt-get install gfortran
   elif [[ "$platform" == "Darwin" ]]; then
     echo "Setting up Mac"
     read "osx?Set new osx defaults? [yN] "
