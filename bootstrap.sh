@@ -46,7 +46,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   done
 
   if [[ "$platform" == "Linux" ]]; then
-    git config --global credential.helper cached
+    git config --global credential.helper cache
   elif [[ "$platform" == "Darwin" ]]; then
     git config --global credential.helper osxkeychain
   fi
