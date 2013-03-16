@@ -40,10 +40,14 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     echo "Linking $rcfile to ${ZDOTDIR:-$HOME}/.${rcfile:t}"
   done
 
-  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx)*; do
+  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|tmux.osx.conf)*; do
     ln -fns "$rcfile" "$HOME/.${rcfile:t}"
     echo "Linking $rcfile to $HOME/.${rcfile:t}"
   done
+
+  if [[ "$platform" == "Darwin" ]]; then
+    ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
+  fi
 
   if [[ "$platform" == "Linux" ]]; then
     git config --global credential.helper cache
