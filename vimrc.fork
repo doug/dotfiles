@@ -88,8 +88,12 @@ augroup end
 " Slime configuration
 let g:slime_target = "tmux"
 
+" copy text to system clipboard
 if has("macunix")
   vmap <c-x> :!pbcopy<cr>
   vmap <c-c> :w !pbcopy<cr><cr>
 elseif has("x")
 end
+
+" Space will toggle folds!
+nnoremap <space> za
