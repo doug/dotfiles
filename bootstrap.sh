@@ -40,7 +40,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     echo "Linking $rcfile to ${ZDOTDIR:-$HOME}/.${rcfile:t}"
   done
 
-  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|tmux.osx.conf)*; do
+  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|tmux.osx.conf|themes)*; do
     ln -fns "$rcfile" "$HOME/.${rcfile:t}"
     echo "Linking $rcfile to $HOME/.${rcfile:t}"
   done
