@@ -46,6 +46,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   done
 
   if [[ "$platform" == "Darwin" ]]; then
+    mv $HOME/.tmux.conf $HOME/.tmux.base.conf
     ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
   fi
 

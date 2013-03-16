@@ -22,8 +22,11 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     export LIBRARY_PATH=$LIBRARY_PATH:$HOMEBREW_PREFIX/lib
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOMEBREW_PREFIX/lib
 elif [[ "$PLATFORM" == "Linux" ]]; then
+    # Go
     export GOARCH=amd64
     export GOOS=linux
+    # Path
+    export PATH=$PATH:/opt/local/bin
 fi
 
 # Add home bin
