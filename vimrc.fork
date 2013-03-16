@@ -1,3 +1,6 @@
+" Add a local leader which is also ,
+let maplocalleader=","
+
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <esc>
 inoremap kk <esc>
@@ -31,11 +34,13 @@ nmap <silent> // :nohlsearch<cr>
 nmap <c-b> 1@:
 
 " Moving between split windows
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-h> <C-w>h
-map <C-l> <C-w>l
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-h> <c-w>h
+map <c-l> <c-w>l
 
+" toggle paste mode
+nmap <LocalLeader>pp :set paste!<cr>
 
 " Set filetype for troublesome types
 augroup filetype
@@ -57,8 +62,15 @@ augroup whitespace
   autocmd BufWritePre * :%s/[ \t\r]\+$//e
 augroup end
 
+" MultiCursor bundle mappings
+ let g:multicursor_quit = "<LocalLeader>qq"
+ nnoremap <LocalLeader>qp :<c-u>call MultiCursorPlaceCursor()<cr>
+ nnoremap <LocalLeader>qm :<c-u>call MultiCursorManual()<cr>
+ nnoremap <LocalLeader>qr :<c-u>call MultiCursorRemoveCursors()<cr>
+ xnoremap <LocalLeader>qv :<c-u>call MultiCursorVisual()<cr>
+ nnoremap <LocalLeader>qs :<c-u>call MultiCursorSearch('')<cr>
 
-"jump to last cursor position when opening a file
+ "jump to last cursor position when opening a file
 "don't do it when writing a commit log entry
 "augroup cursor
   "autocmd!
@@ -73,3 +85,11 @@ augroup end
   "end
 "endfunction
 
+" Slime configuration
+let g:slime_target = "tmux"
+
+if has("macunix")
+  vmap <c-x> :!pbcopy<cr>
+  vmap <c-c> :w !pbcopy<cr><cr>
+elseif has("x")
+end

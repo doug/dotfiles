@@ -4,14 +4,17 @@ endif
 
 let g:spf13_override_snippets = 1
 
-if !exists('g:doug_override_snippets')
-  " Snippets
-  Bundle 'doug/snipmate-snippets'
-endif
+"if !exists('g:doug_override_snippets')
+  "" Snippets
+  "Bundle 'doug/snipmate-snippets'
+"endif
 
 if !exists('g:doug_override_go')
   " Go
   Bundle 'jnwhiteh/vim-golang'
   Bundle 'nsf/gocode', {'rtp': 'vim/'}
 endif
+
+Bundle 'https://github.com/paradigm/vim-multicursor.git'
+Bundle 'jpalardy/vim-slime'
 
