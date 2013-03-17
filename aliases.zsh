@@ -44,6 +44,12 @@ function convert2mp4 {
   ffmpeg -i $1 -acodec libfaac -ab 96k -vcodec libx264 -vpre slower -vpre main -level 21 -refs 2 -b 345k -bt 345k -threads 0 -s 640x360 $2
 }
 
+function git-create {
+  server=${1%%[/]*}
+  remote=${1#*[/]}
+  ssh $server "mkdir -p /$remote && cd /$remote && git init --bare"
+}
+
 # git aliases
 alias update-submodules="git submodule foreach \"(git checkout master; git pull)&\""
 alias s="nocorrect git status"
