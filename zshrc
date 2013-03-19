@@ -19,11 +19,11 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     export CPP_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOMEBREW_PREFIX/include
     export LIBRARY_PATH=$LIBRARY_PATH:$HOMEBREW_PREFIX/lib
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOMEBREW_PREFIX/lib
-    if [[ $+commands[brew] == 1 ]]; then
+    if (( $+commands[brew] )); then
       # GO
       export GOROOT=`brew --prefix go`
     fi
-    if [[ $+commands[npm] == 1 ]]; then
+    if (( $+commands[npm] )); then
       # npm
       export NODE_PATH=$NODE_PATH:`npm root -g`
     fi
