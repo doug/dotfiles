@@ -6,7 +6,6 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     export HOMEBREW_PREFIX=$HOME/.homebrew
     export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
     # GO
-    export GOROOT=`brew --prefix go`
     export GOBIN=$HOMEBREW_PREFIX/bin
     export GOARCH=amd64
     export GOOS=darwin
@@ -14,23 +13,30 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
     # npm
     export NODE_PATH=$HOMEBREW_PREFIX/lib/node
-    export NODE_PATH=$NODE_PATH:`npm root -g`
-    export PATH=$PATH:$HOMEBREW_PREFIX/share/npm/bin
+    export PATH=$HOMEBREW_PREFIX/share/npm/bin:$PATH
     # compile path
     export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOMEBREW_PREFIX/include
     export CPP_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOMEBREW_PREFIX/include
     export LIBRARY_PATH=$LIBRARY_PATH:$HOMEBREW_PREFIX/lib
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOMEBREW_PREFIX/lib
+    if [[ $+commands[brew] == 1 ]]; then
+      # GO
+      export GOROOT=`brew --prefix go`
+    fi
+    if [[ $+commands[npm] == 1 ]]; then
+      # npm
+      export NODE_PATH=$NODE_PATH:`npm root -g`
+    fi
 elif [[ "$PLATFORM" == "Linux" ]]; then
     # Go
     export GOARCH=amd64
     export GOOS=linux
     # Path
-    export PATH=$PATH:/opt/local/bin
+    export PATH=/opt/local/bin:$PATH
 fi
 
 # Add home bin
-export PATH=$PATH:$HOME/bin
+export PATH=$HOME/bin:$PATH
 
 export EDITOR=vim
 
