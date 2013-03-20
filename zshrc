@@ -1,12 +1,19 @@
 # Detect os
 export PLATFORM=`uname`
 
+# Add home bin
+export PATH=$HOME/bin:$PATH
+# Go
+export GOPATH=$HOME/.gocode
+export PATH=$GOPATH/bin:$PATH
+
+export EDITOR=vim
 if [[ "$PLATFORM" == "Darwin" ]]; then
     # Homebrew
     export HOMEBREW_PREFIX=$HOME/.homebrew
     export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
     # GO
-    export GOBIN=$HOMEBREW_PREFIX/bin
+    #export GOBIN=$HOMEBREW_PREFIX/bin
     export GOARCH=amd64
     export GOOS=darwin
     # pkg-config
@@ -39,10 +46,6 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
     export PATH=/opt/local/bin:$PATH
 fi
 
-# Add home bin
-export PATH=$HOME/bin:$PATH
-
-export EDITOR=vim
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
