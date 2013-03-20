@@ -12,7 +12,6 @@ set tabstop=2
 
 " Fast saving
 nmap ;w :w!<cr>
-"imap ;w <esc>:w!<cr>a
 imap ;w <esc>:w!<cr>
 
 " set text width default
@@ -32,12 +31,6 @@ nmap <silent> // :nohlsearch<cr>
 
 " rerun last command
 nmap <c-b> 1@:
-
-" Moving between split windows
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-h> <c-w>h
-map <c-l> <c-w>l
 
 " toggle paste mode
 nmap <LocalLeader>pp :set paste!<cr>
@@ -97,3 +90,4 @@ end
 
 " Space will toggle folds!
 nnoremap <space> za
+

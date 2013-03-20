@@ -34,28 +34,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
   fi
 
-  setopt EXTENDED_GLOB
-  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc|zpreztorc)(.); do
-    ln -fns "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    echo "Linking $rcfile to ${ZDOTDIR:-$HOME}/.${rcfile:t}"
-  done
-
-  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|tmux.osx.conf|themes)*; do
-    ln -fns "$rcfile" "$HOME/.${rcfile:t}"
-    echo "Linking $rcfile to $HOME/.${rcfile:t}"
-  done
-
-  if [[ "$platform" == "Darwin" ]]; then
-    mv $HOME/.tmux.conf $HOME/.tmux.base.conf
-    ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
-  fi
-
-  if [[ "$platform" == "Linux" ]]; then
-    git config --global credential.helper cache
-  elif [[ "$platform" == "Darwin" ]]; then
-    git config --global credential.helper osxkeychain
-  fi
-
   read "gitconfig?Update gitconfig? [yN] "
   if [[ "$gitconfig" =~ ^[Yy]$ ]]; then
     cp -f $current/gitconfig.template $HOME/.gitconfig
@@ -65,6 +43,11 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     git config --global user.email $email
     read "github?Github username: "
     git config --global github.user $github
+    if [[ "$platform" == "Linux" ]]; then
+      git config --global credential.helper cache
+    elif [[ "$platform" == "Darwin" ]]; then
+      git config --global credential.helper osxkeychain
+    fi
   fi
 
   read "base?Install base packages? [yN] "
@@ -77,6 +60,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       sudo apt-get install golang
       sudo apt-get install exuberant-ctags
       sudo apt-get install libclang-dev
+      sudo apt-get install fasd
     elif [[ "$platform" == "Darwin" ]]; then
       brew install git
       brew install git-extras
@@ -111,6 +95,22 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$vim" =~ ^[Yy]$ ]]; then
       curl http://j.mp/spf13-vim3 -L -o - | sh
     fi
+  fi
+
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc|zpreztorc)(.); do
+    ln -fns "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    echo "Linking $rcfile to ${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+
+  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|tmux.osx.conf|themes)*; do
+    ln -fns "$rcfile" "$HOME/.${rcfile:t}"
+    echo "Linking $rcfile to $HOME/.${rcfile:t}"
+  done
+
+  if [[ "$platform" == "Darwin" ]]; then
+    mv $HOME/.tmux.conf $HOME/.tmux.base.conf
+    ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
   fi
 
 fi
