@@ -64,6 +64,10 @@ bindkey '^E' end-of-line
 # don't use cdablevars
 unsetopt cdablevarS
 
+if [[ -s $HOME/.nvm/nvm.sh ]]; then
+    source $HOME/.nvm/nvm.sh
+fi
+
 if [[ -s $HOME/.localrc ]]; then
     source $HOME/.localrc
 fi

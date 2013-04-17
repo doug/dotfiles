@@ -50,6 +50,11 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
+  read "nvm?Install nvm? [yN] "
+  if [[ "$nvm" =~ ^[Yy]$ ]]; then
+    git clone git://github.com/creationix/nvm.git $HOME/.nvm
+  fi
+
   read "base?Install base packages? [yN] "
   if [[ "$base" =~ ^[Yy]$ ]]; then
     if [[ "$platform" == "Linux" ]]; then
