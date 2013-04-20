@@ -4,7 +4,7 @@ export PLATFORM=`uname`
 # Add home bin
 export PATH=$HOME/bin:$PATH
 # Go
-export GOPATH=$HOME/.gocode
+export GOPATH=$HOME/.go
 export PATH=$GOPATH/bin:$PATH
 
 export EDITOR=vim
@@ -63,6 +63,10 @@ bindkey '^E' end-of-line
 
 # don't use cdablevars
 unsetopt cdablevarS
+
+if [[ -s $HOME/.rvm/scripts/rvm ]] then
+  source $HOME/.rvm/scripts/rvm
+fi
 
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
     source $HOME/.nvm/nvm.sh

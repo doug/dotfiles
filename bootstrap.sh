@@ -102,6 +102,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
+  if [[ ! -d $HOME/.rvm ]]; then
+    read "rvm?Install rvm? [yN] "
+    if [[ "$rvm" =~ ^[Yy]$ ]]; then
+      curl -L https://get.rvm.io | bash -s stable --autolibs=enabled --ruby=1.9.3
+    fi
+  fi
+
   setopt EXTENDED_GLOB
   for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc|zpreztorc)(.); do
     ln -fns "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
