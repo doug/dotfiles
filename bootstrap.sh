@@ -18,13 +18,15 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       zsh "$current/osx"
     fi
     if [[ ! -d /Applications/Spectacle.app ]]; then
-      curl http://spectacleapp.com/updates/downloads/Spectacle%200.7.zip > spectacle.zip
+      curl https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.2.zip > spectacle.zip
       unzip spectacle.zip
       mv Spectacle.app /Applications
       rm spectacle.zip
     fi
     if [[ ! -d $HOME/.homebrew ]]; then
       mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
+      echo "Homebrew installed restart your terminal session and run bootstrap.sh again."
+      exit
     fi
     # echo $HOME/.homebrew/bin > /etc/paths.d/homebrew
   fi
