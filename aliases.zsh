@@ -12,6 +12,10 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
   alias open="xdg-open"
 fi
 
+function pythonlib {
+  python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"
+}
+
 function google {
   open "https://www.google.com/#q=$1"
 }
