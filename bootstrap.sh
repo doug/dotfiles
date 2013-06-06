@@ -92,11 +92,12 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     go get -u github.com/nsf/gocode
   fi
 
-  # install pythonz for python managment
-  #read "pythonz?Install pythonz for python managment? [yN] "
-  #if [[ "$pythonz" =~ ^[Yy]$ ]]; then
-    #curl -kL https://raw.github.com/saghul/pythonz/master/pythonz-install | bash
-  #fi
+  # install pythonbrew for python managment
+  read "pythonbrew?Install pythonbrew for python management? [yN] "
+  if [[ "$pythonbrew" =~ ^[Yy]$ ]]; then
+    curl -kL http://xrl.us/pythonbrewinstall | bash
+  fi
+
 
   # install spf13-vim3 vim files
   if [[ ! -d $HOME/.spf13-vim-3 ]]; then
