@@ -54,6 +54,24 @@ function git-create {
   ssh $server "mkdir -p /$remote && cd /$remote && git init --bare"
 }
 
+function chop_mp3() {
+  file=$1
+  step=$2
+  wav=full.wav
+  lame --decode $1 $wav
+  duration=$(soxi -D $wav) 
+  echo $duration
+  steps=$((duration/step))
+  echo $steps
+  for x in $(seq 0 $steps); do
+    echo $x
+    sox $wav out.wav trim $((x*step)) $((x*step+step))
+    lame out.wav $x.mp3
+    rm -f out.wav
+  done
+  rm -f $wav
+}
+
 # git aliases
 alias update-submodules="git submodule foreach \"(git checkout master; git pull)&\""
 alias s="nocorrect git status"
