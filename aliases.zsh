@@ -54,18 +54,32 @@ function git-create {
   ssh $server "mkdir -p /$remote && cd /$remote && git init --bare"
 }
 
-function chop_mp3() {
-  file=$1
+function chop_wav() {
+  wav=$1
   step=$2
-  wav=full.wav
-  lame --decode $1 $wav
-  duration=$(soxi -D $wav) 
+  duration=$(soxi -D $wav)
   echo $duration
   steps=$((duration/step))
   echo $steps
   for x in $(seq 0 $steps); do
     echo $x
-    sox $wav out.wav trim $((x*step)) $((x*step+step))
+    sox $wav $x.wav trim $((x*step)) $step
+  done
+}
+
+function chop_mp3() {
+  file=$1
+  step=$2
+  wav=full.wav
+  lame --decode $1 $wav
+  duration=$(soxi -D $wav)
+  echo $duration
+  steps=$((duration/step))
+  echo $steps
+  for x in $(seq 0 $steps); do
+    echo $x
+    sox $wav out.wav trim $((x*step)) $step
+    #ffmpeg -i out.wav $x.m4a
     lame out.wav $x.mp3
     rm -f out.wav
   done

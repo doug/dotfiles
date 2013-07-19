@@ -1,3 +1,7 @@
+" UnBundle some modules I don't want
+UnBundle 'nathanaelkane/vim-indent-guides'
+
+
 " Add a local leader which is also ,
 let maplocalleader=","
 
