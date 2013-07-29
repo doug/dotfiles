@@ -25,8 +25,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
     if [[ ! -d $HOME/.homebrew ]]; then
       mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
-      echo "Homebrew installed restart your terminal session and run bootstrap.sh again."
-      exit
+      export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
     fi
     # echo $HOME/.homebrew/bin > /etc/paths.d/homebrew
   fi
@@ -151,5 +150,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     mv $HOME/.tmux.conf $HOME/.tmux.base.conf
     ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
   fi
+
+  source $HOME/.zshrc
 
 fi
