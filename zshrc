@@ -52,6 +52,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Add Google Cloud SDK
+alias pyengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/python $HOME/bin/cloudsdk-current"
+alias goengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/go $HOME/bin/cloudsdk-current"
+export PATH=$PATH:$HOME/bin/cloudsdk-current/bin
+
+
 # Customize to your needs...
 if [[ -s $HOME/.aliases.zsh ]]; then
     source $HOME/.aliases.zsh

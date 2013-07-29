@@ -33,7 +33,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
   # install prezto
   if [[ ! -d $HOME/.zprezto ]]; then
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto"
   fi
 
   read "gitconfig?Update gitconfig? [yN] "
@@ -52,10 +52,32 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
+  if [[ ! -d $HOME/bin/cloudsdk ]]; then
+    read "cloudsdk?Install Google Cloud SDK? [yN] "
+    if [[ "$cloudsdk" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin/cloudsdk
+      CLOUD_VERSION="0.9.6"
+      if [[ $platform == "Darwin" ]]; then
+        PLATFORMSTR="mac"
+      else
+        PLATFORMSTR="linux"
+      fi
+      curl https://dl.google.com/dl/cloudsdk/google-cloud-sdk-${CLOUD_VERSION}-${PLATFORMSTR}-python.zip > cloud.zip
+      unzip cloud.zip
+      mv google-cloud-sdk-${CLOUD_VERSION} $HOME/bin/cloudsdk/python
+      rm -f cloud.zip
+      curl https://dl.google.com/dl/cloudsdk/google-cloud-sdk-${CLOUD_VERSION}-${PLATFORMSTR}-go_amd64.zip > cloud.zip
+      unzip cloud.zip
+      mv google-cloud-sdk-${CLOUD_VERSION} $HOME/bin/cloudsdk/go
+      rm -f cloud.zip
+      ln -s cloudsdk/python $HOME/bin/cloudsdk-current
+    fi
+  fi
+
   if [[ ! -d $HOME/.nvm ]]; then
     read "nvm?Install nvm? [yN] "
     if [[ "$nvm" =~ ^[Yy]$ ]]; then
-    git clone git://github.com/creationix/nvm.git $HOME/.nvm
+      git clone git://github.com/creationix/nvm.git $HOME/.nvm
     fi
   fi
 
@@ -64,22 +86,15 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$platform" == "Linux" ]]; then
       sudo apt-get install git
       sudo apt-get install build-essential
-      sudo apt-get install ffmpeg
-      sudo apt-get install node
-      sudo apt-get install golang
       sudo apt-get install exuberant-ctags
       sudo apt-get install libclang-dev
       sudo apt-get install fasd
     elif [[ "$platform" == "Darwin" ]]; then
       brew install git
       brew install git-extras
-      brew install git-flow
       brew install wget
       brew install ack
-      brew install node
       brew install go
-      brew install ffmpeg
-      brew install macvim
       brew install tmux
       brew install ctags
       brew install jpeg-turbo
@@ -89,7 +104,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       brew install reattach-to-user-namespace
     fi
     # install Go utilities
-    go get -u github.com/nsf/gocode
+    #go get -u github.com/nsf/gocode
   fi
 
   # install pythonbrew for python managment
