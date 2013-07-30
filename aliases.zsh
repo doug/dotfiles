@@ -10,6 +10,7 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
   alias pbcopy="xclip -selection clipboard"
   alias pbpaste="xclip -selection clipboard -o"
   alias open="xdg-open"
+  alias trash="gvfs-trash"
 fi
 
 function pythonlib {
