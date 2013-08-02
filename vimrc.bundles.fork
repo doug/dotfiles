@@ -17,4 +17,5 @@ let g:spf13_override_snippets = 1
 
 Bundle 'https://github.com/paradigm/vim-multicursor.git'
 Bundle 'jpalardy/vim-slime'
+Bundle 'https://github.com/dart-lang/dart-vim-plugin.git'
 
