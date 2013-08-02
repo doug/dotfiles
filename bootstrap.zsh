@@ -73,6 +73,22 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
+  if [[ ! -d $HOME/bin/dart-sdk ]]; then
+    read "dartsdk?Install Dart SDK? [yN] "
+    if [[ "$dartsdk" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin
+      if [[ $platform == "Darwin" ]]; then
+        PLATFORMSTR="macos-64"
+      else
+        PLATFORMSTR="linux-64"
+      fi
+      curl https://storage.googleapis.com/dart-editor-archive-integration/latest/dartsdk-${PLATFORMSTR}.tar.gz > dartsdk.tar.gz
+      tar xvfz dartsdk.tar.gz
+      rm -f dartsdk.tar.gz
+      mv dart-sdk $HOME/bin
+    fi
+  fi
+
   if [[ ! -d $HOME/.nvm ]]; then
     read "nvm?Install nvm? [yN] "
     if [[ "$nvm" =~ ^[Yy]$ ]]; then
@@ -87,31 +103,28 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       sudo apt-get install build-essential
       sudo apt-get install exuberant-ctags
       sudo apt-get install libclang-dev
-      sudo apt-get install fasd
+      sudo apt-get install ack
+      sudo apt-get install tmux
+      sudo apt-get install vim
     elif [[ "$platform" == "Darwin" ]]; then
       brew install git
       brew install git-extras
       brew install wget
       brew install ack
-      brew install go
       brew install tmux
       brew install ctags
-      brew install jpeg-turbo
-      brew link jpeg-turbo
-      brew install optipng
-      # tmux pasteboard fixes issue of using macvim from tmux
+      # tmux pasteboard fixes issue of copy/paste from tmux
       brew install reattach-to-user-namespace
     fi
-    # install Go utilities
-    #go get -u github.com/nsf/gocode
   fi
 
   # install pythonbrew for python managment
-  read "pythonbrew?Install pythonbrew for python management? [yN] "
-  if [[ "$pythonbrew" =~ ^[Yy]$ ]]; then
-    curl -kL http://xrl.us/pythonbrewinstall | bash
+  if [[ ! -d $HOME/.pythonbrew ]]; then
+    read "pythonbrew?Install pythonbrew for python management? [yN] "
+    if [[ "$pythonbrew" =~ ^[Yy]$ ]]; then
+      curl -kL http://xrl.us/pythonbrewinstall | bash
+    fi
   fi
-
 
   # install spf13-vim3 vim files
   if [[ ! -d $HOME/.spf13-vim-3 ]]; then
