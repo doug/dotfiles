@@ -8,6 +8,7 @@ export GOPATH=$HOME/.go
 export PATH=$GOPATH/bin:$PATH
 
 export EDITOR=vim
+export VISUAL=$EDITOR
 if [[ "$PLATFORM" == "Darwin" ]]; then
     # Homebrew
     export HOMEBREW_PREFIX=$HOME/.homebrew
