@@ -17,6 +17,8 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     #export GOBIN=$HOMEBREW_PREFIX/bin
     export GOARCH=amd64
     export GOOS=darwin
+    # Ruby
+    export PATH=$PATH:$HOME/.rvm/bin
     # pkg-config
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
     # npm
