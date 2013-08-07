@@ -101,6 +101,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       brew install optipng
       # tmux pasteboard fixes issue of using macvim from tmux
       brew install reattach-to-user-namespace
+      brew install zsh
     fi
     # install Go utilities
     #go get -u github.com/nsf/gocode
