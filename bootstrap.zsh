@@ -115,6 +115,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       brew install ctags
       # tmux pasteboard fixes issue of copy/paste from tmux
       brew install reattach-to-user-namespace
+      brew install zsh
     fi
   fi
 
