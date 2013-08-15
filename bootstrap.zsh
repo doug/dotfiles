@@ -119,11 +119,11 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-  # install pythonbrew for python managment
-  if [[ ! -d $HOME/.pythonbrew ]]; then
-    read "pythonbrew?Install pythonbrew for python management? [yN] "
-    if [[ "$pythonbrew" =~ ^[Yy]$ ]]; then
-      curl -kL http://xrl.us/pythonbrewinstall | bash
+  # install pyenv for python managment
+  if [[ ! -d $HOME/.pyenv ]]; then
+    read "pyenv?Install pyenv for python management? [yN] "
+    if [[ "$pyenv" =~ ^[Yy]$ ]]; then
+      git clone git://github.com/yyuu/pyenv.git $HOME/.pyenv
     fi
   fi
 

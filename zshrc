@@ -53,13 +53,17 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Add Google Cloud SDK
-alias pyengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/python $HOME/bin/cloudsdk-current"
-alias goengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/go $HOME/bin/cloudsdk-current"
-PATH=$PATH:$HOME/bin/cloudsdk-current/bin
+if [[ -s $HOME/bin/cloudsdk-current ]]; then
+  alias pyengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/python $HOME/bin/cloudsdk-current"
+  alias goengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/go $HOME/bin/cloudsdk-current"
+  PATH=$PATH:$HOME/bin/cloudsdk-current/bin
+fi
 
 # Add Dart SDK
-export DART_SDK=$HOME/bin/dart-sdk
-PATH=$PATH:$DART_SDK/bin
+if [[ -s $HOME/bin/dart-sdk ]]; then
+  export DART_SDK=$HOME/bin/dart-sdk
+  PATH=$PATH:$DART_SDK/bin
+fi
 
 # Customize to your needs...
 if [[ -s $HOME/.aliases.zsh ]]; then
@@ -73,8 +77,9 @@ bindkey '^E' end-of-line
 # don't use cdablevars
 unsetopt cdablevarS
 
-if [[ -s $HOME/.pythonbrew/etc/bashrc ]] then
-  source $HOME/.pythonbrew/etc/bashrc
+if [[ -s $HOME/.pyenv ]] then
+  PATH=$HOME/.pyenv/bin:$PATH
+  eval "$(pyenv init -)"
 fi
 
 if [[ -s $HOME/.rvm/scripts/rvm ]] then
