@@ -3,6 +3,14 @@
 #Be sure to change your shell first
 #chsh -s `which zsh`
 
+ZSH=`which zsh`
+if [[ "$SHELL" != "$ZSH" ]]; then
+  echo "Switching shell to zsh."
+  chsh -s $ZSH
+  echo "Please restart your terminal session."
+  exit
+fi
+
 platform=`uname`
 
 if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
@@ -168,6 +176,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
   fi
 
-  source $HOME/.zshrc
+  exec $SHELL
 
 fi
