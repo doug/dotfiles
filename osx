@@ -5,8 +5,8 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
 echo "Re-enable key repeat"
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-#echo "Hide the dock"
-#defaults write com.apple.Dock autohide-delay -float 10000 && killall Dock
+echo "Hide the dock"
+defaults write com.apple.Dock autohide-delay -float 10000 && killall Dock
 
 echo "Show the ~/Library folder"
 chflags nohidden ~/Library
