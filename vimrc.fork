@@ -22,13 +22,13 @@ imap ;w <esc>:w!<cr>
 set textwidth=100
 
 " Add emacs beginning and end of line
-map <c-a> ^
-map! <c-a> <c-o>^
-map <c-e> $
-map! <c-e> <c-o>$
+"map <c-a> ^
+"map! <c-a> <c-o>^
+"map <c-e> $
+"map! <c-e> <c-o>$
 
 " NERDTreeToggle
-nnoremap <c-n> :NERDTreeToggle<cr>
+"nnoremap <c-n> :NERDTreeToggle<cr>
 
 " stop highlighting after I searched
 nmap <silent> // :nohlsearch<cr>
