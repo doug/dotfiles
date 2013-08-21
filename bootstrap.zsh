@@ -18,10 +18,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       zsh "$current/osx"
     fi
     if [[ ! -d /Applications/Spectacle.app ]]; then
-      curl https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.2.zip > spectacle.zip
-      unzip spectacle.zip
-      mv Spectacle.app /Applications
-      rm spectacle.zip
+      read "spectacle?Install Spectacle for window management? [yN] "
+      if [[ "$spectacle" =~ ^[Yy]$ ]]; then
+        curl https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.2.zip > spectacle.zip
+        unzip spectacle.zip
+        mv Spectacle.app /Applications
+        rm spectacle.zip
+      fi
     fi
     if [[ ! -d $HOME/.homebrew ]]; then
       mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
@@ -131,7 +134,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   if [[ ! -d $HOME/.spf13-vim-3 ]]; then
     read "vim?Install vim bundles? [yN] "
     if [[ "$vim" =~ ^[Yy]$ ]]; then
-      curl http://j.mp/spf13-vim3 -L -o - | sh
+      sh <(curl https://j.mp/spf13-vim3 -L)
     fi
   fi
 
