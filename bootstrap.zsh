@@ -66,7 +66,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     read "cloudsdk?Install Google Cloud SDK? [yN] "
     if [[ "$cloudsdk" =~ ^[Yy]$ ]]; then
       mkdir -p $HOME/bin/cloudsdk
-      CLOUD_VERSION="0.9.6"
+      CLOUD_VERSION="0.9.7"
       if [[ $platform == "Darwin" ]]; then
         PLATFORMSTR="mac"
       else
