@@ -1,5 +1,5 @@
 if !exists('g:spf13_bundle_groups')
-    let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'ruby', 'python', 'javascript', 'html', 'misc', 'scala']
+    let g:spf13_bundle_groups=['general', 'programming', 'neocomplcache', 'python', 'javascript', 'html', 'ruby', 'go', 'misc']
 endif
 
 let g:spf13_override_snippets = 1
@@ -9,12 +9,13 @@ let g:spf13_override_snippets = 1
   "Bundle 'doug/snipmate-snippets'
 "endif
 
-if !exists('g:doug_override_go')
-  " Go
-  Bundle 'jnwhiteh/vim-golang'
-  Bundle 'nsf/gocode', {'rtp': 'vim/'}
-endif
+"if !exists('g:doug_override_go')
+  "" Go
+  "Bundle 'jnwhiteh/vim-golang'
+  "Bundle 'nsf/gocode', {'rtp': 'vim/'}
+"endif
 
 Bundle 'https://github.com/paradigm/vim-multicursor.git'
 Bundle 'jpalardy/vim-slime'
+Bundle 'https://github.com/dart-lang/dart-vim-plugin.git'
 

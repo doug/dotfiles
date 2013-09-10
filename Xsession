@@ -1,0 +1,13 @@
+#!/bin/sh
+
+gnome-settings-daemon &
+
+gnome-terminal &
+
+xautolock -time 5 -locker "/usr/bin/xlock -mode swarm" &
+
+gnome-power-manager &
+
+gnome-volume-manager &
+
+exec awesome

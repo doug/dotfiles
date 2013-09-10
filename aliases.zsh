@@ -8,6 +8,7 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
   alias pbcopy="xclip -selection clipboard"
   alias pbpaste="xclip -selection clipboard -o"
   alias open="xdg-open"
+  alias trash="gvfs-trash"
 fi
 
 export PATH=$PATH:$HOME/bin/google-cloud-sdk/current/bin
@@ -56,6 +57,19 @@ function git-create {
   ssh $server "mkdir -p /$remote && cd /$remote && git init --bare"
 }
 
+function chop_wav() {
+  wav=$1
+  step=$2
+  duration=$(soxi -D $wav)
+  echo $duration
+  steps=$((duration/step))
+  echo $steps
+  for x in $(seq 0 $steps); do
+    echo $x
+    sox $wav $x.wav trim $((x*step)) $step
+  done
+}
+
 function chop_mp3() {
   file=$1
   step=$2
@@ -67,7 +81,8 @@ function chop_mp3() {
   echo $steps
   for x in $(seq 0 $steps); do
     echo $x
-    sox $wav out.wav trim $((x*step)) $((x*step+step))
+    sox $wav out.wav trim $((x*step)) $step
+    #ffmpeg -i out.wav $x.m4a
     lame out.wav $x.mp3
     rm -f out.wav
   done
