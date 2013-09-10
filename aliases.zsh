@@ -2,8 +2,6 @@ if [[ "$PLATFORM"  == "Darwin" ]]; then
   alias gvim=mvim
   alias python32="arch -i386 python"
   alias signalstrength="while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed -e 's/^.*://g' | xargs -I SIGNAL printf \"\rRSSI dBm: SIGNAL\"; sleep 0.5; done"
-  alias pyengine="brew unlink go-app-engine-64 && brew link google-app-engine"
-  alias goengine="brew unlink google-app-engine && brew link go-app-engine-64"
   alias subl="/Applications/Sublime\ Text\ 2.app/Contents/MacOS/Sublime\ Text\ 2"
 elif [[ "$PLATFORM" == "Linux" ]]; then
   # Linux Aliases
@@ -11,6 +9,10 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
   alias pbpaste="xclip -selection clipboard -o"
   alias open="xdg-open"
 fi
+
+export PATH=$PATH:$HOME/bin/google-cloud-sdk/current/bin
+alias pyengine="rm -f $HOME/bin/google-cloud-sdk/current && ln -s $HOME/bin/google-cloud-sdk/python $HOME/bin/google-cloud-sdk/current"
+alias goengine="rm -f $HOME/bin/google-cloud-sdk/current && ln -s $HOME/bin/google-cloud-sdk/go $HOME/bin/google-cloud-sdk/current"
 
 function pythonlib {
   python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"
@@ -59,7 +61,7 @@ function chop_mp3() {
   step=$2
   wav=full.wav
   lame --decode $1 $wav
-  duration=$(soxi -D $wav) 
+  duration=$(soxi -D $wav)
   echo $duration
   steps=$((duration/step))
   echo $steps
