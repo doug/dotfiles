@@ -2,7 +2,7 @@ if [[ "$PLATFORM"  == "Darwin" ]]; then
   alias gvim=mvim
   alias python32="arch -i386 python"
   alias signalstrength="while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed -e 's/^.*://g' | xargs -I SIGNAL printf \"\rRSSI dBm: SIGNAL\"; sleep 0.5; done"
-  alias subl="/Applications/Sublime\ Text\ 2.app/Contents/MacOS/Sublime\ Text\ 2"
+  alias subl="/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text"
 elif [[ "$PLATFORM" == "Linux" ]]; then
   # Linux Aliases
   alias pbcopy="xclip -selection clipboard"
