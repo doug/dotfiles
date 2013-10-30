@@ -32,7 +32,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
     if (( $+commands[brew] )); then
       # GO
-      export GOROOT=`brew --prefix go`/libexec
+      export GOROOT=`brew --prefix go`
     fi
     if (( $+commands[npm] )); then
       # npm
