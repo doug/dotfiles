@@ -65,6 +65,11 @@ if [[ -s $HOME/bin/dart-sdk ]]; then
   PATH=$PATH:$DART_SDK/bin
 fi
 
+# Add Android tools
+if [[ -s $HOME/bin/android ]]; then
+  PATH=$PATH:$HOME/bin/android/tools:$HOME/bin/android/platform-tools
+fi
+
 # Customize to your needs...
 if [[ -s $HOME/.aliases.zsh ]]; then
     source $HOME/.aliases.zsh
