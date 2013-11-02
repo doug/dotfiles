@@ -62,25 +62,16 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-  if [[ ! -d $HOME/bin/cloudsdk ]]; then
+  if [[ ! -d $HOME/bin/google-cloud-sdk ]]; then
     read "cloudsdk?Install Google Cloud SDK? [yN] "
     if [[ "$cloudsdk" =~ ^[Yy]$ ]]; then
-      mkdir -p $HOME/bin/cloudsdk
-      CLOUD_VERSION="0.9.7"
-      if [[ $platform == "Darwin" ]]; then
-        PLATFORMSTR="mac"
-      else
-        PLATFORMSTR="linux"
-      fi
-      curl https://dl.google.com/dl/cloudsdk/google-cloud-sdk-${CLOUD_VERSION}-${PLATFORMSTR}-python.zip > cloud.zip
+      curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk-python.zip > cloud.zip
       unzip cloud.zip
-      mv google-cloud-sdk-${CLOUD_VERSION} $HOME/bin/cloudsdk/python
+      mv google-cloud-sdk $HOME/bin/google-cloud-sdk
       rm -f cloud.zip
-      curl https://dl.google.com/dl/cloudsdk/google-cloud-sdk-${CLOUD_VERSION}-${PLATFORMSTR}-go_amd64.zip > cloud.zip
-      unzip cloud.zip
-      mv google-cloud-sdk-${CLOUD_VERSION} $HOME/bin/cloudsdk/go
-      rm -f cloud.zip
-      ln -s cloudsdk/python $HOME/bin/cloudsdk-current
+      sh $HOME/bin/google-cloud-sdk/INSTALL
+      echo "use 'gcloud components list' to list components."
+      echo "to install java for example 'gcloud components update pkg-java'"
     fi
   fi
 
