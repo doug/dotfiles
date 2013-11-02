@@ -4,8 +4,8 @@ export PLATFORM=`uname`
 # Add home bin
 PATH=$HOME/bin:$PATH
 # Go
-export GOPATH=$HOME/.go
-PATH=$GOPATH/bin:$PATH
+export GOPATH=$HOME/.go:$HOME/go:$HOME/.gogae
+PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 export EDITOR=vim
 if [[ "$PLATFORM" == "Darwin" ]]; then
@@ -32,7 +32,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
     if (( $+commands[brew] )); then
       # GO
-      export GOROOT=`brew --prefix go`
+      export GOROOT=`brew --prefix go`/libexec
     fi
     if (( $+commands[npm] )); then
       # npm
