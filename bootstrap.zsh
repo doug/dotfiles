@@ -70,7 +70,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       unzip cloud.zip
       mv google-cloud-sdk $APPENGINE_SDK
       rm -f cloud.zip
-      sh $HOME/bin/google-loud-sdk/INSTALL
+      sh $APPENGINE_SDK/INSTALL
       #$APPENGINE_SDK/bin/gcloud components update pkg-python
       $APPENGINE_SDK/bin/gcloud components update pkg-java
       $APPENGINE_SDK/bin/gcloud components update pkg-go-x86_64
