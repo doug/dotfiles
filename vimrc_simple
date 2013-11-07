@@ -1,0 +1,149 @@
+                             ".                         .
+              ".  *       `     .       +     .    *        `   +     .
+                  ".   ______       _____     __    __    ______    `    +
+           ".   `     /  ___ \   /  ___  \  /  /  /  / /  ______\         .
+              ".     /  /  /  } /  /  /  / /  /  /  / /  /           *   .
+          ".  *     /  /  /  / /  /  /  / /  /  /  / /  /  /-----/
+          "+       /  /__/ _/ /  /__/  / /  /__/  / /  /___/  /      . +
+         ".    `  /_______-   \_____ /   \_____ /   \_______ /
+                  ".         +            `       .                *
+             "`       *          .           +          *           `
+
+set nocompatible              " be iMproved
+filetype off                  " required!
+
+" Vundle {
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+" My Bundles {
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'bling/vim-airline'
+Bundle 'scrooloose/syntastic'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'jpalardy/vim-slime'
+Bundle 'Valloric/YouCompleteMe'
+
+Bundle 'jnwhiteh/vim-golang'
+"Bundle 'spf13/vim-gocode'
+Bundle 'Blackrush/vim-gocode'
+
+Bundle "pangloss/vim-javascript"
+Bundle "elzr/vim-json"
+" }
+
+filetype plugin indent on     " required!
+
+" }
+
+
+" Add a local leader which is also ,
+let mapleader=","
+let maplocalleader=","
+
+" Color
+syntax on
+
+" Line numbers
+set number
+
+" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
+inoremap jj <esc>
+inoremap kk <esc>
+
+" Indentation
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+" Fast saving
+nmap ;w :w!<cr>
+imap ;w <esc>:w!<cr>
+
+" set text width default
+set textwidth=100
+
+" Add emacs beginning and end of line
+"map <c-a> ^
+"map! <c-a> <c-o>^
+"map <c-e> $
+"map! <c-e> <c-o>$
+
+" NERDTreeToggle
+nnoremap <c-e> :NERDTreeToggle<cr>
+let g:NERDTreeDirArrows=0
+
+" stop highlighting after I searched
+nmap <silent> // :nohlsearch<cr>
+
+" rerun last command
+" nmap <c-b> 1@:
+
+" toggle paste mode
+nmap <LocalLeader>pp :set paste!<cr>
+
+" Set filetype for troublesome types
+augroup filetype
+  autocmd!
+  autocmd BufRead,BufNewFile *.proto set ft=proto
+  autocmd BufRead,BufNewFile *.go set ft=go
+augroup end
+
+" Automatic formating on save
+augroup go
+  autocmd!
+  autocmd FileType go autocmd BufWritePre <buffer> Fmt
+  autocmd FileType go setlocal noexpandtab
+augroup end
+
+" remove trailing whitespace and pesky ^M
+augroup whitespace
+  autocmd!
+  autocmd BufWritePre * :%s/[ \t\r]\+$//e
+augroup end
+
+" MultiCursor bundle mappings
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-d>'
+"let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" Slime configuration
+let g:slime_target = "tmux"
+
+" copy text to system clipboard
+if has("macunix")
+  vmap <c-x> :!pbcopy<cr>
+  vmap <c-c> :w !pbcopy<cr><cr>
+elseif has("x")
+end
+
+" Space will toggle folds!
+nnoremap <space> za
+
+" Font for gui
+if has("gui_running")
+    if has("gui_gtk2")
+        set guifont=Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 12
+    elseif has("gui_mac")
+        set guifont=Andale\ Mono\ Regular:h10,Menlo\ Regular:h10,Consolas\ Regular:h10,Courier\ New\ Regular:h12
+    elseif has("gui_win32")
+        set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
+    endif
+endif
+
+
+" Use local vimrc if available {
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+" }
+
+
