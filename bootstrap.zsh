@@ -65,6 +65,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   if [[ ! -d $HOME/bin/google-cloud-sdk ]]; then
     read "cloudsdk?Install Google Cloud SDK? [yN] "
     if [[ "$cloudsdk" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin
       APPENGINE_SDK=$HOME/bin/google-cloud-sdk
       curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk-python.zip > cloud.zip
       unzip cloud.zip
