@@ -1,6 +1,11 @@
 # Detect os
 export PLATFORM=`uname`
 
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
 # Add home bin
 PATH=$HOME/bin:$PATH
 # Go
@@ -47,10 +52,6 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
 fi
 
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
 
 # Add Google Cloud SDK
 export PATH=$PATH:$HOME/bin/google-cloud-sdk/bin
