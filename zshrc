@@ -1,18 +1,23 @@
 # Detect os
 export PLATFORM=`uname`
 
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
 # Add home bin
-export PATH=$HOME/bin:$PATH
+PATH=$HOME/bin:$PATH
 # Go
-export GOPATH=$HOME/.go
-export PATH=$GOPATH/bin:$PATH
+export GOPATH=$HOME/.go:$HOME/go:$HOME/.gogae
+PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 export EDITOR=vim
 export VISUAL=$EDITOR
 if [[ "$PLATFORM" == "Darwin" ]]; then
     # Homebrew
     export HOMEBREW_PREFIX=$HOME/.homebrew
-    export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
+    PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
     # GO
     #export GOBIN=$HOMEBREW_PREFIX/bin
     export GOARCH=amd64
@@ -23,19 +28,19 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
     # npm
     export NODE_PATH=$HOMEBREW_PREFIX/lib/node
-    export PATH=$HOMEBREW_PREFIX/share/npm/bin:$PATH
+    PATH=$HOMEBREW_PREFIX/share/npm/bin:$PATH
     # compile path
     export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOMEBREW_PREFIX/include
     export CPP_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOMEBREW_PREFIX/include
     export LIBRARY_PATH=$LIBRARY_PATH:$HOMEBREW_PREFIX/lib
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOMEBREW_PREFIX/lib
     # python
-    export PATH=$HOMEBREW_PREFIX/share/python:$PATH
+    PATH=$HOMEBREW_PREFIX/share/python:$PATH
     # ruby
-    export PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
+    PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
     if (( $+commands[brew] )); then
       # GO
-      export GOROOT=`brew --prefix go`
+      export GOROOT=`brew --prefix go`/libexec
     fi
     if (( $+commands[npm] )); then
       # npm
@@ -46,20 +51,24 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
     export GOARCH=amd64
     export GOOS=linux
     # Path
-    export PATH=/opt/local/bin:$PATH
+    PATH=/opt/local/bin:$PATH
 fi
 
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
 
 # Add Google Cloud SDK
-alias pyengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/python $HOME/bin/cloudsdk-current"
-alias goengine="rm -f $HOME/bin/cloudsdk-current && ln -s cloudsdk/go $HOME/bin/cloudsdk-current"
-export PATH=$PATH:$HOME/bin/cloudsdk-current/bin
+export PATH=$PATH:$HOME/bin/google-cloud-sdk/bin
 
+# Add Dart SDK
+if [[ -s $HOME/bin/dart-sdk ]]; then
+  export DART_SDK=$HOME/bin/dart-sdk
+  PATH=$PATH:$DART_SDK/bin
+fi
+
+# Add Android tools
+if [[ -s $HOME/bin/android ]]; then
+  PATH=$PATH:$HOME/bin/android/tools:$HOME/bin/android/platform-tools
+fi
 
 # Customize to your needs...
 if [[ -s $HOME/.aliases.zsh ]]; then
@@ -73,8 +82,9 @@ bindkey '^E' end-of-line
 # don't use cdablevars
 unsetopt cdablevarS
 
-if [[ -s $HOME/.pythonbrew/etc/bashrc ]] then
-  source $HOME/.pythonbrew/etc/bashrc
+if [[ -s $HOME/.pyenv ]] then
+  PATH=$HOME/.pyenv/bin:$PATH
+  eval "$(pyenv init -)"
 fi
 
 if [[ -s $HOME/.rvm/scripts/rvm ]] then
@@ -88,3 +98,6 @@ fi
 if [[ -s $HOME/.localrc ]]; then
     source $HOME/.localrc
 fi
+
+# Export the PATH
+export PATH
