@@ -1,10 +1,10 @@
 " UnBundle some modules I don't want
-UnBundle 'nathanaelkane/vim-indent-guides'
-UnBundle 'airblade/vim-gitgutter'
-
 
 " Add a local leader which is also ,
 let maplocalleader=","
+
+" No background on current line in terminal
+hi CursorLine ctermbg=none
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <esc>
