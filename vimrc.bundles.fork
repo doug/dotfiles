@@ -1,15 +1,72 @@
 if !exists('g:spf13_bundle_groups')
     let g:spf13_bundle_groups=['general', 'programming', 'javascript', 'html']
 endif
+let g:override_spf13_bundles = 1
 
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'Blackrush/vim-gocode'
+" General
+"
+Bundle 'scrooloose/nerdtree'
+"Bundle 'altercation/vim-colors-solarized'
+"Bundle 'spf13/vim-colors'
+"Bundle 'tpope/vim-surround'
+Bundle 'spf13/vim-autoclose'
+Bundle 'kien/ctrlp.vim'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'vim-scripts/sessionman.vim'
+"Bundle 'matchit.zip'
+if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
+  Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
+  Bundle 'Lokaltog/vim-powerline'
+else
+  Bundle 'bling/vim-airline'
+endif
 
-Bundle 'dart-lang/dart-vim-plugin'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'godlygeek/csapprox'
+"Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'mbbill/undotree'
+"Bundle 'myusuf3/numbers.vim'
+"Bundle 'nathanaelkane/vim-indent-guides'
+"if !exists('g:spf13_no_views')
+  "Bundle 'vim-scripts/restore_view.vim'
+"endif
+"Bundle 'airblade/vim-gitgutter'
+"Bundle 'tpope/vim-abolish.git'
+
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-fugitive'
+"Bundle 'mattn/webapi-vim'
+"Bundle 'mattn/gist-vim'
+Bundle 'scrooloose/nerdcommenter'
+"Bundle 'godlygeek/tabular'
+if executable('ctags')
+  Bundle 'majutsushi/tagbar'
+endif
 
 Bundle 'jpalardy/vim-slime'
-
-" To over
 if !exists('g:no_ycm')
   Bundle 'Valloric/YouCompleteMe'
 endif
+
+" Javascript
+Bundle 'elzr/vim-json'
+Bundle 'groenewege/vim-less'
+Bundle 'pangloss/vim-javascript'
+"Bundle 'briancollins/vim-jst'
+"Bundle 'kchmck/vim-coffee-script'
+
+" HTML
+"Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'hail2u/vim-css3-syntax'
+"Bundle 'tpope/vim-haml'
+
+" Go
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'Blackrush/vim-gocode'
+
+" Dart
+Bundle 'dart-lang/dart-vim-plugin'
+
+
