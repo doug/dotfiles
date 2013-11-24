@@ -1,6 +1,3 @@
-if !exists('g:spf13_bundle_groups')
-    let g:spf13_bundle_groups=['general', 'programming', 'javascript', 'html']
-endif
 let g:override_spf13_bundles = 1
 
 " General
@@ -14,13 +11,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'vim-scripts/sessionman.vim'
 "Bundle 'matchit.zip'
-if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
-  Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
-  Bundle 'Lokaltog/vim-powerline'
-else
-  Bundle 'bling/vim-airline'
-endif
+Bundle 'bling/vim-airline'
 
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'godlygeek/csapprox'
