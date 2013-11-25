@@ -96,18 +96,22 @@ end
 " Space will toggle folds!
 nnoremap <space> za
 
-" Font for gui
-if has("gui_gtk2")
-    set guifont=Menlo\ Regular\ 12,Andale\ Mono\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 12
-elseif has("gui_mac")
-    set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
-elseif has("gui_win32")
-    set guifont=Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
+if has("gui_running")
+  " Font for gui
+  if has("gui_gtk2")
+      set guifont=DejaVu\ Sans\ Mono\ 11,Andale\ Mono\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
+  elseif has("gui_mac")
+      set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
+      set transparency=0
+  elseif has("gui_win32")
+      set guifont=Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
+  endif
 endif
 
 " Colors
-colorscheme Monokai
-set transparency=0
+"colorscheme Monokai
+set background=light
+colorscheme solarized
 
 " no relative lines
 set number
