@@ -2,6 +2,8 @@ if !exists('g:spf13_bundle_groups')
     let g:spf13_bundle_groups=['general', 'programming', 'javascript', 'html']
 endif
 
+Bundle 'Valloric/MatchTagAlways'
+
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'Blackrush/vim-gocode'
 
