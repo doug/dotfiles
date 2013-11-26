@@ -1,3 +1,4 @@
+let g:spf13_bundle_groups=[]
 let g:override_spf13_bundles = 1
 
 " General
