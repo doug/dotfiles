@@ -109,9 +109,8 @@ if has("gui_running")
 endif
 
 " Colors
-"colorscheme Monokai
 set background=light
-colorscheme solarized
+colorscheme Monokai
 
 " no relative lines
 set number
