@@ -54,7 +54,7 @@ Bundle 'pangloss/vim-javascript'
 " HTML
 "Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'hail2u/vim-css3-syntax'
-"Bundle 'tpope/vim-haml'
+Bundle 'cakebaker/scss-syntax.vim'
 
 " Go
 Bundle 'jnwhiteh/vim-golang'
