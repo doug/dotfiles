@@ -41,9 +41,15 @@ Bundle 'jpalardy/vim-slime'
 if !exists('g:no_ycm')
   Bundle 'Valloric/YouCompleteMe'
 endif
-"Bundle 'rosenfeld/conque-term'
-
 Bundle 'Valloric/MatchTagAlways'
+
+" Snippets
+"Bundle "SirVer/ultisnips"
+
+" Gist
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
+
 
 " Javascript
 Bundle 'elzr/vim-json'
