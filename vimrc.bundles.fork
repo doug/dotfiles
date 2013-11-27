@@ -41,6 +41,7 @@ Bundle 'jpalardy/vim-slime'
 if !exists('g:no_ycm')
   Bundle 'Valloric/YouCompleteMe'
 endif
+"Bundle 'rosenfeld/conque-term'
 
 Bundle 'Valloric/MatchTagAlways'
 
@@ -55,6 +56,12 @@ Bundle 'pangloss/vim-javascript'
 "Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
+
+" Markdown
+Bundle "tpope/vim-markdown"
+
+" Scala
+Bundle 'derekwyatt/vim-scala'
 
 " Go
 Bundle 'jnwhiteh/vim-golang'

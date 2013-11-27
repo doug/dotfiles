@@ -3,9 +3,6 @@
 " Add a local leader which is also ,
 let maplocalleader=","
 
-" No background on current line in terminal
-hi CursorLine ctermbg=none
-
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <esc>
 inoremap kk <esc>
@@ -28,14 +25,8 @@ set textwidth=100
 "map <c-e> $
 "map! <c-e> <c-o>$
 
-" NERDTreeToggle
-"nnoremap <c-n> :NERDTreeToggle<cr>
-
 " stop highlighting after I searched
 nmap <silent> // :nohlsearch<cr>
-
-" rerun last command
-nmap <c-b> 1@:
 
 " toggle paste mode
 nmap <LocalLeader>pp :set paste!<cr>
@@ -60,32 +51,6 @@ augroup whitespace
   autocmd BufWritePre * :%s/[ \t\r]\+$//e
 augroup end
 
-" MultiCursor bundle mappings
- let g:multicursor_quit = "<LocalLeader>qq"
- nnoremap <LocalLeader>qp :<c-u>call MultiCursorPlaceCursor()<cr>
- nnoremap <LocalLeader>qm :<c-u>call MultiCursorManual()<cr>
- nnoremap <LocalLeader>qr :<c-u>call MultiCursorRemoveCursors()<cr>
- xnoremap <LocalLeader>qv :<c-u>call MultiCursorVisual()<cr>
- nnoremap <LocalLeader>qs :<c-u>call MultiCursorSearch('')<cr>
-
- "jump to last cursor position when opening a file
-"don't do it when writing a commit log entry
-"augroup cursor
-  "autocmd!
-  "autocmd BufReadPost * call SetCursorPosition()
-"augroup end
-"function! SetCursorPosition()
-  "if &filetype !~ 'svn\|commit\c'
-    "if line("'\"") > 0 && line("'\"") <= line("$")
-      "exe "normal! g`\""
-      "normal! zz
-    "endif
-  "end
-"endfunction
-
-" Slime configuration
-let g:slime_target = "tmux"
-
 " copy text to system clipboard
 if has("macunix")
   vmap <c-x> :!pbcopy<cr>
@@ -102,14 +67,19 @@ if has("gui_running")
       set guifont=DejaVu\ Sans\ Mono\ 11,Andale\ Mono\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
   elseif has("gui_mac")
       set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
-      set transparency=0
   elseif has("gui_win32")
       set guifont=Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
   endif
+  if has("gui_macvim")
+    set transparency=0
+  endif
 endif
 
+" Slime
+let g:slime_target = "tmux"
+
 " Colors
-set background=light
+set background=dark
 colorscheme Monokai
 
 " no relative lines
@@ -118,3 +88,10 @@ set norelativenumber
 
 " no spell check
 set nospell
+
+" http://vimbits.com/bits/128
+" automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
+au BufWritePost .vimrc.fork so ~/.vimrc.fork
+au BufWritePost .vimrc.local so ~/.vimrc.local
+
