@@ -1,21 +1,73 @@
-if !exists('g:spf13_bundle_groups')
-    let g:spf13_bundle_groups=['general', 'programming', 'neocomplcache', 'python', 'javascript', 'html', 'ruby', 'go', 'misc']
+let g:spf13_bundle_groups=[]
+let g:override_spf13_bundles = 1
+
+" General
+"
+Bundle 'scrooloose/nerdtree'
+"Bundle 'altercation/vim-colors-solarized'
+"Bundle 'spf13/vim-colors'
+"Bundle 'tpope/vim-surround'
+Bundle 'spf13/vim-autoclose'
+Bundle 'kien/ctrlp.vim'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'vim-scripts/sessionman.vim'
+"Bundle 'matchit.zip'
+Bundle 'bling/vim-airline'
+
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'godlygeek/csapprox'
+"Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'mbbill/undotree'
+"Bundle 'myusuf3/numbers.vim'
+"Bundle 'nathanaelkane/vim-indent-guides'
+"if !exists('g:spf13_no_views')
+  "Bundle 'vim-scripts/restore_view.vim'
+"endif
+"Bundle 'airblade/vim-gitgutter'
+"Bundle 'tpope/vim-abolish.git'
+
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-fugitive'
+"Bundle 'mattn/webapi-vim'
+"Bundle 'mattn/gist-vim'
+Bundle 'scrooloose/nerdcommenter'
+"Bundle 'godlygeek/tabular'
+if executable('ctags')
+  Bundle 'majutsushi/tagbar'
 endif
 
-let g:spf13_override_snippets = 1
-
-"if !exists('g:doug_override_snippets')
-  "" Snippets
-  "Bundle 'doug/snipmate-snippets'
-"endif
-
-"if !exists('g:doug_override_go')
-  "" Go
-  "Bundle 'jnwhiteh/vim-golang'
-  "Bundle 'nsf/gocode', {'rtp': 'vim/'}
-"endif
-
-Bundle 'https://github.com/paradigm/vim-multicursor.git'
 Bundle 'jpalardy/vim-slime'
-Bundle 'https://github.com/dart-lang/dart-vim-plugin.git'
+if !exists('g:no_ycm')
+  Bundle 'Valloric/YouCompleteMe'
+endif
+"Bundle 'rosenfeld/conque-term'
+
+Bundle 'Valloric/MatchTagAlways'
+
+" Javascript
+Bundle 'elzr/vim-json'
+Bundle 'groenewege/vim-less'
+Bundle 'pangloss/vim-javascript'
+"Bundle 'briancollins/vim-jst'
+"Bundle 'kchmck/vim-coffee-script'
+
+" HTML
+"Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'cakebaker/scss-syntax.vim'
+
+" Markdown
+Bundle "tpope/vim-markdown"
+
+" Scala
+Bundle 'derekwyatt/vim-scala'
+
+" Go
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'Blackrush/vim-gocode'
+
+" Dart
+Bundle 'dart-lang/dart-vim-plugin'
+
 

@@ -1,7 +1,4 @@
 " UnBundle some modules I don't want
-UnBundle 'nathanaelkane/vim-indent-guides'
-UnBundle 'airblade/vim-gitgutter'
-
 
 " Add a local leader which is also ,
 let maplocalleader=","
@@ -28,14 +25,8 @@ set textwidth=100
 "map <c-e> $
 "map! <c-e> <c-o>$
 
-" NERDTreeToggle
-"nnoremap <c-n> :NERDTreeToggle<cr>
-
 " stop highlighting after I searched
 nmap <silent> // :nohlsearch<cr>
-
-" rerun last command
-nmap <c-b> 1@:
 
 " toggle paste mode
 nmap <LocalLeader>pp :set paste!<cr>
@@ -60,32 +51,6 @@ augroup whitespace
   autocmd BufWritePre * :%s/[ \t\r]\+$//e
 augroup end
 
-" MultiCursor bundle mappings
- let g:multicursor_quit = "<LocalLeader>qq"
- nnoremap <LocalLeader>qp :<c-u>call MultiCursorPlaceCursor()<cr>
- nnoremap <LocalLeader>qm :<c-u>call MultiCursorManual()<cr>
- nnoremap <LocalLeader>qr :<c-u>call MultiCursorRemoveCursors()<cr>
- xnoremap <LocalLeader>qv :<c-u>call MultiCursorVisual()<cr>
- nnoremap <LocalLeader>qs :<c-u>call MultiCursorSearch('')<cr>
-
- "jump to last cursor position when opening a file
-"don't do it when writing a commit log entry
-"augroup cursor
-  "autocmd!
-  "autocmd BufReadPost * call SetCursorPosition()
-"augroup end
-"function! SetCursorPosition()
-  "if &filetype !~ 'svn\|commit\c'
-    "if line("'\"") > 0 && line("'\"") <= line("$")
-      "exe "normal! g`\""
-      "normal! zz
-    "endif
-  "end
-"endfunction
-
-" Slime configuration
-let g:slime_target = "tmux"
-
 " copy text to system clipboard
 if has("macunix")
   vmap <c-x> :!pbcopy<cr>
@@ -96,13 +61,37 @@ end
 " Space will toggle folds!
 nnoremap <space> za
 
-" Font for gui
 if has("gui_running")
-    if has("gui_gtk2")
-        set guifont=Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 12
-    elseif has("gui_mac")
-        set guifont=Andale\ Mono\ Regular:h10,Menlo\ Regular:h10,Consolas\ Regular:h10,Courier\ New\ Regular:h12
-    elseif has("gui_win32")
-        set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
-    endif
+  " Font for gui
+  if has("gui_gtk2")
+      set guifont=DejaVu\ Sans\ Mono\ 11,Andale\ Mono\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
+  elseif has("gui_mac")
+      set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
+  elseif has("gui_win32")
+      set guifont=Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
+  endif
+  if has("gui_macvim")
+    set transparency=0
+  endif
 endif
+
+" Slime
+let g:slime_target = "tmux"
+
+" Colors
+set background=dark
+colorscheme Monokai
+
+" no relative lines
+set number
+set norelativenumber
+
+" no spell check
+set nospell
+
+" http://vimbits.com/bits/128
+" automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
+au BufWritePost .vimrc.fork so ~/.vimrc.fork
+au BufWritePost .vimrc.local so ~/.vimrc.local
+

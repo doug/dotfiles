@@ -57,7 +57,12 @@ fi
 
 
 # Add Google Cloud SDK
-export PATH=$PATH:$HOME/bin/google-cloud-sdk/bin
+if [[ -s $HOME/bin/google-cloud-sdk ]]; then
+  CLOUD_SDK=$HOME/bin/google-cloud-sdk
+  PATH=$PATH:$CLOUD_SDK/bin
+  PATH=$PATH:$CLOUD_SDK/platform/google_appengine_go_amd64
+  PATH=$PATH:$CLOUD_SDK/platform/google_appengine
+fi
 
 # Add Dart SDK
 if [[ -s $HOME/bin/dart-sdk ]]; then
@@ -95,8 +100,8 @@ if [[ -s $HOME/.nvm/nvm.sh ]]; then
     source $HOME/.nvm/nvm.sh
 fi
 
-if [[ -s $HOME/.localrc ]]; then
-    source $HOME/.localrc
+if [[ -s $HOME/.zshrc.local ]]; then
+    source $HOME/.zshrc.local
 fi
 
 # Export the PATH
