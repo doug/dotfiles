@@ -85,6 +85,9 @@ function chop_mp3() {
   rm -f $wav
 }
 
+# force 256 color support in tmux
+alias tmux="tmux -2"
+
 # git aliases
 alias update-submodules="git submodule foreach \"(git checkout master; git pull)&\""
 alias s="nocorrect git status"
