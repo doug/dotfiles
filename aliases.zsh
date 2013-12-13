@@ -85,6 +85,14 @@ function chop_mp3() {
   rm -f $wav
 }
 
+# get and expand a gist useful for templating
+function getgist() {
+  curl -0 $1/download | tar -xz
+  set -- gist*
+  mv $1/* .
+  rmdir $1
+}
+
 # force 256 color support in tmux
 alias tmux="tmux -2"
 
