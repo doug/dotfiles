@@ -87,7 +87,7 @@ function chop_mp3() {
 
 # get and expand a gist useful for templating
 function boil() {
-  curl -0 $1/download | tar -xz
+  curl $1/download | tar -xz
   set -- gist*
   mv $1/* .
   rmdir $1
