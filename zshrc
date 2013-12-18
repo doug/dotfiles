@@ -13,6 +13,7 @@ export GOPATH=$HOME/.go:$HOME/go:$HOME/.gogae
 PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 export EDITOR=vim
+export VISUAL=$EDITOR
 if [[ "$PLATFORM" == "Darwin" ]]; then
     # Homebrew
     export HOMEBREW_PREFIX=$HOME/.homebrew
@@ -21,6 +22,8 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     #export GOBIN=$HOMEBREW_PREFIX/bin
     export GOARCH=amd64
     export GOOS=darwin
+    # Ruby
+    export PATH=$PATH:$HOME/.rvm/bin
     # pkg-config
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
     # npm
