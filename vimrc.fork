@@ -89,6 +89,9 @@ set norelativenumber
 " no spell check
 set nospell
 
+" Go auto fmt with goimports - https://github.com/bradfitz/goimports "
+let g:gofmt_command = "goimports"
+
 " http://vimbits.com/bits/128
 " automatically reload vimrc when it's saved
 au BufWritePost .vimrc so ~/.vimrc
