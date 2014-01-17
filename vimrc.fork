@@ -55,8 +55,13 @@ augroup end
 if has("macunix")
   vmap <c-x> :!pbcopy<cr>
   vmap <c-c> :w !pbcopy<cr><cr>
-elseif has("x")
-end
+else
+  " copy and paste
+  vmap <C-c> "+yi
+  vmap <C-x> "+c
+  vmap <C-v> c<ESC>"+p
+  imap <C-v> <ESC>"+pa
+endif
 
 " Space will toggle folds!
 nnoremap <space> za
