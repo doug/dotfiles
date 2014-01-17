@@ -50,6 +50,7 @@ elif [[ "$PLATFORM" == "Linux" ]]; then
     # Go
     export GOARCH=amd64
     export GOOS=linux
+    export CGO_LDFLAGS="-Wl,-rpath,/usr/local/lib"
     # Path
     PATH=/opt/local/bin:$PATH
 fi
