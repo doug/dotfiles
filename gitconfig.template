@@ -15,3 +15,7 @@
   remote = origin
 [push]
   default = current
+[merge]
+  tool = vimdiff
+  prompt = false
+  conflictstyle = diff3

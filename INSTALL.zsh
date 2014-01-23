@@ -55,8 +55,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     git config --global user.email $email
     read "github?Github username: "
     git config --global github.user $github
-    read "diff?Diff Client (vimdiff, meld, etc): "
-    git config --global diff.tool $diff
     if [[ "$platform" == "Linux" ]]; then
       git config --global credential.helper cache
     elif [[ "$platform" == "Darwin" ]]; then
