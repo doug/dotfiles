@@ -80,19 +80,20 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-  if [[ ! -d $HOME/bin/dart-sdk ]]; then
+  if [[ ! -d $HOME/bin/dart ]]; then
     read "dartsdk?Install Dart SDK? [yN] "
     if [[ "$dartsdk" =~ ^[Yy]$ ]]; then
       mkdir -p $HOME/bin
       if [[ $platform == "Darwin" ]]; then
-        PLATFORMSTR="macos-64"
+        PLATFORMSTR="macos-x64"
       else
-        PLATFORMSTR="linux-64"
+        PLATFORMSTR="linux-x64"
       fi
-      curl https://storage.googleapis.com/dart-editor-archive-integration/latest/dartsdk-${PLATFORMSTR}.tar.gz > dartsdk.tar.gz
-      tar xvfz dartsdk.tar.gz
-      rm -f dartsdk.tar.gz
-      mv dart-sdk $HOME/bin
+      curl http://storage.googleapis.com/dart-archive/channels/stable/release/latest/editor/darteditor-${PLATFORMSTR}.zip > darteditor.zip
+      unzip darteditor.zip
+      rm -f darteditor.zip
+      mv dart $HOME/bin
+      ln -s dart/dart-sdk $HOME/bin/dart-sdk
     fi
   fi
 
