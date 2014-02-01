@@ -76,4 +76,7 @@ Bundle 'Blackrush/vim-gocode'
 " Dart
 Bundle 'dart-lang/dart-vim-plugin'
 
+" GLSL
+Bundle 'https://github.com/tikhomirov/vim-glsl.git'
+
 
