@@ -1,17 +1,21 @@
 [alias]
-	co = checkout
-	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+  co = checkout
+  l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 [color]
-	ui = true
+  ui = true
 [core]
-	excludesfile = ~/.gitignore
-	editor = vim
-	autocrlf = input
+  excludesfile = ~/.gitignore
+  editor = vim
+  autocrlf = input
 [apply]
-	whitespace = nowarn
+  whitespace = nowarn
 [format]
-	pretty = %C(yellow)%h%Creset %s %C(magenta)(%an, %cr)%Creset
+  pretty = %C(yellow)%h%Creset %s %C(magenta)(%an, %cr)%Creset
 [branch "master"]
-	remote = origin
+  remote = origin
 [push]
-	default = current
+  default = current
+[merge]
+  tool = vimdiff
+  prompt = false
+  conflictstyle = diff3

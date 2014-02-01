@@ -70,7 +70,6 @@ Bundle "tpope/vim-markdown"
 Bundle 'derekwyatt/vim-scala'
 
 " Go
-Bundle 'jnwhiteh/vim-golang'
 Bundle 'Blackrush/vim-gocode'
 
 " Dart
