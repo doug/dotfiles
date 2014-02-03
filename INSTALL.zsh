@@ -62,6 +62,28 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
+  if [[ ! -d $HOME/bin/android-sdk ]]; then
+    read "androidsdk?Install Android SDK? [yN] "
+    if [[ "$androidsdk" =~ ^[Yy]$ ]]; then
+      # SDK
+      mkdir -p $HOME/bin
+      OS="linux-x86_64"
+      VERSION="20131030"
+      if [[ "$platform" == "Darwin" ]]; then
+        OS="mac-x86_64"
+      fi
+      curl http://dl.google.com/android/adt/adt-bundle-$OS-$VERSION.zip > adt.zip
+      unzip adt.zip
+      mv adt-bundle-$OS-$VERSION $HOME/bin/android-sdk
+      rm -f adt.zip
+      # NDK
+      curl http://dl.google.com/android/ndk/android-ndk-r9c-$OS.tar.bz2 > ndk.tar.bz2
+      unarchive ndk.tar.bz2
+      rm -f ndk.tar.bz2
+      mv android_ndk-r9c $HOME/bin/android-ndk
+    fi
+  fi
+
   if [[ ! -d $HOME/bin/google-cloud-sdk ]]; then
     read "cloudsdk?Install Google Cloud SDK? [yN] "
     if [[ "$cloudsdk" =~ ^[Yy]$ ]]; then
