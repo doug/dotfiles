@@ -4,33 +4,31 @@ let g:override_spf13_bundles = 1
 " General
 "
 Bundle 'scrooloose/nerdtree'
-"Bundle 'altercation/vim-colors-solarized'
-"Bundle 'spf13/vim-colors'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'spf13/vim-colors'
 "Bundle 'tpope/vim-surround'
-Bundle 'spf13/vim-autoclose'
+"Bundle 'spf13/vim-autoclose'
 Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'vim-scripts/sessionman.vim'
-Bundle 'matchit.zip'
+"Bundle 'matchit.zip'
 Bundle 'bling/vim-airline'
 
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'godlygeek/csapprox'
 "Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'flazz/vim-colorschemes'
-Bundle 'mbbill/undotree'
+"Bundle 'mbbill/undotree'
 "Bundle 'myusuf3/numbers.vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "if !exists('g:spf13_no_views')
   "Bundle 'vim-scripts/restore_view.vim'
 "endif
-"Bundle 'airblade/vim-gitgutter'
+Bundle 'airblade/vim-gitgutter'
 "Bundle 'tpope/vim-abolish.git'
 
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
 Bundle 'scrooloose/nerdcommenter'
 "Bundle 'godlygeek/tabular'
 if executable('ctags')
@@ -41,7 +39,7 @@ Bundle 'jpalardy/vim-slime'
 if !exists('g:no_ycm')
   Bundle 'Valloric/YouCompleteMe'
 endif
-Bundle 'Valloric/MatchTagAlways'
+"Bundle 'Valloric/MatchTagAlways'
 
 " Snippets
 "Bundle "SirVer/ultisnips"
@@ -52,14 +50,14 @@ Bundle 'mattn/gist-vim'
 
 " Javascript
 Bundle 'elzr/vim-json'
-Bundle 'groenewege/vim-less'
-Bundle 'pangloss/vim-javascript'
+"Bundle 'groenewege/vim-less'
+"Bundle 'pangloss/vim-javascript'
 "Bundle 'briancollins/vim-jst'
 "Bundle 'kchmck/vim-coffee-script'
 
 " HTML
 "Bundle 'amirh/HTML-AutoCloseTag'
-Bundle 'hail2u/vim-css3-syntax'
+"Bundle 'hail2u/vim-css3-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'mattn/emmet-vim'
 
@@ -77,5 +75,4 @@ Bundle 'dart-lang/dart-vim-plugin'
 
 " GLSL
 Bundle 'https://github.com/tikhomirov/vim-glsl.git'
-
 
