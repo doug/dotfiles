@@ -1,0 +1,2 @@
+--type-add=html=.html.erb,.html.haml,.handlebars
+--type-set=go=.go
