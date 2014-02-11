@@ -77,8 +77,11 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       mv adt-bundle-$OS-$VERSION $HOME/bin/android-sdk
       rm -f adt.zip
       # NDK
+      if [[ "$platform" == "Darwin" ]]; then
+        OS="darwin-x86_64"
+      fi
       curl http://dl.google.com/android/ndk/android-ndk-r9c-$OS.tar.bz2 > ndk.tar.bz2
-      unarchive ndk.tar.bz2
+      tar xvf ndk.tar.bz2
       rm -f ndk.tar.bz2
       mv android_ndk-r9c $HOME/bin/android-ndk
     fi
