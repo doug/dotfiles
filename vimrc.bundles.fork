@@ -50,7 +50,6 @@ Bundle 'Valloric/MatchTagAlways'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 
-
 " Javascript
 Bundle 'elzr/vim-json'
 Bundle 'groenewege/vim-less'
@@ -62,6 +61,7 @@ Bundle 'pangloss/vim-javascript'
 "Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'mattn/emmet-vim'
 
 " Markdown
 Bundle "tpope/vim-markdown"
