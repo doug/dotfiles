@@ -12,6 +12,4 @@ gnome-volume-manager &
 
 drive-sync &
 
-google-chrome &
-
 exec awesome
