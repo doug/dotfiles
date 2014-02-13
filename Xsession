@@ -10,6 +10,4 @@ gnome-power-manager &
 
 gnome-volume-manager &
 
-drive-sync &
-
 exec awesome
