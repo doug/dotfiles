@@ -129,6 +129,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
+  if [[ ! -d $HOME/bin/lein ]]; then
+    read "lein?Install lein (clojure's leiningen)? [yN] "
+    if [[ "$lein" =~ ^[Yy]$ ]]; then
+      curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > $HOME/bin/lein
+    fi
+  fi
+
   read "base?Install base packages? [yN] "
   if [[ "$base" =~ ^[Yy]$ ]]; then
     if [[ "$platform" == "Linux" ]]; then
