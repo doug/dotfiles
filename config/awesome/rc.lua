@@ -6,7 +6,8 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
-
+-- Widget library
+require("vicious")
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -149,6 +150,61 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
+-- Initialize widget
+--cpuwidget = awful.widget.graph()
+---- Graph properties
+--cpuwidget:set_width(50)
+--cpuwidget:set_background_color("#494B4F")
+--cpuwidget:set_color("#FF5656")
+--cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+---- Register widget
+--vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
+--
+--
+-- RAM usage widget
+--memwidget = awful.widget.progressbar()
+--memwidget:set_width(15)
+--memwidget:set_height(30)
+--memwidget:set_vertical(true)
+--memwidget:set_background_color('#494B4F')
+--memwidget:set_color('#AECF96')
+--memwidget:set_gradient_colors({ '#AECF96', '#88A175', '#FF5656' })
+
+---- RAM usage tooltip
+--memwidget_t = awful.tooltip({ objects = { memwidget.widget },})
+
+--vicious.cache(vicious.widgets.mem)
+--vicious.register(memwidget, vicious.widgets.mem,
+                --function (widget, args)
+                    --memwidget_t:set_text(" RAM: " .. args[2] .. "MB / " .. args[3] .. "MB ")
+                    --return args[1]
+                 --end, 13)
+                 ----update every 13 seconds
+
+-- Network widget
+--netwidget = awful.widget.graph()
+--netwidget:set_width(50)
+--netwidget:set_height(30)
+--netwidget:set_background_color("#494B4F")
+--netwidget:set_color("#FF5656")
+--netwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+
+--netwidget_t = awful.tooltip({ objects = { netwidget.widget },})
+
+---- Register network widget
+--vicious.register(netwidget, vicious.widgets.net,
+                    --function (widget, args)
+                        --netwidget_t:set_text("Network download: " .. args["{eth0 down_mb}"] .. "mb/s")
+                        --return args["{eth0 down_mb}"]
+                    --end)
+
+cpuwidget = widget({ type = "textbox" })
+vicious.register(cpuwidget, vicious.widgets.cpu, "cpu $1% ")
+
+memwidget = widget({ type = "textbox" })
+vicious.register(memwidget, vicious.widgets.mem, "mem $1% ")
+
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
@@ -181,6 +237,9 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
+        cpuwidget,
+        memwidget,
+        netwidget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
