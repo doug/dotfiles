@@ -128,12 +128,19 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       git clone git://github.com/creationix/nvm.git $HOME/.nvm
     fi
   fi
-
   if [[ ! -f $HOME/bin/lein ]]; then
     read "lein?Install lein (clojure's leiningen)? [yN] "
     if [[ "$lein" =~ ^[Yy]$ ]]; then
       curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > $HOME/bin/lein
       chmod a+x $HOME/bin/lein
+    fi
+  fi
+
+  if [[ ! -f $HOME/bin/git-fat ]]; then
+    read "fat?Install git-fat? [yN] "
+    if [[ "$fat" =~ ^[Yy]$ ]]; then
+      curl https://raw.github.com/jedbrown/git-fat/master/git-fat > $HOME/bin/git-fat
+      chmod a+x $HOME/bin/git-fat
     fi
   fi
 
