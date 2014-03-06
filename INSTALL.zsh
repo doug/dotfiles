@@ -131,6 +131,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   if [[ ! -f $HOME/bin/lein ]]; then
     read "lein?Install lein (clojure's leiningen)? [yN] "
     if [[ "$lein" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin
       curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > $HOME/bin/lein
       chmod a+x $HOME/bin/lein
     fi
@@ -139,6 +140,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   if [[ ! -f $HOME/bin/git-fat ]]; then
     read "fat?Install git-fat? [yN] "
     if [[ "$fat" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin
       curl https://raw.github.com/jedbrown/git-fat/master/git-fat > $HOME/bin/git-fat
       chmod a+x $HOME/bin/git-fat
     fi
