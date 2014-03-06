@@ -213,6 +213,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
   fi
 
-  exec $SHELL
+  source $HOME/.zshenv
+  source $HOME/.zshrc
 
 fi
