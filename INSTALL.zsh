@@ -149,13 +149,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read "base?Install base packages? [yN] "
   if [[ "$base" =~ ^[Yy]$ ]]; then
     if [[ "$platform" == "Linux" ]]; then
-      sudo apt-get install git
-      sudo apt-get install build-essential
-      sudo apt-get install exuberant-ctags
-      sudo apt-get install libclang-dev
-      sudo apt-get install ack
-      sudo apt-get install tmux
-      sudo apt-get install vim
+      sudo apt-get -y install git
+      sudo apt-get -y install build-essential
+      sudo apt-get -y install exuberant-ctags
+      sudo apt-get -y install libclang-dev
+      sudo apt-get -y install ack
+      sudo apt-get -y install tmux
+      sudo apt-get -y install vim
     elif [[ "$platform" == "Darwin" ]]; then
       brew install git
       brew install git-extras
