@@ -10,7 +10,7 @@ if [[ -s $HOME/.aliases.zsh ]]; then
 fi
 
 # Increase the max number of files
-ulimit -n 10000
+ulimit -n 1024
 
 # keep the emacs start and end of line even if in vi-mode
 bindkey '^A' beginning-of-line
