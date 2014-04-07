@@ -99,7 +99,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       sh $APPENGINE_SDK/INSTALL
       #$APPENGINE_SDK/bin/gcloud components update pkg-python
       $APPENGINE_SDK/bin/gcloud components update pkg-java
-      $APPENGINE_SDK/bin/gcloud components update pkg-go-x86_64
+      $APPENGINE_SDK/bin/gcloud components update pkg-go
       mkdir -p $HOME/.gogae
       ln -s $APPENGINE_SDK/platform/google_appengine_go_amd64/goroot/src/pkg $HOME/.gogae/src
     fi
