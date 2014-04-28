@@ -78,6 +78,12 @@ if [[ -s $HOME/bin/dart-sdk ]]; then
   PATH=$PATH:$DART_SDK/bin
 fi
 
+# Add NaCl SDK
+if [[ -s $HOME/bin/nacl-sdk ]]; then
+  export NACL_SDK=$HOME/bin/nacl-sdk
+  PATH=$NACL_SDK:$PATH
+fi
+
 # Add Android tools
 if [[ -s $HOME/bin/android ]]; then
   PATH=$PATH:$HOME/bin/android/tools:$HOME/bin/android/platform-tools
