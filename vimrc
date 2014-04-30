@@ -13,6 +13,7 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/syntastic'
@@ -28,7 +29,8 @@ Plugin 'elzr/vim-json'
 
 call vundle#end()
 filetype plugin indent on
-filetype plugin on
+
+syntax enable
 
 " Add a local leader which is also ,
 let mapleader=","
@@ -119,6 +121,7 @@ map <C-e> :NERDTreeToggle<CR>
 let g:slime_target = "tmux"
 
 " Colors
+set t_Co=256
 set background=dark
 colorscheme Monokai
 
