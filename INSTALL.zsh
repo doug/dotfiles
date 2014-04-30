@@ -186,12 +186,12 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   fi
 
   # install spf13-vim3 vim files
-  if [[ ! -d $HOME/.spf13-vim-3 ]]; then
-    read "vim?Install vim bundles? [yN] "
-    if [[ "$vim" =~ ^[Yy]$ ]]; then
-      sh <(curl https://j.mp/spf13-vim3 -L)
-    fi
-  fi
+  #if [[ ! -d $HOME/.spf13-vim-3 ]]; then
+    #read "vim?Install vim bundles? [yN] "
+    #if [[ "$vim" =~ ^[Yy]$ ]]; then
+      #sh <(curl https://j.mp/spf13-vim3 -L)
+    #fi
+  #fi
 
   if [[ ! -d $HOME/.rvm ]]; then
     read "rvm?Install rvm? [yN] "

@@ -1,6 +1,37 @@
-" UnBundle some modules I don't want
+if filereadable(expand('~/.vimrc.local'))
+	source ~/.vimrc.local
+endif
+
+" Use Vundle to load the plugins you want
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
+if executable('ctags')
+  Plugin 'majutsushi/tagbar'
+endif
+Plugin 'jpalardy/vim-slime'
+if !exists('g:no_ycm')
+  Plugin 'Valloric/YouCompleteMe'
+endif
+Plugin 'elzr/vim-json'
+
+call vundle#end()
+filetype plugin indent on
+filetype plugin on
 
 " Add a local leader which is also ,
+let mapleader=","
 let maplocalleader=","
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
@@ -80,6 +111,9 @@ if has("gui_running")
     set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
   endif
 endif
+
+" Nerdtree
+map <C-e> :NERDTreeToggle<CR>
 
 " Slime
 let g:slime_target = "tmux"
