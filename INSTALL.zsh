@@ -3,13 +3,13 @@
 #Be sure to change your shell first
 #chsh -s `which zsh`
 
-ZSH=`which zsh`
-if [[ "$SHELL" != "$ZSH" ]]; then
-  echo "Switching shell to zsh."
-  chsh -s $ZSH
-  echo "Please restart your terminal session."
-  exit
-fi
+# ZSH=`which zsh`
+# if [[ "$SHELL" != "$ZSH" ]]; then
+#   echo "Switching shell to zsh."
+#   chsh -s $ZSH
+#   echo "Please restart your terminal session."
+#   exit
+# fi
 
 platform=`uname`
 
