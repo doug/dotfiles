@@ -2,12 +2,29 @@
 
 gnome-settings-daemon &
 
-gnome-terminal &
+#gnome-terminal &
 
 xautolock -time 5 -locker "/usr/bin/xlock -mode swarm" &
 
-gnome-power-manager &
+#gnome-power-manager &
 
 gnome-volume-manager &
 
-exec awesome
+# exec awesome
+
+# i3
+# necessary to make chrome pick up the proxy settings stored in gconf.
+export DESKTOP_SESSION=gnome
+
+# Disable audible bell
+xset -b
+
+export GTK_IM_MODULE=xim
+
+# Background color
+xsetroot -solid "#333333"
+
+# Start urxvtd
+urxvtd -q -f -o
+
+exec i3
