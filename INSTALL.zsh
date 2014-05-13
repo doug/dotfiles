@@ -218,14 +218,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     echo "Linking $configfile to $HOME/.config/${configfile:t}"
   done
 
-	if [[ "$platform" == "Linux" ]]; then
-		mkdir -p $HOME/.i3
-		for configfile in "${current}"/i3/*; do
-			ln -fns "$configfile" "$HOME/.i3/${configfile:t}"
-			echo "Linking $configfile to $HOME/.i3/${configfile:t}"
-		done
-	fi
-
   if [[ "$platform" == "Darwin" ]]; then
     mv $HOME/.tmux.conf $HOME/.tmux.base.conf
     ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
