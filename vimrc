@@ -1,7 +1,3 @@
-if filereadable(expand('~/.vimrc.local'))
-	source ~/.vimrc.local
-endif
-
 " Use Vundle to load the plugins you want
 set nocompatible
 filetype off
@@ -10,6 +6,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
+
+if filereadable(expand('~/.vimrc.bundles.local'))
+  source ~/.vimrc.bundles.local
+endif
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
@@ -26,6 +26,8 @@ if !exists('g:no_ycm')
   Plugin 'Valloric/YouCompleteMe'
 endif
 Plugin 'elzr/vim-json'
+Plugin 'nsf/gocode',  {'rtp': 'vim/'}
+Plugin 'Townk/vim-autoclose'
 
 call vundle#end()
 filetype plugin indent on
@@ -140,4 +142,37 @@ let g:gofmt_command = "goimports"
 au BufWritePost .vimrc so ~/.vimrc
 au BufWritePost .vimrc.fork so ~/.vimrc.fork
 au BufWritePost .vimrc.local so ~/.vimrc.local
+
+" Go tags for tagbar https://github.com/jstemmer/gotags
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
 
