@@ -28,6 +28,7 @@ endif
 Plugin 'elzr/vim-json'
 Plugin 'nsf/gocode',  {'rtp': 'vim/'}
 Plugin 'Townk/vim-autoclose'
+Plugin 'thinkpixellab/flatland', {'rtp': 'Vim/'}
 
 call vundle#end()
 filetype plugin indent on
