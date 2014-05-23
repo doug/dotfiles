@@ -85,8 +85,8 @@ if [[ -s $HOME/bin/nacl-sdk ]]; then
 fi
 
 # Add Android tools
-if [[ -s $HOME/bin/android ]]; then
-  PATH=$PATH:$HOME/bin/android/tools:$HOME/bin/android/platform-tools
+if [[ -s $HOME/bin/android-sdk ]]; then
+  PATH=$PATH:$HOME/bin/android-sdk/sdk/platform-tools:$HOME/bin/android-sdk/sdk/tools
 fi
 
 if [[ -s $HOME/.pyenv ]] then
