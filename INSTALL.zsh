@@ -91,7 +91,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       curl http://dl.google.com/android/ndk/android-ndk-r9c-$OS.tar.bz2 > ndk.tar.bz2
       tar xvf ndk.tar.bz2
       rm -f ndk.tar.bz2
-      mv android_ndk-r9c $HOME/bin/android-ndk
+      mv android-ndk-r9c $HOME/bin/android-ndk
     fi
   fi
 
