@@ -86,7 +86,8 @@ fi
 
 # Add Android tools
 if [[ -s $HOME/bin/android-sdk ]]; then
-  PATH=$PATH:$HOME/bin/android-sdk/sdk/platform-tools:$HOME/bin/android-sdk/sdk/tools
+  export ANDROID_SDK=$HOME/bin/android-sdk
+  PATH=$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools:$PATH
 fi
 
 if [[ -s $HOME/.pyenv ]] then
