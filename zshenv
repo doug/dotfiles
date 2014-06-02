@@ -86,7 +86,7 @@ fi
 
 # Add Android tools
 if [[ -s $HOME/bin/android-sdk ]]; then
-  export ANDROID_SDK=$HOME/bin/android-sdk
+  export ANDROID_SDK=$HOME/bin/android-sdk/sdk
   PATH=$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools:$PATH
 fi
 
