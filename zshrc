@@ -19,6 +19,7 @@ bindkey '^E' end-of-line
 # don't use cdablevars
 unsetopt cdablevarS
 
+export EDITOR='vim'
 
 if [[ -s $HOME/.zshrc.local ]]; then
     source $HOME/.zshrc.local
