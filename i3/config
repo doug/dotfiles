@@ -148,3 +148,8 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# mods for floating always windows
+for_window [window_role="pop-up"] floating enable
+for_window [class="Nautilus" instance="file_progress"] floating enable
+
