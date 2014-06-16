@@ -26,6 +26,7 @@ if !exists('g:no_ycm')
   Plugin 'Valloric/YouCompleteMe'
 endif
 Plugin 'elzr/vim-json'
+Plugin 'jnwhiteh/vim-golang'
 Plugin 'nsf/gocode',  {'rtp': 'vim/'}
 Plugin 'Townk/vim-autoclose'
 Plugin 'thinkpixellab/flatland', {'rtp': 'Vim/'}
