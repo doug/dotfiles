@@ -19,6 +19,9 @@ PATH=$HOME/bin:$PATH
 export GOPATH=$HOME/.go:$HOME/go:$HOME/.gogae
 PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
+# Docker
+export DOCKER_HOST=tcp://:2375
+
 export EDITOR=vim
 export VISUAL=$EDITOR
 if [[ "$PLATFORM" == "Darwin" ]]; then
