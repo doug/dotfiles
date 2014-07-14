@@ -201,10 +201,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   fi
 
   setopt EXTENDED_GLOB
-  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc|zpreztorc)(.); do
-    ln -fns "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    echo "Linking $rcfile to ${ZDOTDIR:-$HOME}/.${rcfile:t}"
-  done
 
   for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|tmux.osx.conf|themes|config); do
     ln -fns "$rcfile" "$HOME/.${rcfile:t}"
