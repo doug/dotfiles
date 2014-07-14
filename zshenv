@@ -70,9 +70,8 @@ fi
 # Add Google Cloud SDK
 if [[ -s $HOME/bin/google-cloud-sdk ]]; then
   CLOUD_SDK=$HOME/bin/google-cloud-sdk
+  source $CLOUD_SDK/completion.zsh.inc
   PATH=$PATH:$CLOUD_SDK/bin
-  PATH=$PATH:$CLOUD_SDK/platform/google_appengine_go_amd64
-  PATH=$PATH:$CLOUD_SDK/platform/google_appengine
 fi
 
 # Add Dart SDK

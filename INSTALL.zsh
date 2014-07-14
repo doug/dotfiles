@@ -103,16 +103,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$cloudsdk" =~ ^[Yy]$ ]]; then
       mkdir -p $HOME/bin
       APPENGINE_SDK=$HOME/bin/google-cloud-sdk
-      curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk-python.zip > cloud.zip
+      curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip > cloud.zip
       unzip cloud.zip
       mv google-cloud-sdk $APPENGINE_SDK
       rm -f cloud.zip
-      sh $APPENGINE_SDK/INSTALL
-      #$APPENGINE_SDK/bin/gcloud components update pkg-python
-      $APPENGINE_SDK/bin/gcloud components update pkg-java
-      $APPENGINE_SDK/bin/gcloud components update pkg-go-x86_64
+      sh $APPENGINE_SDK/install.sh
       mkdir -p $HOME/.gogae
-      ln -s $APPENGINE_SDK/platform/google_appengine_go_amd64/goroot/src/pkg $HOME/.gogae/src
+      ln -s $APPENGINE_SDK/platform/google_appengine/goroot/src/pkg $HOME/.gogae/src
     fi
   fi
 
