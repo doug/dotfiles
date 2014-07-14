@@ -64,10 +64,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
   if [[ ! -d $HOME/bin/nacl-sdk ]]; then
     read "naclsdk?Install NaCl SDK? [yN] "
-    curl http://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/nacl_sdk.zip > nacl_sdk.zip
-    unzip nacl_sdk.zip
-    rm -f nacl_sdk.zip
-    mv nacl_sdk $HOME/bin/nacl-sdk
+    if [[ "$naclsdk" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin
+			curl http://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/nacl_sdk.zip > nacl_sdk.zip
+			unzip nacl_sdk.zip
+			rm -f nacl_sdk.zip
+			mv nacl_sdk $HOME/bin/nacl-sdk
+		fi
   fi
 
   if [[ ! -d $HOME/bin/android-sdk ]]; then
