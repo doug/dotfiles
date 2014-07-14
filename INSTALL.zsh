@@ -42,8 +42,8 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   fi
 
   # install prezto
-  if [[ ! -d $HOME/.zprezto ]]; then
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto"
+  if [[ ! -d $HOME/.oh-my-zsh ]]; then
+    git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
   fi
 
   read "gitconfig?Update gitconfig? [yN] "
