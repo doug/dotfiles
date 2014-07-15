@@ -141,7 +141,7 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] then
 fi
 
 if [[ -s $HOME/.nvm/nvm.sh ]]; then
-    source $HOME/.nvm/nvm.sh
+  source $HOME/.nvm/nvm.sh
 fi
 
 # Export the PATH

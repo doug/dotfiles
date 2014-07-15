@@ -134,6 +134,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     read "nvm?Install nvm? [yN] "
     if [[ "$nvm" =~ ^[Yy]$ ]]; then
       git clone git://github.com/creationix/nvm.git $HOME/.nvm
+			sh $HOME/.nvm/install.sh
     fi
   fi
   if [[ ! -f $HOME/bin/lein ]]; then
@@ -219,7 +220,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
   fi
 
-  source $HOME/.zshenv
   source $HOME/.zshrc
 
 fi
