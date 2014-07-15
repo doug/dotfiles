@@ -31,6 +31,9 @@ Plugin 'nsf/gocode',  {'rtp': 'vim/'}
 Plugin 'Townk/vim-autoclose'
 Plugin 'thinkpixellab/flatland', {'rtp': 'Vim/'}
 Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'Lokaltog/vim-easymotion'
 
 call vundle#end()
 filetype plugin indent on

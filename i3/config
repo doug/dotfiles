@@ -110,6 +110,12 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# volume binding
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 0 -- '-5%'
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 0 -- '+5%'
+
+# set a timeout lock
+# `exec xautolock -time 1 -locker "i3lock -c 333333"`
 # lock the screen
 bindsym $mod+p exec "i3lock -c 333333"
 # reload the configuration file

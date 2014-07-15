@@ -1,6 +1,6 @@
 #!/bin/sh
 
-unity-settings-daemon &
+#gnome-settings-daemon &
 
 #gnome-terminal &
 
@@ -8,9 +8,9 @@ drive-sync &
 
 xautolock -time 5 -locker "i3lock -c 333333" &
 
-#unity-power-manager &
+#gnome-power-manager &
 
-unity-volume-manager &
+#gnome-volume-manager &
 
 # i3
 # necessary to make chrome pick up the proxy settings stored in gconf.
