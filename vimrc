@@ -24,16 +24,22 @@ endif
 Plugin 'jpalardy/vim-slime'
 if !exists('g:no_ycm')
   Plugin 'Valloric/YouCompleteMe'
+else
+  Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'elzr/vim-json'
-Plugin 'jnwhiteh/vim-golang'
-Plugin 'nsf/gocode',  {'rtp': 'vim/'}
+"Plugin 'jnwhiteh/vim-golang'
+"Plugin 'nsf/gocode',  {'rtp': 'vim/'}
 Plugin 'Townk/vim-autoclose'
 Plugin 'thinkpixellab/flatland', {'rtp': 'Vim/'}
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'Shougo/unite.vim'
+Plugin 'fatih/vim-go'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 
 call vundle#end()
 filetype plugin indent on
@@ -76,15 +82,15 @@ nmap <LocalLeader>pp :set paste!<cr>
 augroup filetype
   autocmd!
   autocmd BufRead,BufNewFile *.proto set ft=proto
-  autocmd BufRead,BufNewFile *.go set ft=go
+  "autocmd BufRead,BufNewFile *.go set ft=go
 augroup end
 
 " Automatic formating on save
-augroup go
-  autocmd!
-  autocmd FileType go autocmd BufWritePre <buffer> Fmt
-  autocmd FileType go setlocal noexpandtab
-augroup end
+"augroup go
+  "autocmd!
+  "autocmd FileType go autocmd BufWritePre <buffer> Fmt
+  "autocmd FileType go setlocal noexpandtab
+"augroup end
 
 " remove trailing whitespace and pesky ^M
 augroup whitespace
@@ -177,6 +183,62 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+" easymotion configuration
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
+" easymotion configuration end
+
+if !exists('g:no_ycm')
+	" youcompleteme
+else
+	" neocomplete
+	" Disable AutoComplPop.
+	let g:acp_enableAtStartup = 0
+	" Use neocomplete.
+	let g:neocomplete#enable_at_startup = 1
+	" Use smartcase.
+	let g:neocomplete#enable_smart_case = 1
+endif
+" Disable preview window for YCM and neocomplete
+set completeopt-=preview
+
+" Ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-l>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" End Ultisnips
+
 
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
