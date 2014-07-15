@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="random"
+ZSH_THEME="skaro"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -39,7 +39,7 @@ ZSH_THEME="random"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -110,7 +110,7 @@ fi
 if [[ -s $HOME/bin/google-cloud-sdk ]]; then
   CLOUD_SDK=$HOME/bin/google-cloud-sdk
   source $CLOUD_SDK/completion.zsh.inc
-  PATH=$PATH:$CLOUD_SDK/bin
+  PATH=$PATH:$CLOUD_SDK/bin:$CLOUD_SDK/platform/google_appengine
 fi
 
 # Add Dart SDK
