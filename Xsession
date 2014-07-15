@@ -4,7 +4,9 @@ unity-settings-daemon &
 
 #gnome-terminal &
 
-xautolock -time 5 -locker "/usr/bin/xlock -mode swarm" &
+drive-sync &
+
+xautolock -time 5 -locker "i3lock -c 333333" &
 
 #unity-power-manager &
 
