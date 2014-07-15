@@ -1,16 +1,14 @@
 #!/bin/sh
 
-gnome-settings-daemon &
+unity-settings-daemon &
 
 #gnome-terminal &
 
 xautolock -time 5 -locker "/usr/bin/xlock -mode swarm" &
 
-#gnome-power-manager &
+#unity-power-manager &
 
-gnome-volume-manager &
-
-# exec awesome
+unity-volume-manager &
 
 # i3
 # necessary to make chrome pick up the proxy settings stored in gconf.
@@ -23,8 +21,5 @@ export GTK_IM_MODULE=xim
 
 # Background color
 xsetroot -solid "#333333"
-
-# Start urxvtd
-urxvtd -q -f -o
 
 exec i3
