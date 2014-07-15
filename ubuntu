@@ -1,0 +1,4 @@
+
+# do not show desktop background on nautilus so that window managers like i3 work
+dconf write /org/gnome/desktop/background/draw-background false
+dconf write /org/gnome/desktop/background/show-desktop-icons false
