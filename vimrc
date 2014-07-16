@@ -225,6 +225,8 @@ else
 	let g:neocomplete#enable_at_startup = 1
 	" Use smartcase.
 	let g:neocomplete#enable_smart_case = 1
+	" <TAB> completion
+	inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 endif
 " Disable preview window for YCM and neocomplete
 set completeopt-=preview

@@ -56,15 +56,13 @@ export PLATFORM=`uname`
 
 # Add home bin
 PATH=$HOME/bin:$PATH
+
 # Go
-export GOPATH=$HOME/.go:$HOME/go:$HOME/.gogae
 PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 # Docker
 export DOCKER_HOST=tcp://:2375
 
-export EDITOR=vim
-export VISUAL=$EDITOR
 if [[ "$PLATFORM" == "Darwin" ]]; then
     # Homebrew
     export HOMEBREW_PREFIX=$HOME/.homebrew
@@ -154,19 +152,31 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  if (( $+commands[vim] )); then
+		export EDITOR='vim'
+	else
+		export EDITOR='vi'
+	fi
 else
-  export EDITOR='subl'
+  if (( $+commands[gvim] )); then
+		export EDITOR='gvim'
+  elif (( $+commands[subl] )); then
+		export EDITOR='subl'
+	else
+		export EDITOR='vim'
+	fi
 fi
+export VISUAL=$EDITOR
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
+
+# keep the emacs start and end of line even if in vi-mode
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
 
 # Aliases
 if [[ -s $HOME/.aliases.zsh ]]; then
   source $HOME/.aliases.zsh
 fi
 
-# keep the emacs start and end of line even if in vi-mode
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
