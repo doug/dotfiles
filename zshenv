@@ -4,3 +4,6 @@
 
 # Go
 export GOPATH=$HOME/.go:$HOME/go:$HOME/.gogae
+
+# skip compinit
+skip_global_compinit=1

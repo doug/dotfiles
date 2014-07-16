@@ -158,9 +158,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 		export EDITOR='vi'
 	fi
 else
-  if (( $+commands[gvim] )); then
-		export EDITOR='gvim'
-  elif (( $+commands[subl] )); then
+  if (( $+commands[subl] )); then
 		export EDITOR='subl'
 	else
 		export EDITOR='vim'

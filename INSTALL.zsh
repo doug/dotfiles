@@ -3,13 +3,12 @@
 #Be sure to change your shell first
 #chsh -s `which zsh`
 
-# ZSH=`which zsh`
-# if [[ "$SHELL" != "$ZSH" ]]; then
-#   echo "Switching shell to zsh."
-#   chsh -s $ZSH
-#   echo "Please restart your terminal session."
-#   exit
-# fi
+if [[ "$ZSH_NAME" != "zsh" ]]; then
+	echo "Switching shell to zsh."
+	chsh -s `which zsh`
+	echo "Please restart your terminal session."
+	exit
+fi
 
 platform=`uname`
 
@@ -41,7 +40,26 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     # echo $HOME/.homebrew/bin > /etc/paths.d/homebrew
   fi
 
-  # install prezto
+	setopt EXTENDED_GLOB
+
+  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|ubuntu|tmux.osx.conf|themes|config); do
+    ln -fns "$rcfile" "$HOME/.${rcfile:t}"
+    echo "Linking $rcfile to $HOME/.${rcfile:t}"
+  done
+
+  mkdir -p $HOME/.config
+
+  for configfile in "${current}"/config/*; do
+    ln -fns "$configfile" "$HOME/.config/${configfile:t}"
+    echo "Linking $configfile to $HOME/.config/${configfile:t}"
+  done
+
+  if [[ "$platform" == "Darwin" ]]; then
+    mv $HOME/.tmux.conf $HOME/.tmux.base.conf
+    ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
+  fi
+  
+	# install prezto
   if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
   fi
@@ -178,14 +196,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-  # install pyenv for python managment
-  if [[ ! -d $HOME/.pyenv ]]; then
-    read "pyenv?Install pyenv for python management? [yN] "
-    if [[ "$pyenv" =~ ^[Yy]$ ]]; then
-      git clone git://github.com/yyuu/pyenv.git $HOME/.pyenv
-    fi
-  fi
-
   # install spf13-vim3 vim files
   #if [[ ! -d $HOME/.spf13-vim-3 ]]; then
     #read "vim?Install vim bundles? [yN] "
@@ -193,6 +203,29 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       #sh <(curl https://j.mp/spf13-vim3 -L)
     #fi
   #fi
+	if [[ ! -d $HOME/.vim ]]; then
+		read "vim?Install vim bundles? [yN] "
+		if [[ "$vim" =~ ^[Yy]$ ]]; then
+			mkdir -p $HOME/.vim/bundle
+			git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+			vim +PluginInstall +qall
+			# compile ycm
+			# cd $HOME/.vim/bundle/YouCompleteMe
+			# sh ./install.sh --clang-completer
+			# install eclim
+			# wget http://downloads.sourceforge.net/project/eclim/eclim/2.3.4/eclim_2.3.4.jar
+			# java -Dvim.files=$HOME/.vim -Declipse.home=$HOME/eclipse43/stable -jar eclim_2.3.4.jar install
+			# # java -Dvim.files=$HOME/.vim -Declipse.home=$HOME/eclipse43/stable -jar eclim_2.3.4.jar uninstall
+		fi
+	fi
+  
+	# install pyenv for python managment
+  if [[ ! -d $HOME/.pyenv ]]; then
+    read "pyenv?Install pyenv for python management? [yN] "
+    if [[ "$pyenv" =~ ^[Yy]$ ]]; then
+      git clone git://github.com/yyuu/pyenv.git $HOME/.pyenv
+    fi
+  fi
 
   if [[ ! -d $HOME/.rvm ]]; then
     read "rvm?Install rvm? [yN] "
@@ -201,25 +234,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-  setopt EXTENDED_GLOB
 
-  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|tmux.osx.conf|themes|config); do
-    ln -fns "$rcfile" "$HOME/.${rcfile:t}"
-    echo "Linking $rcfile to $HOME/.${rcfile:t}"
-  done
-
-  mkdir -p $HOME/.config
-
-  for configfile in "${current}"/config/*; do
-    ln -fns "$configfile" "$HOME/.config/${configfile:t}"
-    echo "Linking $configfile to $HOME/.config/${configfile:t}"
-  done
-
-  if [[ "$platform" == "Darwin" ]]; then
-    mv $HOME/.tmux.conf $HOME/.tmux.base.conf
-    ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
-  fi
-
-  source $HOME/.zshrc
+  echo "All finsihed please reload your terminal."
 
 fi

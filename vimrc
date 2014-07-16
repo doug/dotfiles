@@ -25,7 +25,7 @@ Plugin 'jpalardy/vim-slime'
 if !exists('g:no_ycm')
   Plugin 'Valloric/YouCompleteMe'
 else
-  Plugin 'Shougo/neocomplete.vim'
+  "Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'elzr/vim-json'
 "Plugin 'jnwhiteh/vim-golang'
@@ -58,6 +58,7 @@ inoremap kk <esc>
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
+set expandtab
 
 " Fast saving
 nmap ;w :w!<cr>
@@ -86,11 +87,12 @@ augroup filetype
 augroup end
 
 " Automatic formating on save
-"augroup go
+augroup go
   "autocmd!
   "autocmd FileType go autocmd BufWritePre <buffer> Fmt
   "autocmd FileType go setlocal noexpandtab
-"augroup end
+  autocmd FileType go setlocal tabstop=2
+augroup end
 
 " remove trailing whitespace and pesky ^M
 augroup whitespace
@@ -131,6 +133,9 @@ endif
 " Nerdtree
 map <C-e> :NERDTreeToggle<CR>
 
+" Tagbar
+map <C-t> :TagbarToggle<CR>
+
 " Slime
 let g:slime_target = "tmux"
 
@@ -156,33 +161,33 @@ au BufWritePost .vimrc.fork so ~/.vimrc.fork
 au BufWritePost .vimrc.local so ~/.vimrc.local
 
 " Go tags for tagbar https://github.com/jstemmer/gotags
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+"let g:tagbar_type_go = {
+    "\ 'ctagstype' : 'go',
+    "\ 'kinds'     : [
+        "\ 'p:package',
+        "\ 'i:imports:1',
+        "\ 'c:constants',
+        "\ 'v:variables',
+        "\ 't:types',
+        "\ 'n:interfaces',
+        "\ 'w:fields',
+        "\ 'e:embedded',
+        "\ 'm:methods',
+        "\ 'r:constructor',
+        "\ 'f:functions'
+    "\ ],
+    "\ 'sro' : '.',
+    "\ 'kind2scope' : {
+        "\ 't' : 'ctype',
+        "\ 'n' : 'ntype'
+    "\ },
+    "\ 'scope2kind' : {
+        "\ 'ctype' : 't',
+        "\ 'ntype' : 'n'
+    "\ },
+    "\ 'ctagsbin'  : 'gotags',
+    "\ 'ctagsargs' : '-sort -silent'
+"\ }
 
 " easymotion configuration
 
@@ -215,21 +220,30 @@ map  N <Plug>(easymotion-prev)
 
 " easymotion configuration end
 
-if !exists('g:no_ycm')
-	" youcompleteme
-else
-	" neocomplete
-	" Disable AutoComplPop.
-	let g:acp_enableAtStartup = 0
-	" Use neocomplete.
-	let g:neocomplete#enable_at_startup = 1
-	" Use smartcase.
-	let g:neocomplete#enable_smart_case = 1
-	" <TAB> completion
-	inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-endif
+"if !exists('g:no_ycm')
+  " youcompleteme
+  let g:ycm_auto_trigger = 1
+  let g:EclimCompletionMethod = 'omnifunc'
+  "let g:ycm_autoclose_preview_window_after_insertion = 0
+  "let g:ycm_autoclose_preview_window_after_completion = 0
+"else
+  "" neocomplete
+  "" Disable AutoComplPop.
+  "let g:acp_enableAtStartup = 0
+  "" Use neocomplete.
+  "let g:neocomplete#enable_at_startup = 1
+  "" Use smartcase.
+  "let g:neocomplete#enable_smart_case = 1
+  "" <TAB> completion
+  "inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+"endif
+
 " Disable preview window for YCM and neocomplete
-set completeopt-=preview
+"set completeopt-=preview
+"set g:ycm_add_preview_to_completeopt = 0
+
+" Make help and completion descriptions in preview scratch splitbelow
+set splitbelow
 
 " Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
