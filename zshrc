@@ -51,9 +51,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Detect os
-export PLATFORM=`uname`
-
 # Add home bin
 PATH=$HOME/bin:$PATH
 
@@ -63,7 +60,7 @@ PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 # Docker
 export DOCKER_HOST=tcp://:2375
 
-if [[ "$PLATFORM" == "Darwin" ]]; then
+if [[ "$OSTYPE" == darwin* ]]; then
     # Homebrew
     export HOMEBREW_PREFIX=$HOME/.homebrew
     PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
@@ -75,9 +72,6 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     export PATH=$PATH:$HOME/.rvm/bin
     # pkg-config
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
-    # npm
-    export NODE_PATH=$HOMEBREW_PREFIX/lib/node
-    PATH=$HOMEBREW_PREFIX/share/npm/bin:$PATH
     # compile path
     export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOMEBREW_PREFIX/include
     export CPP_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOMEBREW_PREFIX/include
@@ -87,15 +81,7 @@ if [[ "$PLATFORM" == "Darwin" ]]; then
     PATH=$HOMEBREW_PREFIX/share/python:$PATH
     # ruby
     PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
-    if (( $+commands[brew] )); then
-      # GO
-      export GOROOT=`brew --prefix go`/libexec
-    fi
-    if (( $+commands[npm] )); then
-      # npm
-      export NODE_PATH=$NODE_PATH:`npm root -g`
-    fi
-elif [[ "$PLATFORM" == "Linux" ]]; then
+elif [[ "$OSTYPE" == linux* ]]; then
     # Go
     export GOARCH=amd64
     export GOOS=linux
