@@ -116,4 +116,7 @@ alias brown="play -c 2 -n synth 60:00 brownnoise"
 #play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20
 #play -m "|sox -n -p synth sin " "|sox -n -p synth 2 tremolo 10" "|sox -n -p synth pinknoise band -n 2500 4000 reverb 20"
 
+# multi move http://www.mfasold.net/blog/2008/11/moving-or-renaming-multiple-files/
+autoload -U zmv
+alias mmv='noglob zmv -W'
 
