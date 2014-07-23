@@ -162,4 +162,11 @@ bar {
 # mods for floating always windows
 for_window [window_role="pop-up"] floating enable
 for_window [class="Nautilus" instance="file_progress"] floating enable
+for_window [class="Gnome-screenshot"] floating enable
+for_window [class="VirtualBox"] floating enable
+for_window [class="screengrab"] floating enable
+for_window [class="MPlayer"] floating enable
+for_window [class="Gnome-mplayer"] floating enable
+for_window [class="VLC"] floating enable
+for_window [class="Empathy"] floating enable
 
