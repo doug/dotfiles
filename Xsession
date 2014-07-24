@@ -1,6 +1,7 @@
 #!/bin/sh
 
 #gnome-settings-daemon &
+unity-settings-daemon &
 
 #gnome-terminal &
 
