@@ -46,9 +46,9 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if [[ "$OSTYPE" == darwin* ]]; then
-  plugins=(git docker wd autojump extract osx brew)
+  plugins=(git docker wd autojump history-substring-search extract osx brew)
 elif [[ "$OSTYPE" == linux* ]]; then
-  plugins=(git docker wd autojump extract)
+  plugins=(git docker wd autojump history-substring-search extract)
 fi
 
 source $ZSH/oh-my-zsh.sh
