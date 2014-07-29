@@ -149,7 +149,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 	fi
 else
   if (( $+commands[subl] )); then
-		export EDITOR='subl'
+		export EDITOR='subl -w'
 	else
 		export EDITOR='vim'
 	fi

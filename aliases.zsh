@@ -120,3 +120,4 @@ alias brown="play -c 2 -n synth 60:00 brownnoise"
 autoload -U zmv
 alias mmv='noglob zmv -W'
 
+alias gerritinit='curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://gerrit-review.googlesource.com/tools/hooks/commit-msg ; chmod +x `git rev-parse --git-dir`/hooks/commit-msg'
