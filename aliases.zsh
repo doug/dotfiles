@@ -9,6 +9,16 @@ elif [[ "$OSTYPE" == linux* ]]; then
   alias pbpaste="xclip -selection clipboard -o"
   alias open="xdg-open"
   alias trash="gvfs-trash"
+
+  function ffcapture {
+    dim=`xwininfo`
+    w=`echo $dim | awk '/Width/ {print $2}'`
+    h=`echo $dim | awk '/Height/ {print $2}'`
+    x=`echo $dim | awk '/Absolute upper-left X/ {print $4}'`
+    y=`echo $dim | awk '/Absolute upper-left Y/ {print $4}'`
+    avconv -f x11grab -r 30 -s ${w}x${h} -i :0.0+${x},${y} $1
+  }
+
 fi
 
 function pythonlib {
