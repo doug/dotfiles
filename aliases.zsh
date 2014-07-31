@@ -13,10 +13,18 @@ elif [[ "$OSTYPE" == linux* ]]; then
   function ffcapture {
     dim=`xwininfo`
     w=`echo $dim | awk '/Width/ {print $2}'`
+    # keep divisible by 2
+    if (($w % 2 != 0)) {
+      (( w = w + 1 ))
+    }
     h=`echo $dim | awk '/Height/ {print $2}'`
+    # keep divisible by 2
+    if (($h % 2 != 0)) {
+      (( h = h + 1 ))
+    }
     x=`echo $dim | awk '/Absolute upper-left X/ {print $4}'`
     y=`echo $dim | awk '/Absolute upper-left Y/ {print $4}'`
-    avconv -f x11grab -r 30 -s ${w}x${h} -i :0.0+${x},${y} $1
+    avconv -video_size ${w}x${h} -framerate 24 -f x11grab -i :0.0+${x},${y} $1
   }
 
 fi
