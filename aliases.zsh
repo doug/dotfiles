@@ -3,8 +3,8 @@ if [[ "$OSTYPE"  == darwin* ]]; then
   alias python32="arch -i386 python"
   alias signalstrength="while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed -e 's/^.*://g' | xargs -I SIGNAL printf \"\rRSSI dBm: SIGNAL\"; sleep 0.5; done"
   alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-  alias hideFiles="defaults write com.apple.finder AppleShowAllFiles -bool false"
-  alias showFiles="defaults write com.apple.finder AppleShowAllFiles -bool true"
+  alias hideFiles="defaults write com.apple.finder AppleShowAllFiles -bool false; killall Finder /System/Library/CoreServices/Finder.app"
+  alias showFiles="defaults write com.apple.finder AppleShowAllFiles -bool true; killall Finder /System/Library/CoreServices/Finder.app"
 elif [[ "$OSTYPE" == linux* ]]; then
   # Linux Aliases
   alias pbcopy="xclip -selection clipboard"
