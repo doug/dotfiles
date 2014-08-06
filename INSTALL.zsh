@@ -33,6 +33,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         rm spectacle.zip
       fi
     fi
+    if (( ! $+commands[subl] )); then
+      read "sublime?Install sublime symlink? [yN] "
+      if [[ "$sublime" =~ ^[Yy]$ ]]; then
+        mkdir -p $HOME/bin
+        ln -s $HOME/bin/subl /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
+      fi
+    fi
     if [[ ! -d $HOME/.homebrew ]]; then
       mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
       export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
