@@ -61,4 +61,4 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 echo "Show hidden files in Finder"
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
-killall Finder
+killall Finder /System/Library/CoreServices/Finder.app
