@@ -42,7 +42,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
 	setopt EXTENDED_GLOB
 
-  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|ubuntu|tmux.osx.conf|themes|config|INSTALL.zsh); do
+  for rcfile in "${current}"/^(bootstrap.sh|*.template|osx|ubuntu|tmux.osx.conf|themes|config|INSTALL.zsh|README.md); do
     ln -fns "$rcfile" "$HOME/.${rcfile:t}"
     echo "Linking $rcfile to $HOME/.${rcfile:t}"
   done
