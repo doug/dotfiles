@@ -235,6 +235,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   fi
 
 
-  echo "All finsihed please reload your terminal."
+  echo "All finished, please reload your terminal."
 
 fi
