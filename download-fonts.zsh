@@ -1,5 +1,5 @@
 mkdir -p $HOME/.fonts
-for x in Roboto Anonymous-Pro; do 
+for x in Roboto Anonymous-Pro source-sans-pro; do 
   curl -O http://www.fontsquirrel.com/fonts/download/$x
   unzip -o $x -d $HOME/.fonts
   rm $x
