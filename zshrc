@@ -168,3 +168,8 @@ if [[ -s $HOME/.aliases.zsh ]]; then
   source $HOME/.aliases.zsh
 fi
 
+# Local overrides
+if [[ -s $HOME/.zshrc.local ]]; then
+  source $HOME/.zshrc.local
+fi
+
