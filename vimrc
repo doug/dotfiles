@@ -40,6 +40,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'fatih/vim-go'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'wavded/vim-stylus'
 
 call vundle#end()
 filetype plugin indent on
