@@ -62,6 +62,7 @@ PATH=$HOME/bin:$PATH
 PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 # Docker
+# export DOCKER_HOST="tcp://$(boot2docker ip 2> /dev/null):2375"
 export DOCKER_HOST=tcp://:2375
 
 if [[ "$OSTYPE" == darwin* ]]; then
