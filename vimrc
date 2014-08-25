@@ -256,6 +256,13 @@ let g:UltiSnipsJumpBackwardTrigger="<c-l>"
 let g:UltiSnipsEditSplit="vertical"
 " End Ultisnips
 
+" Syntastic
+let g:syntastic_auto_loc_list=1
+"let g:syntastic_disabled_filetypes=['html']
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_javascript_checkers=['gjslint']
+" End Syntastic
 
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
