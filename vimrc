@@ -41,6 +41,7 @@ Plugin 'fatih/vim-go'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'wavded/vim-stylus'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 filetype plugin indent on
