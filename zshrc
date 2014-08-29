@@ -160,6 +160,11 @@ else
 fi
 export VISUAL=$EDITOR
 
+# Autojump
+if [[ $OSTYPE == darwin* ]]; then
+  [[ -s $HOMEBREW_PREFIX/etc/autojump.sh ]] && . $HOMEBREW_PREFIX/etc/autojump.sh
+fi
+
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
