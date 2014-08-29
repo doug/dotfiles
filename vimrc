@@ -30,7 +30,7 @@ endif
 Plugin 'elzr/vim-json'
 "Plugin 'jnwhiteh/vim-golang'
 "Plugin 'nsf/gocode',  {'rtp': 'vim/'}
-Plugin 'Townk/vim-autoclose'
+Plugin 'spf13/vim-autoclose'
 Plugin 'thinkpixellab/flatland', {'rtp': 'Vim/'}
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
@@ -39,7 +39,7 @@ Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'Shougo/unite.vim'
 Plugin 'fatih/vim-go'
 Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
 Plugin 'wavded/vim-stylus'
 Plugin 'editorconfig/editorconfig-vim'
 
@@ -69,12 +69,6 @@ imap ;w <esc>:w!<cr>
 " set text width default
 set textwidth=100
 
-" Add emacs beginning and end of line
-"map <c-a> ^
-"map! <c-a> <c-o>^
-"map <c-e> $
-"map! <c-e> <c-o>$
-
 " stop highlighting after I searched
 nmap <silent> // :nohlsearch<cr>
 
@@ -85,14 +79,11 @@ nmap <LocalLeader>pp :set paste!<cr>
 augroup filetype
   autocmd!
   autocmd BufRead,BufNewFile *.proto set ft=proto
-  "autocmd BufRead,BufNewFile *.go set ft=go
 augroup end
 
 " Automatic formating on save
 augroup go
-  "autocmd!
-  "autocmd FileType go autocmd BufWritePre <buffer> Fmt
-  "autocmd FileType go setlocal noexpandtab
+  autocmd!
   autocmd FileType go setlocal tabstop=2
 augroup end
 
@@ -265,6 +256,8 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_javascript_checkers=['gjslint']
+"let g:syntastic_html_tidy_ignore_errors=["proprietary attribute" ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!"]
 " End Syntastic
 
 " Airline
