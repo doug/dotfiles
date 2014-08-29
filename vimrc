@@ -120,15 +120,15 @@ nnoremap <space> za
 if has("gui_running")
   " Font for gui
   if has("gui_gtk2")
-      set guifont=DejaVu\ Sans\ Mono\ 11,Andale\ Mono\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
+      set guifont=Source\ Code\ Pro\ 11,DejaVu\ Sans\ Mono\ 11,Andale\ Mono\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
   elseif has("gui_mac")
-      set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
+      set guifont=Source\ Code\ Pro:h12,Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
   elseif has("gui_win32")
-      set guifont=Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
+      set guifont=Source\ Code\ Pro:h12,Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
   endif
   if has("gui_macvim")
     set transparency=0
-    set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
+    set guifont=Source\ Code\ Pro:h12,Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
   endif
 endif
 
@@ -143,8 +143,10 @@ let g:slime_target = "tmux"
 
 " Colors
 set t_Co=256
-set background=dark
-colorscheme Monokai
+"set background=dark
+"colorscheme Monokai
+set background=light
+colorscheme summerfruit256
 
 " no relative lines
 set number
@@ -264,6 +266,10 @@ let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_javascript_checkers=['gjslint']
 " End Syntastic
+
+" Airline
+let g:airline_theme='light'
+" End Airline
 
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
