@@ -68,35 +68,6 @@ else
   export DOCKER_HOST=tcp://:2375
 fi
 
-if [[ "$OSTYPE" == darwin* ]]; then
-    # Homebrew
-    export HOMEBREW_PREFIX=$HOME/.homebrew
-    PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
-    # GO
-    #export GOBIN=$HOMEBREW_PREFIX/bin
-    export GOARCH=amd64
-    export GOOS=darwin
-    # Ruby
-    export PATH=$PATH:$HOME/.rvm/bin
-    # pkg-config
-    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
-    # compile path
-    export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOMEBREW_PREFIX/include
-    export CPP_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOMEBREW_PREFIX/include
-    export LIBRARY_PATH=$LIBRARY_PATH:$HOMEBREW_PREFIX/lib
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOMEBREW_PREFIX/lib
-    # python
-    PATH=$HOMEBREW_PREFIX/share/python:$PATH
-    # ruby
-    PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
-elif [[ "$OSTYPE" == linux* ]]; then
-    # Go
-    export GOARCH=amd64
-    export GOOS=linux
-    export CGO_LDFLAGS="-Wl,-rpath,/usr/local/lib"
-    # Path
-    PATH=/opt/local/bin:$PATH
-fi
 
 # Add Google Cloud SDK
 if [[ -s $HOME/bin/google-cloud-sdk ]]; then
