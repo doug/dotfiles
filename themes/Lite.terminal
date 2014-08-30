@@ -29,6 +29,10 @@
 	dIABCBEaIy0yNztBSE5bYoKEhouWn6eqs8XIzQAAAAAAAAEBAAAAAAAAABkAAAAAAAAA
 	AAAAAAAAAADP
 	</data>
+	<key>Bell</key>
+	<false/>
+	<key>CursorBlink</key>
+	<true/>
 	<key>Font</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGGBlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -44,8 +48,29 @@
 	<real>1.004032258064516</real>
 	<key>ProfileCurrentVersion</key>
 	<real>2.02</real>
+	<key>ShowDimensionsInTitle</key>
+	<false/>
+	<key>VisualBell</key>
+	<true/>
+	<key>WindowTitle</key>
+	<string></string>
 	<key>name</key>
-	<string>Doug Lite</string>
+	<string>Lite</string>
+	<key>noWarnProcesses</key>
+	<array>
+		<dict>
+			<key>ProcessName</key>
+			<string>screen</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>tmux</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>ssh</string>
+		</dict>
+	</array>
 	<key>type</key>
 	<string>Window Settings</string>
 </dict>

@@ -17,7 +17,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
     export GOARCH=amd64
     export GOOS=darwin
     # Ruby
-    export PATH=$PATH:$HOME/.rvm/bin
+    PATH=$PATH:$HOME/.rvm/bin
     # pkg-config
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
     # compile path
@@ -28,16 +28,15 @@ if [[ "$OSTYPE" == darwin* ]]; then
     # python
     PATH=$HOMEBREW_PREFIX/share/python:$PATH
     # ruby
-    PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
+    export PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
 elif [[ "$OSTYPE" == linux* ]]; then
     # Go
     export GOARCH=amd64
     export GOOS=linux
     export CGO_LDFLAGS="-Wl,-rpath,/usr/local/lib"
     # Path
-    PATH=/opt/local/bin:$PATH
+    export PATH=/opt/local/bin:$PATH
 fi
-export $PATH
 
 # Local overrides
 if [[ -s $HOME/.zshenv.local ]]; then

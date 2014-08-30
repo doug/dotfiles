@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="skaro"
+ZSH_THEME="tjkirch"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -26,12 +26,12 @@ ZSH_THEME="skaro"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -62,10 +62,10 @@ PATH=$HOME/bin:$PATH
 PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 # Docker
-if (( $+commands[boot2docker] )); then
+export DOCKER_HOST=tcp://:2375
+# on Linux we need the actual IP
+if [[ $OSTYPE == linux* ]] && (( $+commands[boot2docker] )); then
   export DOCKER_HOST="tcp://$(boot2docker ip 2> /dev/null):2375"
-else
-  export DOCKER_HOST=tcp://:2375
 fi
 
 
