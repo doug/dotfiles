@@ -27,7 +27,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ ! -d /Applications/Spectacle.app ]]; then
       read "spectacle?Install Spectacle for window management? [yN] "
       if [[ "$spectacle" =~ ^[Yy]$ ]]; then
-        curl https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.2.zip > spectacle.zip
+        curl -L https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.2.zip > spectacle.zip
         unzip spectacle.zip
         mv Spectacle.app /Applications
         rm spectacle.zip
@@ -65,7 +65,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     mv $HOME/.tmux.conf $HOME/.tmux.base.conf
     ln -fns $current/tmux.osx.conf $HOME/.tmux.conf
   fi
-  
+
 	# install prezto
   if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
@@ -91,7 +91,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     read "naclsdk?Install NaCl SDK? [yN] "
     if [[ "$naclsdk" =~ ^[Yy]$ ]]; then
       mkdir -p $HOME/bin
-			curl http://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/nacl_sdk.zip > nacl_sdk.zip
+			curl -L http://storage.googleapis.com/nativeclient-mirror/nacl/nacl_sdk/nacl_sdk.zip > nacl_sdk.zip
 			unzip nacl_sdk.zip
 			rm -f nacl_sdk.zip
 			mv nacl_sdk $HOME/bin/nacl-sdk
@@ -108,7 +108,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       if [[ "$platform" == "Darwin" ]]; then
         OS="mac-x86_64"
       fi
-      curl http://dl.google.com/android/adt/adt-bundle-$OS-$VERSION.zip > adt.zip
+      curl -L http://dl.google.com/android/adt/adt-bundle-$OS-$VERSION.zip > adt.zip
       unzip adt.zip
       mv adt-bundle-$OS-$VERSION $HOME/bin/android-sdk
       rm -f adt.zip
@@ -116,7 +116,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       if [[ "$platform" == "Darwin" ]]; then
         OS="darwin-x86_64"
       fi
-      curl http://dl.google.com/android/ndk/android-ndk-r9c-$OS.tar.bz2 > ndk.tar.bz2
+      curl -L http://dl.google.com/android/ndk/android-ndk-r9c-$OS.tar.bz2 > ndk.tar.bz2
       tar xvf ndk.tar.bz2
       rm -f ndk.tar.bz2
       mv android-ndk-r9c $HOME/bin/android-ndk
@@ -128,7 +128,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$cloudsdk" =~ ^[Yy]$ ]]; then
       mkdir -p $HOME/bin
       APPENGINE_SDK=$HOME/bin/google-cloud-sdk
-      curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip > cloud.zip
+      curl -L https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.zip > cloud.zip
       unzip cloud.zip
       mv google-cloud-sdk $APPENGINE_SDK
       rm -f cloud.zip
@@ -147,7 +147,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       else
         PLATFORMSTR="linux-x64"
       fi
-      curl http://storage.googleapis.com/dart-archive/channels/stable/release/latest/editor/darteditor-${PLATFORMSTR}.zip > darteditor.zip
+      curl -L http://storage.googleapis.com/dart-archive/channels/stable/release/latest/editor/darteditor-${PLATFORMSTR}.zip > darteditor.zip
       unzip darteditor.zip
       rm -f darteditor.zip
       mv dart $HOME/bin
@@ -166,7 +166,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     read "lein?Install lein (clojure's leiningen)? [yN] "
     if [[ "$lein" =~ ^[Yy]$ ]]; then
       mkdir -p $HOME/bin
-      curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > $HOME/bin/lein
+      curl -L https://raw.github.com/technomancy/leiningen/stable/bin/lein > $HOME/bin/lein
       chmod a+x $HOME/bin/lein
     fi
   fi
@@ -175,7 +175,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     read "fat?Install git-fat? [yN] "
     if [[ "$fat" =~ ^[Yy]$ ]]; then
       mkdir -p $HOME/bin
-      curl https://raw.github.com/jedbrown/git-fat/master/git-fat > $HOME/bin/git-fat
+      curl -L https://raw.github.com/jedbrown/git-fat/master/git-fat > $HOME/bin/git-fat
       chmod a+x $HOME/bin/git-fat
     fi
   fi
@@ -225,7 +225,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 			# # java -Dvim.files=$HOME/.vim -Declipse.home=$HOME/eclipse43/stable -jar eclim_2.3.4.jar uninstall
 		fi
 	fi
-  
+
 	# install pyenv for python managment
   if [[ ! -d $HOME/.pyenv ]]; then
     read "pyenv?Install pyenv for python management? [yN] "
