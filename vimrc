@@ -77,19 +77,17 @@ nmap <LocalLeader>pp :set paste!<cr>
 
 " Set filetype for troublesome types
 augroup filetype
-  autocmd!
+  "autocmd! " autocmd! clears previous group commands with same name rather than append
   autocmd BufRead,BufNewFile *.proto set ft=proto
 augroup end
 
 " Automatic formating on save
 augroup go
-  autocmd!
   autocmd FileType go setlocal tabstop=2
 augroup end
 
 " remove trailing whitespace and pesky ^M
-augroup whitespace
-  autocmd!
+augroup cleanwhitespace
   autocmd BufWritePre * :%s/[ \t\r]\+$//e
 augroup end
 
@@ -257,7 +255,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_javascript_checkers=['gjslint']
 "let g:syntastic_html_tidy_ignore_errors=["proprietary attribute" ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!"]
+let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute"]
 " End Syntastic
 
 " Airline
