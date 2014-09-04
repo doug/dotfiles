@@ -103,10 +103,6 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] then
   source $HOME/.rvm/scripts/rvm
 fi
 
-if [[ -s $HOME/.nvm/nvm.sh ]]; then
-  source $HOME/.nvm/nvm.sh
-fi
-
 # Export the PATH
 export PATH
 
