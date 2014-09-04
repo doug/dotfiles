@@ -52,7 +52,7 @@ syntax enable
 let mapleader=","
 let maplocalleader=","
 
-" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
+" Extra easy escape with jj or kk
 inoremap jj <esc>
 inoremap kk <esc>
 
@@ -61,6 +61,9 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
+
+" Column width 80 marker
+set colorcolumn=80
 
 " Fast saving
 nmap ;w :w!<cr>
@@ -239,7 +242,8 @@ map  N <Plug>(easymotion-prev)
 set splitbelow
 
 " Ultisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" Trigger configuration. Do not use <tab>
+" if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-l>"
@@ -253,8 +257,9 @@ let g:syntastic_auto_loc_list=1
 "let g:syntastic_disabled_filetypes=['html']
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
-let g:syntastic_javascript_checkers=['gjslint']
+let g:syntastic_javascript_checkers=['jshint', 'jscs']
 "let g:syntastic_html_tidy_ignore_errors=["proprietary attribute" ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+" Need to disable some syntax checks for html5 and Polymer
 let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute"]
 " End Syntastic
 
