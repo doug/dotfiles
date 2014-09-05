@@ -111,9 +111,12 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # volume binding
-bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute 1 toggle
-bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 1 -- '-5%'
-bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 -- '+5%'
+#bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute 1 toggle
+#bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 1 -- '-5%'
+#bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 -- '+5%'
+bindsym XF86AudioMute exec "amixer Master toggle"
+bindsym XF86AudioLowerVolume exec "amixer Master 5%-"
+bindsym XF86AudioRaiseVolume exec "amixer Master 5%+"
 
 # take a screenshot
 bindsym $mod+Shift+y exec "gnome-screenshot -i"
