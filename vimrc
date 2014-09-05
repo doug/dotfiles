@@ -267,7 +267,7 @@ nnoremap <leader>lc :lclose<cr>
 let g:syntastic_javascript_checkers=['jshint', 'jscs']
 "let g:syntastic_html_tidy_ignore_errors=["proprietary attribute" ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 " Need to disable some syntax checks for html5 and Polymer
-let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute"]
+let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute", "has invalid value"]
 " End Syntastic
 
 " Airline
