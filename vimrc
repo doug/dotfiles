@@ -257,6 +257,13 @@ let g:syntastic_auto_loc_list=1
 "let g:syntastic_disabled_filetypes=['html']
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
+let g:syntastic_aggregate_errors=1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_log_list = 1
+nnoremap <leader>l  :Errors<cr>
+nnoremap <leader>ll :lnext<cr>
+nnoremap <leader>lp :lprevious<cr>
+nnoremap <leader>lc :lclose<cr>
 let g:syntastic_javascript_checkers=['jshint', 'jscs']
 "let g:syntastic_html_tidy_ignore_errors=["proprietary attribute" ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 " Need to disable some syntax checks for html5 and Polymer
