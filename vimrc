@@ -30,7 +30,7 @@ endif
 Plugin 'elzr/vim-json'
 "Plugin 'jnwhiteh/vim-golang'
 "Plugin 'nsf/gocode',  {'rtp': 'vim/'}
-Plugin 'Townk/vim-autoclose'
+Plugin 'spf13/vim-autoclose'
 Plugin 'thinkpixellab/flatland', {'rtp': 'Vim/'}
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
@@ -39,7 +39,9 @@ Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'Shougo/unite.vim'
 Plugin 'fatih/vim-go'
 Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
+Plugin 'wavded/vim-stylus'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -47,10 +49,10 @@ filetype plugin indent on
 syntax enable
 
 " Add a local leader which is also ,
-let mapleader=","
-let maplocalleader=","
+let mapleader=" "
+let maplocalleader=" "
 
-" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
+" Extra easy escape with jj or kk
 inoremap jj <esc>
 inoremap kk <esc>
 
@@ -60,18 +62,15 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 
+" Column width 80 marker
+set colorcolumn=80
+
 " Fast saving
 nmap ;w :w!<cr>
 imap ;w <esc>:w!<cr>
 
 " set text width default
 set textwidth=100
-
-" Add emacs beginning and end of line
-"map <c-a> ^
-"map! <c-a> <c-o>^
-"map <c-e> $
-"map! <c-e> <c-o>$
 
 " stop highlighting after I searched
 nmap <silent> // :nohlsearch<cr>
@@ -81,22 +80,17 @@ nmap <LocalLeader>pp :set paste!<cr>
 
 " Set filetype for troublesome types
 augroup filetype
-  autocmd!
+  "autocmd! " autocmd! clears previous group commands with same name rather than append
   autocmd BufRead,BufNewFile *.proto set ft=proto
-  "autocmd BufRead,BufNewFile *.go set ft=go
 augroup end
 
 " Automatic formating on save
 augroup go
-  "autocmd!
-  "autocmd FileType go autocmd BufWritePre <buffer> Fmt
-  "autocmd FileType go setlocal noexpandtab
   autocmd FileType go setlocal tabstop=2
 augroup end
 
 " remove trailing whitespace and pesky ^M
-augroup whitespace
-  autocmd!
+augroup cleanwhitespace
   autocmd BufWritePre * :%s/[ \t\r]\+$//e
 augroup end
 
@@ -118,15 +112,15 @@ nnoremap <space> za
 if has("gui_running")
   " Font for gui
   if has("gui_gtk2")
-      set guifont=DejaVu\ Sans\ Mono\ 11,Andale\ Mono\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
+      set guifont=Source\ Code\ Pro\ 11,DejaVu\ Sans\ Mono\ 11,Andale\ Mono\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
   elseif has("gui_mac")
-      set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
+      set guifont=Source\ Code\ Pro:h12,Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
   elseif has("gui_win32")
-      set guifont=Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
+      set guifont=Source\ Code\ Pro:h12,Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
   endif
   if has("gui_macvim")
     set transparency=0
-    set guifont=Menlo\ Regular:h12,Andale\ Mono\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
+    set guifont=Source\ Code\ Pro:h12,Menlo:h12,Andale_Mono:h12,Consolas:h12,Courier_New:h12
   endif
 endif
 
@@ -141,8 +135,10 @@ let g:slime_target = "tmux"
 
 " Colors
 set t_Co=256
-set background=dark
-colorscheme Monokai
+"set background=dark
+"colorscheme Monokai
+set background=light
+colorscheme summerfruit256
 
 " no relative lines
 set number
@@ -246,7 +242,8 @@ map  N <Plug>(easymotion-prev)
 set splitbelow
 
 " Ultisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" Trigger configuration. Do not use <tab>
+" if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-l>"
@@ -255,6 +252,40 @@ let g:UltiSnipsJumpBackwardTrigger="<c-l>"
 let g:UltiSnipsEditSplit="vertical"
 " End Ultisnips
 
+" Syntastic
+let g:syntastic_auto_loc_list=1
+"let g:syntastic_disabled_filetypes=['html']
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_aggregate_errors=1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_log_list = 1
+nnoremap <leader>l  :Errors<cr>
+nnoremap <leader>ll :lnext<cr>
+nnoremap <leader>lp :lprevious<cr>
+nnoremap <leader>lc :lclose<cr>
+let g:syntastic_javascript_checkers=['jshint', 'jscs']
+"let g:syntastic_html_tidy_ignore_errors=["proprietary attribute" ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+" Need to disable some syntax checks for html5 and Polymer
+let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute", "has invalid value"]
+" End Syntastic
+
+" Airline
+let g:airline_theme='light'
+" End Airline
+
+" ctrlp
+if has("unix")
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+elseif
+  set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+endif
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|bower_components)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+" End ctrlp
 
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local

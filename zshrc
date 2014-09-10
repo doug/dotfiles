@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="skaro"
+ZSH_THEME="tjkirch"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -26,12 +26,12 @@ ZSH_THEME="skaro"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -63,36 +63,11 @@ PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 # Docker
 export DOCKER_HOST=tcp://:2375
-
-if [[ "$OSTYPE" == darwin* ]]; then
-    # Homebrew
-    export HOMEBREW_PREFIX=$HOME/.homebrew
-    PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
-    # GO
-    #export GOBIN=$HOMEBREW_PREFIX/bin
-    export GOARCH=amd64
-    export GOOS=darwin
-    # Ruby
-    export PATH=$PATH:$HOME/.rvm/bin
-    # pkg-config
-    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
-    # compile path
-    export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOMEBREW_PREFIX/include
-    export CPP_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOMEBREW_PREFIX/include
-    export LIBRARY_PATH=$LIBRARY_PATH:$HOMEBREW_PREFIX/lib
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOMEBREW_PREFIX/lib
-    # python
-    PATH=$HOMEBREW_PREFIX/share/python:$PATH
-    # ruby
-    PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
-elif [[ "$OSTYPE" == linux* ]]; then
-    # Go
-    export GOARCH=amd64
-    export GOOS=linux
-    export CGO_LDFLAGS="-Wl,-rpath,/usr/local/lib"
-    # Path
-    PATH=/opt/local/bin:$PATH
+# on Linux we need the actual IP
+if [[ $OSTYPE == linux* ]] && (( $+commands[boot2docker] )); then
+  export DOCKER_HOST="tcp://$(boot2docker ip 2> /dev/null):2375"
 fi
+
 
 # Add Google Cloud SDK
 if [[ -s $HOME/bin/google-cloud-sdk ]]; then
@@ -128,10 +103,6 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] then
   source $HOME/.rvm/scripts/rvm
 fi
 
-if [[ -s $HOME/.nvm/nvm.sh ]]; then
-  source $HOME/.nvm/nvm.sh
-fi
-
 # Export the PATH
 export PATH
 
@@ -156,6 +127,11 @@ else
 fi
 export VISUAL=$EDITOR
 
+# Autojump
+if [[ $OSTYPE == darwin* ]]; then
+  [[ -s $HOMEBREW_PREFIX/etc/autojump.sh ]] && . $HOMEBREW_PREFIX/etc/autojump.sh
+fi
+
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
@@ -166,5 +142,10 @@ bindkey '^E' end-of-line
 # Aliases
 if [[ -s $HOME/.aliases.zsh ]]; then
   source $HOME/.aliases.zsh
+fi
+
+# Local overrides
+if [[ -s $HOME/.zshrc.local ]]; then
+  source $HOME/.zshrc.local
 fi
 
