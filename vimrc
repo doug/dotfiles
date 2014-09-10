@@ -274,6 +274,19 @@ let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recogn
 let g:airline_theme='light'
 " End Airline
 
+" ctrlp
+if has("unix")
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+elseif
+  set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+endif
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|bower_components)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+" End ctrlp
+
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
