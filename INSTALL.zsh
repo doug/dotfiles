@@ -37,7 +37,11 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       read "sublime?Install sublime symlink? [yN] "
       if [[ "$sublime" =~ ^[Yy]$ ]]; then
         mkdir -p $HOME/bin
-        ln -s $HOME/bin/subl /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
+        SUBLPATH="$HOME/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+        if [[ ! -f $SUBLPATH ]]; then
+          SUBLPATH="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+        fi
+        ln -fns $SUBLPATH $HOME/bin/subl
       fi
     fi
     if [[ ! -d $HOME/.homebrew ]]; then
@@ -134,7 +138,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       rm -f cloud.zip
       sh $APPENGINE_SDK/install.sh
       mkdir -p $HOME/.gogae
-      ln -s $APPENGINE_SDK/platform/google_appengine/goroot/src/pkg $HOME/.gogae/src
+      ln -fns $APPENGINE_SDK/platform/google_appengine/goroot/src/pkg $HOME/.gogae/src
     fi
   fi
 
@@ -151,7 +155,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       unzip darteditor.zip
       rm -f darteditor.zip
       mv dart $HOME/bin
-      ln -s dart/dart-sdk $HOME/bin/dart-sdk
+      ln -fns dart/dart-sdk $HOME/bin/dart-sdk
     fi
   fi
 
