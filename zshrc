@@ -119,11 +119,15 @@ if [[ -n $SSH_CONNECTION ]]; then
 		export EDITOR='vi'
 	fi
 else
-  if (( $+commands[subl] )); then
-		export EDITOR='subl -w'
-	else
-		export EDITOR='vim'
-	fi
+  if [[ $OSTYPE == darwin* ]]; then
+    if (( $+commands[subl] )); then
+      export EDITOR='subl -w'
+    else
+      export EDITOR='vim'
+    fi
+  else
+    export EDITOR='vim'
+  fi
 fi
 export VISUAL=$EDITOR
 
