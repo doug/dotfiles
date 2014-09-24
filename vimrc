@@ -50,8 +50,8 @@ filetype plugin indent on
 syntax enable
 
 " Add a local leader which is also ,
-let mapleader=" "
-let maplocalleader=" "
+let mapleader=","
+let maplocalleader=","
 
 " Extra easy escape with jj or kk
 inoremap jj <esc>
