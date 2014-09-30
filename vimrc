@@ -42,6 +42,7 @@ Plugin 'sirver/ultisnips'
 "Plugin 'honza/vim-snippets'
 Plugin 'wavded/vim-stylus'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'mephux/vim-jsfmt'
 
 call vundle#end()
 filetype plugin indent on
