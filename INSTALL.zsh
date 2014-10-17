@@ -108,7 +108,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       # SDK
       mkdir -p $HOME/bin
       OS="linux-x86_64"
-      VERSION="20131030"
+      VERSION="20140702"
       if [[ "$platform" == "Darwin" ]]; then
         OS="mac-x86_64"
       fi
