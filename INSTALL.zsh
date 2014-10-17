@@ -120,7 +120,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       if [[ "$platform" == "Darwin" ]]; then
         OS="darwin-x86_64"
       fi
-      curl -L http://dl.google.com/android/ndk/android-ndk-r9c-$OS.tar.bz2 > ndk.tar.bz2
+      curl -L http://dl.google.com/android/ndk/android-ndk-r10b-$OS.tar.bz2 > ndk.tar.bz2
       tar xvf ndk.tar.bz2
       rm -f ndk.tar.bz2
       mv android-ndk-r9c $HOME/bin/android-ndk
