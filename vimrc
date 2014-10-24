@@ -206,6 +206,10 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+" move by screen line for wrapped text
+noremap j gj
+noremap k gk
+
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
@@ -266,9 +270,9 @@ nnoremap <leader>ll :lnext<cr>
 nnoremap <leader>lp :lprevious<cr>
 nnoremap <leader>lc :lclose<cr>
 let g:syntastic_javascript_checkers=['jshint']
-"let g:syntastic_html_tidy_ignore_errors=["proprietary attribute" ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 " Need to disable some syntax checks for html5 and Polymer
-let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute", "has invalid value"]
+"let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute", "has invalid value"]
+let syntastic_mode_map = { 'passive_filetypes': ['html'] }
 " End Syntastic
 
 " Airline
