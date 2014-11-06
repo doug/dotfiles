@@ -151,7 +151,7 @@ set norelativenumber
 set nospell
 
 " Go auto fmt with goimports - https://github.com/bradfitz/goimports "
-let g:gofmt_command = "goimports"
+let g:go_fmt_command = "goimports"
 
 " http://vimbits.com/bits/128
 " automatically reload vimrc when it's saved
