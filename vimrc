@@ -13,7 +13,7 @@ endif
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'mileszs/ack.vim'
+"Plugin 'mileszs/ack.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/syntastic'
@@ -45,6 +45,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mephux/vim-jsfmt'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'peterhoeg/vim-qml'
+Plugin 'rking/ag.vim'
 
 call vundle#end()
 filetype plugin indent on
