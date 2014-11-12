@@ -185,6 +185,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       sudo apt-get -y install ack
       sudo apt-get -y install tmux
       sudo apt-get -y install vim
+      sudo apt-get -y install silversearcher-ag
     elif [[ "$platform" == "Darwin" ]]; then
       brew install git
       brew install git-extras
@@ -195,6 +196,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       # tmux pasteboard fixes issue of copy/paste from tmux
       brew install reattach-to-user-namespace
       brew install zsh
+      brew install the_silver_searcher
     fi
   fi
 
