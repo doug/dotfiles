@@ -38,10 +38,6 @@ elif [[ "$OSTYPE" == linux* ]]; then
     export PATH=/opt/local/bin:$PATH
 fi
 
-if [[ -s $HOME/.nvm/nvm.sh ]]; then
-  source $HOME/.nvm/nvm.sh
-fi
-
 # Local overrides
 if [[ -s $HOME/.zshenv.local ]]; then
   source $HOME/.zshenv.local
