@@ -94,6 +94,10 @@ if [[ -s $HOME/bin/android-sdk ]]; then
   PATH=$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools:$PATH
 fi
 
+if [[ -s $HOME/.nvm/nvm.sh ]]; then
+  source $HOME/.nvm/nvm.sh
+fi
+
 if [[ -s $HOME/.pyenv ]] then
   PATH=$HOME/.pyenv/bin:$PATH
   eval "$(pyenv init -)"
