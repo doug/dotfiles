@@ -10,7 +10,7 @@
         "avoidEscape": false
     },
     "indent": {
-        "value": "    "
+        "value": "  "
     },
     "whiteSpace": {
         "before": {
