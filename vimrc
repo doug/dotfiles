@@ -260,6 +260,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-l>"
 let g:UltiSnipsEditSplit="vertical"
 " End Ultisnips
 
+" JsFmt
+let g:js_fmt_autosave = 1
+" End JsFmt
+
 " Syntastic
 let g:syntastic_auto_loc_list=1
 "let g:syntastic_disabled_filetypes=['html']
