@@ -27,7 +27,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ ! -d /Applications/Spectacle.app ]]; then
       read "spectacle?Install Spectacle for window management? [yN] "
       if [[ "$spectacle" =~ ^[Yy]$ ]]; then
-        curl -L https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.2.zip > spectacle.zip
+        curl -L https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.8.zip > spectacle.zip
         unzip spectacle.zip
         mv Spectacle.app /Applications
         rm spectacle.zip
