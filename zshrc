@@ -107,6 +107,9 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] then
   source $HOME/.rvm/scripts/rvm
 fi
 
+# homebrew cask
+export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
+
 # Export the PATH
 export PATH
 
