@@ -46,6 +46,7 @@ Plugin 'mephux/vim-jsfmt'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'rking/ag.vim'
+Plugin 'marijnh/tern_for_vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -285,6 +286,10 @@ let syntastic_mode_map = { 'passive_filetypes': ['html'] }
 " Airline
 let g:airline_theme='light'
 " End Airline
+
+" Tern keymap
+let g:tern_map_keys=1
+" End Tern
 
 " ctrlp
 if has("unix")
