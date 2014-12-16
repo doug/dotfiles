@@ -140,3 +140,9 @@ autoload -U zmv
 alias mmv='noglob zmv -W'
 
 alias gerritinit='curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://gerrit-review.googlesource.com/tools/hooks/commit-msg ; chmod +x `git rev-parse --git-dir`/hooks/commit-msg'
+
+alias grc='git review change'
+alias grm='git review mail'
+alias grp='git review pending'
+alias grsub='git review submit'
+alias grs='git review sync'
