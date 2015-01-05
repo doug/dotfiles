@@ -1,6 +1,6 @@
 [alias]
   co = checkout
-  r = review
+  r = codereview
   l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 [color]
   ui = true
