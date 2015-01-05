@@ -75,19 +75,19 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
   fi
 
-  read "gitconfig?Update gitconfig? [yN] "
+  read "gitconfig?Update gitconfig.local? [yN] "
   if [[ "$gitconfig" =~ ^[Yy]$ ]]; then
-    cp -f $current/gitconfig.template $HOME/.gitconfig
+    cp -f $current/gitconfig.local.template $HOME/.gitconfig.local
     read "name?Your name: "
-    git config --global user.name $name
+    git config -f $HOME/.gitconfig.local user.name $name
     read "email?Your email: "
-    git config --global user.email $email
+    git config -f $HOME/.gitconfig.local user.email $email
     read "github?Github username: "
-    git config --global github.user $github
+    git config -f $HOME/.gitconfig.local github.user $github
     if [[ "$platform" == "Linux" ]]; then
-      git config --global credential.helper cache
+      git config -f $HOME/.gitconfig.local credential.helper cache
     elif [[ "$platform" == "Darwin" ]]; then
-      git config --global credential.helper osxkeychain
+      git config -f $HOME/.gitconfig.local credential.helper osxkeychain
     fi
   fi
 

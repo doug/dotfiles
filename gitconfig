@@ -1,7 +1,12 @@
 [alias]
   co = checkout
-  r = codereview
   l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+  change = codereview change
+  gofmt = codereview gofmt
+  mail = codereview mail
+  pending = codereview pending
+  submit = codereview submit
+  sync = codereview sync
 [color]
   ui = true
 [core]
@@ -19,3 +24,5 @@
   tool = vimdiff
   prompt = false
   conflictstyle = diff3
+[include]
+  path = .gitconfig.local
