@@ -62,12 +62,9 @@ PATH=$HOME/bin:$PATH
 PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 
 # Docker
-export DOCKER_HOST=tcp://:2375
-# on Linux we need the actual IP
-if [[ $OSTYPE == linux* ]] && (( $+commands[boot2docker] )); then
-  export DOCKER_HOST="tcp://$(boot2docker ip 2> /dev/null):2375"
+if (( $+commands[boot2docker] )); then
+  $(boot2docker shellinit 2>/dev/null)
 fi
-
 
 # Add Google Cloud SDK
 if [[ -s $HOME/bin/google-cloud-sdk ]]; then
