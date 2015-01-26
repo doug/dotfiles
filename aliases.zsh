@@ -112,6 +112,11 @@ function boil() {
   rmdir $1
 }
 
+# find a c header file
+function findHeader() {
+  echo "#include <$1>" | cpp -H -o /dev/null 2>&1 | head -n1
+}
+
 # force 256 color support in tmux
 alias tmux="tmux -2"
 
