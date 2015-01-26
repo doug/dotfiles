@@ -302,6 +302,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+" add buffer explorer mode ctrl+shift+p
+map <C-b> :CtrlPBuffer<cr>
 " End ctrlp
 
 if filereadable(expand('~/.vimrc.local'))
