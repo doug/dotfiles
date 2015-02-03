@@ -78,6 +78,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read "gitconfig?Update gitconfig.local? [yN] "
   if [[ "$gitconfig" =~ ^[Yy]$ ]]; then
     cp -f $current/gitconfig.local.template $HOME/.gitconfig.local
+    git config -f $HOME/.gitconfig.local http.cookiefile $HOME/.gitcookies
     read "name?Your name: "
     git config -f $HOME/.gitconfig.local user.name $name
     read "email?Your email: "
