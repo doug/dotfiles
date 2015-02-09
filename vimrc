@@ -47,6 +47,7 @@ Plugin 'tikhomirov/vim-glsl'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'rking/ag.vim'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()
 filetype plugin indent on
@@ -140,10 +141,10 @@ let g:slime_target = "tmux"
 
 " Colors
 set t_Co=256
-"set background=dark
-"colorscheme Monokai
-set background=light
-colorscheme summerfruit256
+set background=dark
+colorscheme Monokai
+"set background=light
+"colorscheme summerfruit256
 
 " no relative lines
 set number
