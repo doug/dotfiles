@@ -47,6 +47,7 @@ Plugin 'tikhomirov/vim-glsl'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'rking/ag.vim'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 call vundle#end()
 filetype plugin indent on
