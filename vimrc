@@ -48,6 +48,7 @@ Plugin 'peterhoeg/vim-qml'
 Plugin 'rking/ag.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'mxw/vim-jsx'
 
 call vundle#end()
 filetype plugin indent on
