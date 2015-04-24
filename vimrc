@@ -278,7 +278,7 @@ nnoremap <leader>l  :Errors<cr>
 nnoremap <leader>ll :lnext<cr>
 nnoremap <leader>lp :lprevious<cr>
 nnoremap <leader>lc :lclose<cr>
-let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_checkers=['jsfmt']
 " Need to disable some syntax checks for html5 and Polymer
 "let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute", "has invalid value"]
 let syntastic_mode_map = { 'passive_filetypes': ['html'] }
