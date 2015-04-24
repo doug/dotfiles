@@ -64,6 +64,12 @@ PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
 # Docker
 if (( $+commands[boot2docker] )); then
   $(boot2docker shellinit 2>/dev/null)
+#else
+  #DOCKER_HOST=tcp://localhost:2375
+  #DOCKER_TLS_VERIFY=1
+  #DOCKER_CERT_PATH=$HOME/.docker
+  ## /etc/default/docker
+  ## DOCKER_OPTS="-d -H unix:///var/run/docker.sock -H tcp://localhost:2375"
 fi
 
 # Add Google Cloud SDK

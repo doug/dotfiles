@@ -1,10 +1,12 @@
 [alias]
   co = checkout
   l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+  branchpoint = codereview branchpoint
   change = codereview change
   gofmt = codereview gofmt
   mail = codereview mail
   pending = codereview pending
+  rebase-work = codereview rebase-work
   submit = codereview submit
   sync = codereview sync
 [color]
