@@ -142,6 +142,7 @@ map <C-t> :TagbarToggle<CR>
 
 " Slime
 let g:slime_target = "tmux"
+let g:slime_python_ipython = 1
 
 " Colors
 set t_Co=256
