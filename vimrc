@@ -52,6 +52,8 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'mxw/vim-jsx'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plugin 'zah/nimrod.vim'
+Plugin 'clausreinke/typescript-tools.vim' "npm install -g clausreinke/typescript-tools
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 filetype plugin indent on
