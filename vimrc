@@ -54,6 +54,7 @@ Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plugin 'zah/nimrod.vim'
 Plugin 'clausreinke/typescript-tools.vim' "npm install -g clausreinke/typescript-tools
 Plugin 'leafgarland/typescript-vim'
+Plugin 'terryma/vim-expand-region'
 
 call vundle#end()
 filetype plugin indent on
@@ -298,6 +299,10 @@ let g:airline_theme='light'
 " Tern keymap
 let g:tern_map_keys=1
 " End Tern
+
+" Expand selecting region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " ctrlp
 if has("unix")
