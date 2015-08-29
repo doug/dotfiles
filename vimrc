@@ -43,7 +43,7 @@ Plugin 'sirver/ultisnips'
 "Plugin 'honza/vim-snippets'
 Plugin 'wavded/vim-stylus'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'mephux/vim-jsfmt'
+" Plugin 'mephux/vim-jsfmt'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'peterhoeg/vim-qml'
 Plugin 'rking/ag.vim'
@@ -271,7 +271,7 @@ let g:UltiSnipsEditSplit="vertical"
 " End Ultisnips
 
 " JsFmt
-let g:js_fmt_autosave = 1
+" let g:js_fmt_autosave = 1
 " End JsFmt
 
 " Syntastic
@@ -286,7 +286,7 @@ nnoremap <leader>l  :Errors<cr>
 nnoremap <leader>ll :lnext<cr>
 nnoremap <leader>lp :lprevious<cr>
 nnoremap <leader>lc :lclose<cr>
-let g:syntastic_javascript_checkers=['jsfmt']
+" let g:syntastic_javascript_checkers=['jsfmt']
 " Need to disable some syntax checks for html5 and Polymer
 "let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute", "has invalid value"]
 let syntastic_mode_map = { 'passive_filetypes': ['html'] }
