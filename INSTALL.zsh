@@ -108,23 +108,31 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$androidsdk" =~ ^[Yy]$ ]]; then
       # SDK
       mkdir -p $HOME/bin
-      OS="linux-x86_64"
-      VERSION="20131030"
+      VERSION="r24.3.4"
       if [[ "$platform" == "Darwin" ]]; then
-        OS="mac-x86_64"
+        OS="macosx"
+        curl -L http://dl.google.com/android/android-sdk_$VERSION-$OS.zip > android.zip
+        unzip android.zip
+        mv android-sdk-$OS $HOME/bin/android-sdk
+        rm android.zip
+      else
+        OS="linux"
+        curl -L http://dl.google.com/android/android-sdk_$VERSION-$OS.tgz > android.tgz
+        tar xvfz android.tgz
+        mv android-sdk-$OS $HOME/bin/android-sdk
+        rm android.tgz
       fi
-      curl -L http://dl.google.com/android/adt/adt-bundle-$OS-$VERSION.zip > adt.zip
-      unzip adt.zip
-      mv adt-bundle-$OS-$VERSION $HOME/bin/android-sdk
-      rm -f adt.zip
       # NDK
+      OS="linux-x86_64"
       if [[ "$platform" == "Darwin" ]]; then
         OS="darwin-x86_64"
       fi
-      curl -L http://dl.google.com/android/ndk/android-ndk-r9c-$OS.tar.bz2 > ndk.tar.bz2
-      tar xvf ndk.tar.bz2
-      rm -f ndk.tar.bz2
-      mv android-ndk-r9c $HOME/bin/android-ndk
+      VERSION="r10e"
+      curl -L http://dl.google.com/android/ndk/android-ndk-$VERSION-$OS.bin > ndk.bin
+      chmod a+x ndk.bin
+      ./ndk.bin
+      rm ndk.bin
+      mv android-ndk-$VERSION $HOME/bin/android-ndk
     fi
   fi
 

@@ -93,7 +93,7 @@ fi
 
 # Add Android tools
 if [[ -s $HOME/bin/android-sdk ]]; then
-  export ANDROID_SDK=$HOME/bin/android-sdk/sdk
+  export ANDROID_SDK=$HOME/bin/android-sdk
   PATH=$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools:$PATH
 fi
 
@@ -124,10 +124,10 @@ export LANG=en_US.UTF-8
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   if (( $+commands[vim] )); then
-		export EDITOR='vim'
-	else
-		export EDITOR='vi'
-	fi
+    export EDITOR='vim'
+  else
+    export EDITOR='vi'
+  fi
 else
   if [[ $OSTYPE == darwin* ]]; then
     if (( $+commands[subl] )); then

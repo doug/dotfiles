@@ -3,7 +3,7 @@
 # gui programs should be set in zshenv
 
 # Go
-export GOPATH=$HOME/.go:$HOME/go:$HOME/.gogae
+export GOPATH=$HOME/.go:$HOME/go
 
 # skip compinit
 skip_global_compinit=1
