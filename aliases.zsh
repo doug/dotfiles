@@ -151,3 +151,6 @@ alias grm='git review mail'
 alias grp='git review pending'
 alias grsub='git review submit'
 alias grs='git review sync'
+
+alias golog='adb logcat GoLog:I *:S'
+
