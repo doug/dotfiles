@@ -1,3 +1,8 @@
+" Ensure POSIX shell
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
 " Use Vundle to load the plugins you want
 set nocompatible
 filetype off
