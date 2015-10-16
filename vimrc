@@ -16,13 +16,11 @@ if filereadable(expand('~/.vimrc.bundles.local'))
   source ~/.vimrc.bundles.local
 endif
 
+Plugin 'tpope/vim-sensible'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-"Plugin 'mileszs/ack.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/syntastic'
-"Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-commentary'
 if executable('ctags')
   Plugin 'majutsushi/tagbar'
@@ -30,36 +28,27 @@ endif
 Plugin 'jpalardy/vim-slime'
 if !exists('g:no_ycm')
   Plugin 'Valloric/YouCompleteMe'
-else
-  "Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'elzr/vim-json'
-"Plugin 'jnwhiteh/vim-golang'
-"Plugin 'nsf/gocode',  {'rtp': 'vim/'}
 Plugin 'spf13/vim-autoclose'
-Plugin 'thinkpixellab/flatland', {'rtp': 'Vim/'}
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
-"Plugin 'Shougo/unite.vim'
 Plugin 'fatih/vim-go'
 Plugin 'sirver/ultisnips'
-"Plugin 'honza/vim-snippets'
+Plugin 'honza/vim-snippets'
 Plugin 'wavded/vim-stylus'
 Plugin 'editorconfig/editorconfig-vim'
-" Plugin 'mephux/vim-jsfmt'
 Plugin 'tikhomirov/vim-glsl'
-Plugin 'peterhoeg/vim-qml'
 Plugin 'rking/ag.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mxw/vim-jsx'
-Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-Plugin 'zah/nimrod.vim'
-Plugin 'clausreinke/typescript-tools.vim' "npm install -g clausreinke/typescript-tools
-Plugin 'leafgarland/typescript-vim'
+Plugin 'ervandew/supertab'
 Plugin 'terryma/vim-expand-region'
+Plugin 'sjl/badwolf'
+Plugin 'simnalamburt/vim-mundo'
 
 call vundle#end()
 filetype plugin indent on
@@ -95,6 +84,9 @@ nmap <silent> // :nohlsearch<cr>
 
 " toggle paste mode
 nmap <LocalLeader>pp :set paste!<cr>
+
+" better undo tree
+nnoremap <leader>u :GundoToggle<CR>
 
 " Set filetype for troublesome types
 augroup filetype
@@ -155,7 +147,8 @@ let g:slime_python_ipython = 1
 " Colors
 set t_Co=256
 set background=dark
-colorscheme Monokai
+"colorscheme Monokai
+"colorscheme badwolf
 "set background=light
 "colorscheme summerfruit256
 
@@ -346,4 +339,3 @@ map <C-b> :CtrlPBuffer<cr>
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
-

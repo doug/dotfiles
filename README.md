@@ -3,5 +3,6 @@ dotfiles
 
 everybody has one, these are mine
 
+Main setup (OSX or Linux): fish + tmux + vim + atom + mosh + i3
 
-Make sure you are using zsh as your shell, then clone the repo and run INSTALL.zsh
+Install with `sh install.sh`

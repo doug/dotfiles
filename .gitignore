@@ -1,7 +1,2 @@
-vim/.netrwhist
-vim/.VimballRecord
-fonts
-hgrc
-irssi/config
-irssi/fnotify
-irssi/config.autosave
+config/fish/fishd*
+config/fish/fish_history

@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 if [[ "$OSTYPE" == linux* ]]; then
   FONTDIR=$HOME/.fonts
 elif
