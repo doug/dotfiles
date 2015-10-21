@@ -64,20 +64,13 @@ inoremap jj <esc>
 inoremap kk <esc>
 
 " Indentation
-set shiftwidth=2
-set softtabstop=2
 set tabstop=2
+set softtabstop=2
 set expandtab
 
 " Column width 80 marker
 set colorcolumn=80
-
-" Fast saving
-nmap ;w :w!<cr>
-imap ;w <esc>:w!<cr>
-
-" set text width default
-set textwidth=100
+set textwidth=80
 
 " stop highlighting after I searched
 nmap <silent> // :nohlsearch<cr>
@@ -87,17 +80,6 @@ nmap <LocalLeader>pp :set paste!<cr>
 
 " better undo tree
 nnoremap <leader>u :GundoToggle<CR>
-
-" Set filetype for troublesome types
-augroup filetype
-  "autocmd! " autocmd! clears previous group commands with same name rather than append
-  autocmd BufRead,BufNewFile *.proto set ft=proto
-augroup end
-
-" Automatic formating on save
-augroup go
-  autocmd FileType go setlocal tabstop=2
-augroup end
 
 " remove trailing whitespace and pesky ^M
 augroup cleanwhitespace
@@ -149,8 +131,6 @@ set t_Co=256
 set background=dark
 "colorscheme Monokai
 "colorscheme badwolf
-"set background=light
-"colorscheme summerfruit256
 
 " no relative lines
 set number
@@ -159,182 +139,21 @@ set norelativenumber
 " no spell check
 set nospell
 
-" Go auto fmt with goimports - https://github.com/bradfitz/goimports "
-let g:go_fmt_command = "goimports"
-
-" http://vimbits.com/bits/128
-" automatically reload vimrc when it's saved
-au BufWritePost .vimrc so ~/.vimrc
-au BufWritePost .vimrc.fork so ~/.vimrc.fork
-au BufWritePost .vimrc.local so ~/.vimrc.local
-
-" Go tags for tagbar https://github.com/jstemmer/gotags
-"let g:tagbar_type_go = {
-    "\ 'ctagstype' : 'go',
-    "\ 'kinds'     : [
-        "\ 'p:package',
-        "\ 'i:imports:1',
-        "\ 'c:constants',
-        "\ 'v:variables',
-        "\ 't:types',
-        "\ 'n:interfaces',
-        "\ 'w:fields',
-        "\ 'e:embedded',
-        "\ 'm:methods',
-        "\ 'r:constructor',
-        "\ 'f:functions'
-    "\ ],
-    "\ 'sro' : '.',
-    "\ 'kind2scope' : {
-        "\ 't' : 'ctype',
-        "\ 'n' : 'ntype'
-    "\ },
-    "\ 'scope2kind' : {
-        "\ 'ctype' : 't',
-        "\ 'ntype' : 'n'
-    "\ },
-    "\ 'ctagsbin'  : 'gotags',
-    "\ 'ctagsargs' : '-sort -silent'
-"\ }
-
-" easymotion configuration
-
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-s)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-s2)
-
-" Turn on case sensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
 " move by screen line for wrapped text
 noremap j gj
 noremap k gk
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
-" easymotion configuration end
-
-"if !exists('g:no_ycm')
-  " youcompleteme
-  let g:ycm_auto_trigger = 1
-  let g:EclimCompletionMethod = 'omnifunc'
-  "let g:ycm_autoclose_preview_window_after_insertion = 0
-  "let g:ycm_autoclose_preview_window_after_completion = 0
-"else
-  "" neocomplete
-  "" Disable AutoComplPop.
-  "let g:acp_enableAtStartup = 0
-  "" Use neocomplete.
-  "let g:neocomplete#enable_at_startup = 1
-  "" Use smartcase.
-  "let g:neocomplete#enable_smart_case = 1
-  "" <TAB> completion
-  "inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-"endif
-
-" Disable preview window for YCM and neocomplete
-"set completeopt-=preview
-"set g:ycm_add_preview_to_completeopt = 0
-
-" Make help and completion descriptions in preview scratch splitbelow
-set splitbelow
-
-" Ultisnips
-" Trigger configuration. Do not use <tab>
-" if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-l>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-" End Ultisnips
-
-" JsFmt
-" let g:js_fmt_autosave = 1
-" End JsFmt
-
-" Syntastic
-let g:syntastic_auto_loc_list=1
-"let g:syntastic_disabled_filetypes=['html']
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
-let g:syntastic_aggregate_errors=1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_log_list = 1
-nnoremap <leader>l  :Errors<cr>
-nnoremap <leader>ll :lnext<cr>
-nnoremap <leader>lp :lprevious<cr>
-nnoremap <leader>lc :lclose<cr>
-" let g:syntastic_javascript_checkers=['jsfmt']
-" Need to disable some syntax checks for html5 and Polymer
-"let g:syntastic_html_tidy_ignore_errors=["discarding unexpected", "is not recognized!", "proprietary attribute", "has invalid value"]
-let syntastic_mode_map = { 'passive_filetypes': ['html'] }
-" End Syntastic
-
-" Airline
-let g:airline_theme='light'
-" End Airline
-
-" Tern keymap
-let g:tern_map_keys=1
-" End Tern
-
-" Expand selecting region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
-" http://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim/5686810#5686810
-" :Ag find
-" :Qargs
-" :argdo %s/findme/replacement/gc
-" :argdo update
-" OR
-" :Ag find
-" :Qargs | argdo %s/findme/replacement/gc | update
-command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
-function! QuickfixFilenames()
-  " Building a hash ensures we get each buffer only once
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(values(buffer_numbers))
-endfunction
-
-
-" ctrlp
-if has("unix")
-  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-elseif
-  set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-endif
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|bower_components)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-" add buffer explorer mode ctrl+shift+p
-map <C-b> :CtrlPBuffer<cr>
-" End ctrlp
+let g:synastic_javascript_checkers=['jscs']
 
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
