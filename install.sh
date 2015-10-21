@@ -5,33 +5,33 @@ platform=`uname`
 if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
   current=$(cd $(dirname "$0") && pwd)
-	echo $current
+  echo $current
 
   echo "Update symlinked dotfiles (.bashrc .vimrc, .tmux.conf, ...)? [yN]"
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
-		mkdir -p $HOME/.config/fish/functions
-		rcfiles=(bashrc i3 gitconfig gitignore nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish)
-		for rcfile in "${rcfiles[@]}"; do
-	    echo "Linking $rcfile to $HOME/.$rcfile"
-	    ln -fns "$current/$rcfile" "$HOME/.$rcfile"
-	  done
-		for fishfn in config/fish/functions/*; do
-	    echo "Linking $fishfn to $HOME/.$fishfn"
-	    ln -fns "$current/$fishfn" "$HOME/.$fishfn"
-	  done
-	fi
+    mkdir -p $HOME/.config/fish/functions
+    rcfiles=(bashrc i3 gitconfig gitignore nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish)
+    for rcfile in "${rcfiles[@]}"; do
+      echo "Linking $rcfile to $HOME/.$rcfile"
+      ln -fns "$current/$rcfile" "$HOME/.$rcfile"
+    done
+    for fishfn in config/fish/functions/*; do
+      echo "Linking $fishfn to $HOME/.$fishfn"
+      ln -fns "$current/$fishfn" "$HOME/.$fishfn"
+    done
+  fi
 
   if [[ "$platform" == "Linux" ]]; then
     echo "Setting up Linux"
-		echo "Set better ubuntu defaults? [yN] "
+    echo "Set better ubuntu defaults? [yN] "
     read ubuntu
     if [[ "$ubuntu" =~ ^[Yy]$ ]]; then
       sh "$current/ubuntu"
     fi
   elif [[ "$platform" == "Darwin" ]]; then
     echo "Setting up Mac"
-		echo "Set better osx defaults? [yN] "
+    echo "Set better osx defaults? [yN] "
     read osx
     if [[ "$osx" =~ ^[Yy]$ ]]; then
       sh "$current/osx"
@@ -39,10 +39,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
     if [[ ! -d $HOME/.homebrew ]]; then
       echo "Install homebrew? [yN] "
-			read homebrew
-			if [[ "$homebrew" =~ ^[Yy]$ ]]; then
-	      mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
-	      export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
+      read homebrew
+      if [[ "$homebrew" =~ ^[Yy]$ ]]; then
+        mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
+        export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
         brew install caskroom/cask/brew-cask
       fi
     fi
@@ -60,26 +60,26 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-	echo "Install additional fonts? [yN]"
+  echo "Install additional fonts? [yN]"
   read fonts
-	if [[ "$fonts" =~ ^[Yy]$ ]]; then
-		sh "$current/download-fonts.sh"
-	fi
+  if [[ "$fonts" =~ ^[Yy]$ ]]; then
+    sh "$current/download-fonts.sh"
+  fi
 
   echo "Update gitconfig.local? [yN] "
   read gitconfig
   if [[ "$gitconfig" =~ ^[Yy]$ ]]; then
-		# reset .gitconfig.local
-		echo > $HOME/.gitconfig.local
+    # reset .gitconfig.local
+    echo > $HOME/.gitconfig.local
     git config -f $HOME/.gitconfig.local http.cookiefile $HOME/.gitcookies
-		echo "Your name: "
-		read name
+    echo "Your name: "
+    read name
     git config -f $HOME/.gitconfig.local user.name $name
-		echo "Your email: "
-		read email
+    echo "Your email: "
+    read email
     git config -f $HOME/.gitconfig.local user.email $email
     echo "Github username: "
-		read github
+    read github
     git config -f $HOME/.gitconfig.local github.user $github
     if [[ "$platform" == "Linux" ]]; then
       git config -f $HOME/.gitconfig.local credential.helper cache
@@ -141,7 +141,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     read nvm
     if [[ "$nvm" =~ ^[Yy]$ ]]; then
       git clone git://github.com/creationix/nvm.git $HOME/.nvm
-			sh $HOME/.nvm/install.sh
+      sh $HOME/.nvm/install.sh
     fi
   fi
 
@@ -183,16 +183,16 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
 
 
   if [[ ! -d $HOME/.tmux ]]; then
-		echo "Install tmux plugins? [yN] "
-		read tmux
-	  if [[ "$tmux" =~ ^[Yy]$ ]]; then
-			git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-		fi
-	fi
+    echo "Install tmux plugins? [yN] "
+    read tmux
+    if [[ "$tmux" =~ ^[Yy]$ ]]; then
+      git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    fi
+  fi
 
   if command -v apm >/dev/null 2>&1; then
-		echo "Install atom packages and themes? [yN] "
-		read apm
+    echo "Install atom packages and themes? [yN] "
+    read apm
     if [[ "$apm" =~ ^[Yy]$ ]]; then
       apm install atom-beautify
       apm install atom-material-syntax
