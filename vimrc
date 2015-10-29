@@ -129,8 +129,11 @@ let g:slime_python_ipython = 1
 " Colors
 set t_Co=256
 set background=dark
-"colorscheme Monokai
-"colorscheme badwolf
+
+" colorscheme Monokai
+" colorscheme badwolf
+" set background=light
+" colorscheme summerfruit256
 
 " no relative lines
 set number

@@ -16,6 +16,10 @@ if test -e $HOME/bin/android-sdk
   set -x PATH $ANDROID_SDK/platform-tools $ANDROID_SDK/tools $PATH
 end
 
+if test -e $HOME/bin/google-cloud-sdk
+  set -x PATH $HOME/bin/google-cloud-sdk/bin $PATH
+end
+
 if test -d $HOME/.nvm
   # proper nvm import
   # bass source $HOME/.nvm/nvm.sh
