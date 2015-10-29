@@ -4,6 +4,8 @@ if type fish_vi_mode > /dev/null
 end
 
 # Set local vars ########################################################
+set -x PATH $HOME/bin $PATH
+
 set -x GOPATH $HOME/go
 set -x PATH $GOPATH/bin /usr/local/go/bin $PATH
 
