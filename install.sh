@@ -194,6 +194,8 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     echo "Install atom packages and themes? [yN] "
     read apm
     if [[ "$apm" =~ ^[Yy]$ ]]; then
+      curl -o $HOME/bin/ratom https://raw.githubusercontent.com/aurora/rmate/master/rmate
+      chmod +x $HOME/bin/ratom
       apm install atom-beautify
       apm install atom-material-syntax
       apm install atom-material-syntax-light
@@ -231,6 +233,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install pigments
       apm install pretty-json
       apm install react
+      apm install remote-atom
       apm install vim-mode
       apm install xml-formatter
     fi
