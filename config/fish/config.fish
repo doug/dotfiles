@@ -182,5 +182,5 @@ function fish_prompt
 end
 
 if test -e $HOME/.local.fish
-    $HOME/.local.fish
+    . $HOME/.local.fish
 end
