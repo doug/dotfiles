@@ -97,6 +97,25 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
+  if [[ ! -d $HOME/bin/dart ]]; then
+    echo "Install Dart SDK? [yN] "
+    read dartsdk
+    if [[ "$dartsdk" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin
+      if [[ $platform == "Darwin" ]]; then
+        PLATFORMSTR="macos-x64"
+      else
+        PLATFORMSTR="linux-x64"
+      fi
+      curl -L http://storage.googleapis.com/dart-archive/channels/stable/release/latest/editor/darteditor-${PLATFORMSTR}.zip > darteditor.zip
+      unzip darteditor.zip
+      rm -f darteditor.zip
+      mv dart $HOME/bin
+      echo "Dart sdk not added to path by default add $HOME/bin/dart/dart-sdk/bin"
+    fi
+  fi
+
+
   if [[ ! -d $HOME/bin/android-sdk ]]; then
     echo "Install Android SDK? [yN] "
     read androidsdk
