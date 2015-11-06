@@ -32,13 +32,15 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'sjl/badwolf'
 Plug 'simnalamburt/vim-mundo'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
 " basic setup
 set t_Co=256
+" colorscheme badwolf
+colorscheme PaperColor
 set background=dark
-colorscheme badwolf
 set number
 
 " Add a local leader which is also ,

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 platform=`uname`
 
@@ -85,6 +85,15 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       git config -f $HOME/.gitconfig.local credential.helper cache
     elif [[ "$platform" == "Darwin" ]]; then
       git config -f $HOME/.gitconfig.local credential.helper osxkeychain
+    fi
+  fi
+
+  if [[ ! -d $HOME/.vim/bundle/Vundle.vim ]]; then
+    echo "Install Vim Vundle? [yN] "
+    read vimvundle
+    if [[ "$vimvundle" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/.vim/bundle
+      git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
     fi
   fi
 
