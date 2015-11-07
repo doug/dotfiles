@@ -222,6 +222,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     echo "Install atom packages and themes? [yN] "
     read apm
     if [[ "$apm" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/bin
       curl -o $HOME/bin/ratom https://raw.githubusercontent.com/aurora/rmate/master/rmate
       chmod +x $HOME/bin/ratom
       apm install atom-beautify

@@ -142,6 +142,9 @@ function cd --description "auto ls for each cd"
   end
 end
 
+alias encrypt="openssl aes-256-cbc"
+alias decrypt="openssl aes-256-cbc -d"
+
 
 # Fish greeting #########################################################
 
