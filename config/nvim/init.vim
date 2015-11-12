@@ -4,7 +4,7 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
@@ -16,7 +16,7 @@ if executable('ctags')
   Plug 'majutsushi/tagbar'
 endif
 Plug 'jpalardy/vim-slime'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'elzr/vim-json'
 Plug 'spf13/vim-autoclose'
 Plug 'bling/vim-airline'
@@ -30,16 +30,16 @@ Plug 'rking/ag.vim'
 " Group dependencies, vim-snippets depends on ultisnips
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
-Plug 'sjl/badwolf'
-Plug 'simnalamburt/vim-mundo'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'mkarmona/colorsbox'
+Plug 'flowtype/vim-flow', {'do': 'npm install -g flow-bin'}
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'Quramy/tsuquyomi'
 
 call plug#end()
 
 " basic setup
 set t_Co=256
-" colorscheme badwolf
-colorscheme PaperColor
+colorscheme colorsbox-material
 set background=dark
 set number
 
@@ -53,6 +53,7 @@ inoremap kk <esc>
 
 " Indentation
 set tabstop=2
+set shiftwidth=2
 set softtabstop=2
 set expandtab
 
@@ -82,6 +83,9 @@ let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 let g:synastic_javascript_checkers=['jscs']
+
+" make typescript syntax highlight in javascript
+au BufRead,BufNewFile *.ts set syntax=javascript
 
 " Load local overides and extensions
 if filereadable(expand('~/.nvimrc.local'))

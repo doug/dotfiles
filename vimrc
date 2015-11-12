@@ -49,6 +49,7 @@ Plugin 'ervandew/supertab'
 Plugin 'terryma/vim-expand-region'
 Plugin 'sjl/badwolf'
 Plugin 'simnalamburt/vim-mundo'
+Plugin 'flowtype/vim-flow'
 
 call vundle#end()
 filetype plugin indent on
