@@ -4,42 +4,68 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 
-Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-commentary'
-if executable('ctags')
-  Plug 'majutsushi/tagbar'
+  " Required:
+  set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
 endif
-Plug 'jpalardy/vim-slime'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
-Plug 'elzr/vim-json'
-Plug 'spf13/vim-autoclose'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'fatih/vim-go'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tikhomirov/vim-glsl'
-Plug 'rking/ag.vim'
-" Group dependencies, vim-snippets depends on ultisnips
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'ervandew/supertab'
-Plug 'mkarmona/colorsbox'
-Plug 'flowtype/vim-flow', {'do': 'npm install -g flow-bin'}
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
-Plug 'Quramy/tsuquyomi'
 
-call plug#end()
+
+call neobundle#begin(expand('~/.config/nvim/bundle/'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'tpope/vim-sensible'
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'scrooloose/syntastic'
+if executable('ctags')
+  NeoBundle 'majutsushi/tagbar'
+endif
+NeoBundle 'elzr/vim-json'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'tikhomirov/vim-glsl'
+NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'mkarmona/colorsbox'
+NeoBundle 'Valloric/YouCompleteMe'
+" NeoBundle 'Valloric/YouCompleteMe', {
+  " \ 'build': {
+  "       \ 'mac': 'install.py --clang-completer --system-libclang --system-boost',
+  "       \ 'linux': 'install.py --clang-completer --system-libclang --system-boost',
+  "       \ 'unix': 'install.py --clang-completer --system-libclang --system-boost'
+  " \ }
+" \ }
+NeoBundleLazy 'flowtype/vim-flow', {
+  \ 'autoload': {'filetypes': 'javascript'},
+  \ 'build': {
+  \   'mac': 'npm install -g flow-bin',
+  \   'unix': 'npm install -g flow-bin'
+  \ }}
+" NeoBundle 'Shougo/vimproc.vim', {
+"       \ 'build' : {
+"       \     'windows' : 'tools\\update-dll-mingw',
+"       \     'cygwin' : 'make -f make_cygwin.mak',
+"       \     'mac' : 'make',
+"       \     'linux' : 'make',
+"       \     'unix' : 'gmake',
+"       \    },
+"       \ }
+" NeoBundle 'Quramy/tsuquyomi'
+
+call neobundle#end()
+
+filetype plugin indent on
+
+NeoBundleCheck
 
 " basic setup
 set t_Co=256
-colorscheme colorsbox-material
+" colorscheme colorsbox-material
 set background=dark
 set number
 
@@ -65,27 +91,36 @@ set textwidth=80
 nmap <silent> // :nohlsearch<cr>
 
 " toggle paste mode
-nmap <LocalLeader>pp :set paste!<cr>
+nmap <leader>pp :set paste!<cr>
 
 " Nerdtree
 map <C-e> :NERDTreeToggle<CR>
 
 nnoremap <leader>u :GundoToggle<CR>
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" Navigation without <c-w> (which closes tabs)
+nnoremap <leader><leader>h <C-w>h
+nnoremap <leader><leader>j <C-w>j
+nnoremap <leader><leader>k <C-w>k
+nnoremap <leader><leader>l <C-w>l
 
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+" " make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" " better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = '<tab>'
+" let g:UltiSnipsJumpForwardTrigger = '<tab>'
+" let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 let g:synastic_javascript_checkers=['jscs']
 
 " make typescript syntax highlight in javascript
 au BufRead,BufNewFile *.ts set syntax=javascript
+
+" automatically remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Load local overides and extensions
 if filereadable(expand('~/.nvimrc.local'))
