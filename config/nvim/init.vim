@@ -56,6 +56,8 @@ NeoBundleLazy 'flowtype/vim-flow', {
 "       \    },
 "       \ }
 " NeoBundle 'Quramy/tsuquyomi'
+NeoBundle 'clausreinke/typescript-tools'
+NeoBundle 'leafgarland/typescript-vim'
 
 call neobundle#end()
 
@@ -99,10 +101,16 @@ map <C-e> :NERDTreeToggle<CR>
 nnoremap <leader>u :GundoToggle<CR>
 
 " Navigation without <c-w> (which closes tabs)
-nnoremap <leader><leader>h <C-w>h
-nnoremap <leader><leader>j <C-w>j
-nnoremap <leader><leader>k <C-w>k
-nnoremap <leader><leader>l <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+" YCM YouCompleteMe configurations
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " " make YCM compatible with UltiSnips (using supertab)
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -116,11 +124,16 @@ nnoremap <leader><leader>l <C-w>l
 
 let g:synastic_javascript_checkers=['jscs']
 
-" make typescript syntax highlight in javascript
-au BufRead,BufNewFile *.ts set syntax=javascript
-
 " automatically remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+
+" flow config
+let g:flow#autoclose=1
+let g:flow#flowpath="/home/dougfritz/.nvm/versions/node/v5.0.0/bin/flow"
+let g:flow#omnifunc=1
+
+" Ctrl+P
+let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
 
 " Load local overides and extensions
 if filereadable(expand('~/.nvimrc.local'))
