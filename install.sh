@@ -11,7 +11,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     mkdir -p $HOME/.config/fish/functions
-    rcfiles=(bashrc i3 gitconfig gitignore nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish config/nvim)
+    rcfiles=(bashrc jscsrc i3 gitconfig gitignore nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish config/nvim)
     for rcfile in "${rcfiles[@]}"; do
       echo "Linking $rcfile to $HOME/.$rcfile"
       ln -fns "$current/$rcfile" "$HOME/.$rcfile"

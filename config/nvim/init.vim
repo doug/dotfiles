@@ -17,47 +17,54 @@ endif
 call neobundle#begin(expand('~/.config/nvim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'tpope/vim-sensible'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'scrooloose/syntastic'
-if executable('ctags')
-  NeoBundle 'majutsushi/tagbar'
-endif
-NeoBundle 'elzr/vim-json'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'tikhomirov/vim-glsl'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'mkarmona/colorsbox'
-NeoBundle 'Valloric/YouCompleteMe'
-" NeoBundle 'Valloric/YouCompleteMe', {
-  " \ 'build': {
-  "       \ 'mac': 'install.py --clang-completer --system-libclang --system-boost',
-  "       \ 'linux': 'install.py --clang-completer --system-libclang --system-boost',
-  "       \ 'unix': 'install.py --clang-completer --system-libclang --system-boost'
+
+" Load local overides for bundles
+if filereadable(expand('~/.vimrc.bundle.local'))
+  source ~/.vimrc.bundle.local
+else
+  NeoBundle 'tpope/vim-sensible'
+  NeoBundle 'tpope/vim-commentary'
+  NeoBundle 'scrooloose/nerdtree'
+  NeoBundle 'kien/ctrlp.vim'
+  NeoBundle 'terryma/vim-multiple-cursors'
+  NeoBundle 'scrooloose/syntastic'
+  if executable('ctags')
+    NeoBundle 'majutsushi/tagbar'
+  endif
+  NeoBundle 'elzr/vim-json'
+  NeoBundle 'bling/vim-airline'
+  NeoBundle 'fatih/vim-go'
+  NeoBundle 'tikhomirov/vim-glsl'
+  NeoBundle 'editorconfig/editorconfig-vim'
+  NeoBundle 'mkarmona/colorsbox'
+  NeoBundle 'Valloric/YouCompleteMe'
+  " NeoBundle 'Valloric/YouCompleteMe', {
+    " \ 'build': {
+    "       \ 'mac': 'install.py --clang-completer --system-libclang --system-boost',
+    "       \ 'linux': 'install.py --clang-completer --system-libclang --system-boost',
+    "       \ 'unix': 'install.py --clang-completer --system-libclang --system-boost'
+    " \ }
   " \ }
-" \ }
-NeoBundleLazy 'flowtype/vim-flow', {
-  \ 'autoload': {'filetypes': 'javascript'},
-  \ 'build': {
-  \   'mac': 'npm install -g flow-bin',
-  \   'unix': 'npm install -g flow-bin'
-  \ }}
-" NeoBundle 'Shougo/vimproc.vim', {
-"       \ 'build' : {
-"       \     'windows' : 'tools\\update-dll-mingw',
-"       \     'cygwin' : 'make -f make_cygwin.mak',
-"       \     'mac' : 'make',
-"       \     'linux' : 'make',
-"       \     'unix' : 'gmake',
-"       \    },
-"       \ }
-" NeoBundle 'Quramy/tsuquyomi'
-NeoBundle 'clausreinke/typescript-tools'
-NeoBundle 'leafgarland/typescript-vim'
+  NeoBundleLazy 'flowtype/vim-flow', {
+    \ 'autoload': {'filetypes': 'javascript'},
+    \ 'build': {
+    \   'mac': 'npm install -g flow-bin',
+    \   'unix': 'npm install -g flow-bin'
+    \ }}
+  " NeoBundle 'Shougo/vimproc.vim', {
+  "       \ 'build' : {
+  "       \     'windows' : 'tools\\update-dll-mingw',
+  "       \     'cygwin' : 'make -f make_cygwin.mak',
+  "       \     'mac' : 'make',
+  "       \     'linux' : 'make',
+  "       \     'unix' : 'gmake',
+  "       \    },
+  "       \ }
+  " NeoBundle 'Quramy/tsuquyomi'
+  NeoBundle 'clausreinke/typescript-tools'
+  NeoBundle 'leafgarland/typescript-vim'
+  NeoBundle 'Chiel92/vim-autoformat'
+endif
 
 call neobundle#end()
 
@@ -135,7 +142,11 @@ let g:flow#omnifunc=1
 " Ctrl+P
 let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
 
+" Autoformat
+let g:formatter_js = ['jscs']
+au BufWrite * :Autoformat
+
 " Load local overides and extensions
-if filereadable(expand('~/.nvimrc.local'))
-  source ~/.nvimrc.local
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
 endif
