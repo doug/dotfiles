@@ -88,12 +88,12 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-  if [[ ! -d $HOME/.vim/bundle/Vundle.vim ]]; then
-    echo "Install Vim Vundle? [yN] "
-    read vimvundle
-    if [[ "$vimvundle" =~ ^[Yy]$ ]]; then
-      mkdir -p $HOME/.vim/bundle
-      git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+  if [[ ! -d $HOME/.config/nvim/bundle/neobundle.vim ]]; then
+    echo "Install Vim NeoBundle? [yN] "
+    read vimneobundle
+    if [[ "$vimneobundle" =~ ^[Yy]$ ]]; then
+      mkdir -p $HOME/.config/nvim/bundle
+      git clone https://github.com/Shougo/neobundle.vim $HOME/.config/nvim/bundle/neobundle.vim
     fi
   fi
 

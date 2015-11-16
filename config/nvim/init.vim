@@ -1,7 +1,7 @@
 " Ensure POSIX shell
 
 if &shell =~# 'fish$'
-    set shell=sh
+  set shell=sh
 endif
 
 if has('vim_starting')
@@ -39,18 +39,18 @@ else
   NeoBundle 'mkarmona/colorsbox'
   NeoBundle 'Valloric/YouCompleteMe'
   " NeoBundle 'Valloric/YouCompleteMe', {
-    " \ 'build': {
-    "       \ 'mac': 'install.py --clang-completer --system-libclang --system-boost',
-    "       \ 'linux': 'install.py --clang-completer --system-libclang --system-boost',
-    "       \ 'unix': 'install.py --clang-completer --system-libclang --system-boost'
-    " \ }
+  " \ 'build': {
+  "       \ 'mac': 'install.py --clang-completer --gocode-completer',
+  "       \ 'linux': 'install.py --clang-completer --gocode-completer',
+  "       \ 'unix': 'install.py --clang-completer --gocode-completer'
+  " \ }
   " \ }
   NeoBundleLazy 'flowtype/vim-flow', {
-    \ 'autoload': {'filetypes': 'javascript'},
-    \ 'build': {
-    \   'mac': 'npm install -g flow-bin',
-    \   'unix': 'npm install -g flow-bin'
-    \ }}
+        \ 'autoload': {'filetypes': 'javascript'},
+        \ 'build': {
+        \   'mac': 'npm install -g flow-bin',
+        \   'unix': 'npm install -g flow-bin'
+        \ }}
   " NeoBundle 'Shougo/vimproc.vim', {
   "       \ 'build' : {
   "       \     'windows' : 'tools\\update-dll-mingw',
@@ -61,7 +61,7 @@ else
   "       \    },
   "       \ }
   " NeoBundle 'Quramy/tsuquyomi'
-  NeoBundle 'clausreinke/typescript-tools'
+  NeoBundle 'clausreinke/typescript-tools.vim'
   NeoBundle 'leafgarland/typescript-vim'
   NeoBundle 'Chiel92/vim-autoformat'
 endif
