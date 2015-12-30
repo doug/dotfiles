@@ -144,7 +144,7 @@ let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
 
 " Autoformat
 let g:formatter_js = ['jscs']
-au BufWrite * :Autoformat
+" au BufWrite * :Autoformat
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))

@@ -182,17 +182,17 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       sudo apt-get -y install build-essential
       sudo apt-get -y install exuberant-ctags
       sudo apt-get -y install libclang-dev
-      sudo apt-get -y install ack
       sudo apt-get -y install tmux
       sudo apt-get -y install vim
       sudo apt-get -y install fish
       sudo apt-get -y install silversearcher-ag
+      sudo apt-get -y install ffmpeg
+      sudo apt-get -y install imagemagick
     elif [[ "$platform" == "Darwin" ]]; then
       if ! command -v brew >/dev/null 2>&1; then
         brew install git
         brew install git-extras
         brew install wget
-        brew install ack
         brew install tmux
         brew install ctags
         brew install macvim --with-override-system-vim
@@ -229,7 +229,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install atom-material-syntax
       apm install atom-material-syntax-light
       apm install atom-material-ui
-      apm install atom-ternjs
       apm install atom-typescript
       apm install autocomplete-glsl
       apm install autoprefixer
@@ -258,7 +257,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install markdown-writer
       apm install merge-conflicts
       apm install minimap
-      apm install nuclide-flow
       apm install pigments
       apm install pretty-json
       apm install react
