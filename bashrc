@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
-# The next line updates PATH for the Google Cloud SDK.
-source '$HOME/bin/google-cloud-sdk/path.bash.inc'
-# The next line enables shell command completion for gcloud.
-source '$HOME/bin/google-cloud-sdk/completion.bash.inc'
+# Google Cloud SDK completions.
+if [[ ! -d $HOME/bin/google-cloud-sdk ]]; then
+  source '$HOME/bin/google-cloud-sdk/path.bash.inc'
+  source '$HOME/bin/google-cloud-sdk/completion.bash.inc'
+fi
 
+bind "set completion-ignore-case on"
+bind "set show-all-if-ambiguous on"
+
+# Golang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# Homebrew
 export HOMEBREW_PREFIX=$HOME/.homebrew
 export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
 export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
