@@ -11,7 +11,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     mkdir -p $HOME/.config/fish/functions
-    rcfiles=(bashrc jscsrc i3 gitconfig gitignore nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish config/nvim)
+    rcfiles=(bashrc bash_profile jscsrc i3 gitconfig gitignore nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish config/nvim)
     for rcfile in "${rcfiles[@]}"; do
       echo "Linking $rcfile to $HOME/.$rcfile"
       ln -fns "$current/$rcfile" "$HOME/.$rcfile"
@@ -20,6 +20,14 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       echo "Linking $fishfn to $HOME/.$fishfn"
       ln -fns "$current/$fishfn" "$HOME/.$fishfn"
     done
+  fi
+
+  if [[ ! -d $HOME/.bash_it ]]; then
+    echo "Install bash-it bash plugins? [yN] "
+    read bashit
+    if [[ "$bashit" =~ ^[Yy]$ ]]; then
+      git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+    fi
   fi
 
   if [[ "$platform" == "Linux" ]]; then
