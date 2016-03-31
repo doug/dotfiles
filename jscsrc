@@ -1,4 +1,4 @@
 {
   "preset": "google",
-    "esnext": true
+  "esnext": true
 }
