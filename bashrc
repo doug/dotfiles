@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# The next line updates PATH for the Google Cloud SDK.
+source '$HOME/bin/google-cloud-sdk/path.bash.inc'
+# The next line enables shell command completion for gcloud.
+source '$HOME/bin/google-cloud-sdk/completion.bash.inc'
+
 export HOMEBREW_PREFIX=$HOME/.homebrew
 export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
 export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
