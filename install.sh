@@ -236,8 +236,8 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install docblockr
       apm install editorconfig
       apm install emmet
+      apm install git-time-machine
       apm install go-plus
-      apm install ide-flow
       apm install language-babel
       apm install language-docker
       apm install language-ejs
@@ -249,7 +249,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install language-protobuf
       apm install language-viml
       apm install linter
-      apm install linter-flow
       apm install linter-jscs
       apm install linter-lua
       apm install markdown-format
