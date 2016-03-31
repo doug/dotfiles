@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Google Cloud SDK completions.
-if [[ ! -d $HOME/bin/google-cloud-sdk ]]; then
+if [[ -d $HOME/bin/google-cloud-sdk ]]; then
   source '$HOME/bin/google-cloud-sdk/path.bash.inc'
   source '$HOME/bin/google-cloud-sdk/completion.bash.inc'
 fi
