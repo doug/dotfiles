@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Google Cloud SDK completions.
-if [[ -d $HOME/bin/google-cloud-sdk ]]; then
-  source '$HOME/bin/google-cloud-sdk/path.bash.inc'
-  source '$HOME/bin/google-cloud-sdk/completion.bash.inc'
+if [ -d $HOME/bin/google-cloud-sdk ]; then
+  source $HOME/bin/google-cloud-sdk/path.bash.inc
+  source $HOME/bin/google-cloud-sdk/completion.bash.inc
 fi
 
 bind "set completion-ignore-case on"
@@ -55,6 +55,6 @@ export SCM_CHECK=true
 # Load Bash It
 source $BASH_IT/bash_it.sh
 
-if [[ -f $HOME/.localrc ]]; then
+if [ -f $HOME/.localrc ]; then
   source $HOME/.localrc
 fi
