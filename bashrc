@@ -54,3 +54,7 @@ export SCM_CHECK=true
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
+
+if [[ -f $HOME/.localrc ]]; then
+  source $HOME/.localrc
+fi
