@@ -23,10 +23,34 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   fi
 
   if [[ ! -d $HOME/.bash_it ]]; then
-    echo "Install bash-it bash plugins? [yN] "
+    echo "Install bash-it framework? [yN] "
     read bashit
     if [[ "$bashit" =~ ^[Yy]$ ]]; then
       git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+    fi
+  fi
+
+  if [[ -d $HOME/.bash_it ]]; then
+    echo "Set default bash-it plugins? [yN] "
+    read bashitplugins
+    if [[ "$bashitplugins" =~ ^[Yy]$ ]]; then
+      source $HOME/.bashrc
+      bash-it disable plugin all
+      bash-it disable alias all
+      bash-it disable completion all
+      # docker-machine 300 ms
+      # fasd 20ms
+      # nvm 200ms (nodefault) 700ms with default node
+      bash-it enable plugin alias-completion base battery docker explain extract fasd git history jekyll node nvm ssh tmux todo
+      bash-it enable alias ag atom docker general git npm tmux todo vim
+      bash-it enable completion bash-it docker git git_flow gulp npm pip ssh system tmux todo
+      if [[ "$platform" == "Linux" ]]; then
+        bash-it enable alias apt clipboard
+        bash-it enable completion brew
+      elif [[ "$platform" == "Darwin" ]]; then
+        bash-it enable plugin osx-timemachine osx
+        bash-it enable alias homebrew-cask homebrew osx
+      fi
     fi
   fi
 

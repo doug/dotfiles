@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# gd=/Users/dougfritz/.homebrew/bin/gdate
+# started=`$gd +%s%3N`
 
 # Google Cloud SDK completions.
 if [ -d $HOME/bin/google-cloud-sdk ]; then
@@ -58,3 +60,7 @@ source $BASH_IT/bash_it.sh
 if [ -f $HOME/.localrc ]; then
   source $HOME/.localrc
 fi
+
+# finished=`$gd +%s%3N`
+# total=$((finished-started))
+# echo "Took $total milliseconds."
