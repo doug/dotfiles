@@ -11,7 +11,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     mkdir -p $HOME/.config/fish/functions
-    rcfiles=(bashrc jscsrc i3 gitconfig gitignore nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish config/nvim)
+    rcfiles=(bashrc bash_profile jscsrc i3 gitconfig gitignore irssi nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish config/nvim)
     for rcfile in "${rcfiles[@]}"; do
       echo "Linking $rcfile to $HOME/.$rcfile"
       ln -fns "$current/$rcfile" "$HOME/.$rcfile"
@@ -20,6 +20,38 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       echo "Linking $fishfn to $HOME/.$fishfn"
       ln -fns "$current/$fishfn" "$HOME/.$fishfn"
     done
+  fi
+
+  if [[ ! -d $HOME/.bash_it ]]; then
+    echo "Install bash-it framework? [yN] "
+    read bashit
+    if [[ "$bashit" =~ ^[Yy]$ ]]; then
+      git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+    fi
+  fi
+
+  if [[ -d $HOME/.bash_it ]]; then
+    echo "Set default bash-it plugins? [yN] "
+    read bashitplugins
+    if [[ "$bashitplugins" =~ ^[Yy]$ ]]; then
+      source $HOME/.bashrc
+      bash-it disable plugin all
+      bash-it disable alias all
+      bash-it disable completion all
+      # docker-machine 300 ms
+      # fasd 20ms
+      # nvm 200ms (nodefault) 700ms with default node
+      bash-it enable plugin alias-completion base battery docker explain extract fasd git history jekyll node nvm ssh tmux todo
+      bash-it enable alias ag atom docker general git npm tmux todo vim
+      bash-it enable completion bash-it docker git git_flow gulp npm pip ssh system tmux todo
+      if [[ "$platform" == "Linux" ]]; then
+        bash-it enable alias apt clipboard
+        bash-it enable completion brew
+      elif [[ "$platform" == "Darwin" ]]; then
+        bash-it enable plugin osx-timemachine osx
+        bash-it enable alias homebrew-cask homebrew osx
+      fi
+    fi
   fi
 
   if [[ "$platform" == "Linux" ]]; then
@@ -236,8 +268,8 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install docblockr
       apm install editorconfig
       apm install emmet
+      apm install git-time-machine
       apm install go-plus
-      apm install ide-flow
       apm install language-babel
       apm install language-docker
       apm install language-ejs
@@ -249,7 +281,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install language-protobuf
       apm install language-viml
       apm install linter
-      apm install linter-flow
       apm install linter-jscs
       apm install linter-lua
       apm install markdown-format
