@@ -270,6 +270,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install emmet
       apm install git-time-machine
       apm install go-plus
+      apm install go-debug
       apm install language-babel
       apm install language-docker
       apm install language-ejs
