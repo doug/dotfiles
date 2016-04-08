@@ -8,8 +8,11 @@ if [ -d $HOME/bin/google-cloud-sdk ]; then
   source $HOME/bin/google-cloud-sdk/completion.bash.inc
 fi
 
-bind "set completion-ignore-case on"
-bind "set show-all-if-ambiguous on"
+# bind "set completion-ignore-case on"
+# bind "set show-all-if-ambiguous on"
+# use inputrc instead
+
+alias week="date +%Y-W%02V-%02u"
 
 # Golang
 export GOPATH=$HOME/go
