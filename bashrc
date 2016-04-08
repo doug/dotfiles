@@ -12,7 +12,7 @@ fi
 # bind "set show-all-if-ambiguous on"
 # use inputrc instead
 
-alias week="date +%Y-W%02V-%02u"
+alias week="date +%Y-W%02V-%u"
 
 # Golang
 export GOPATH=$HOME/go
