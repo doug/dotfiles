@@ -258,14 +258,16 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install atom-material-syntax
       apm install atom-material-syntax-light
       apm install atom-material-ui
+      apm install atom-ternjs
       apm install atom-typescript
+      apm install atomic-chrome
       apm install autocomplete-glsl
       apm install autoprefixer
       apm install color-picker
       apm install docblockr
       apm install editorconfig
-      apm install emmet
       apm install git-time-machine
+      apm install git-plus
       apm install go-plus
       apm install go-debug
       apm install language-babel
