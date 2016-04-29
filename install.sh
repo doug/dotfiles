@@ -281,7 +281,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install linter
       apm install linter-jscs
       apm install linter-lua
-      apm install markdown-format
       apm install markdown-toc
       apm install markdown-writer
       apm install merge-conflicts
