@@ -286,11 +286,19 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install merge-conflicts
       apm install minimap
       apm install pigments
+      apm install pdf-view
       apm install pretty-json
       apm install react
       apm install remote-atom
+      apm install todo-show
       apm install vim-mode
       apm install xml-formatter
+      
+      apm disable link
+      apm disable language-mustache
+      apm disable language-ruby-on-rails
+      apm disable metrics
+      apm disable welcome
     fi
   fi
 
