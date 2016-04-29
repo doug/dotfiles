@@ -24,6 +24,8 @@ export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
 export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
 export PKG_CONFIG_PATH=$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
 export LD_LIBRARY_PATH=$HOMEBREW_PREFIX/lib
+# git config --file="$(brew --repository)/.git/config" --replace-all homebrew.analyticsdisabled true
+HOMEBREW_NO_ANALYTICS=1
 
 export PATH=$HOME/bin:$PATH
 
