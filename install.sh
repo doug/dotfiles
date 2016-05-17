@@ -254,7 +254,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       mkdir -p $HOME/bin
       curl -o $HOME/bin/ratom https://raw.githubusercontent.com/aurora/rmate/master/rmate
       chmod +x $HOME/bin/ratom
-      apm install atom-beautify
       apm install atom-material-syntax
       apm install atom-material-syntax-light
       apm install atom-material-ui
@@ -264,6 +263,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install autocomplete-glsl
       apm install autoprefixer
       apm install color-picker
+      apm install clang-format
       apm install docblockr
       apm install editorconfig
       apm install git-time-machine
