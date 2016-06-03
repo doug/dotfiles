@@ -12,8 +12,6 @@ fi
 # bind "set show-all-if-ambiguous on"
 # use inputrc instead
 
-alias week="date +%Y-W%02V-%u"
-
 # Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
@@ -61,6 +59,14 @@ export SCM_CHECK=true
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
+
+# Aliases
+if which gdate >/dev/null; then
+  alias week="gdate +%Y-W%02V-%u"
+else
+  alias week="date +%Y-W%02V-%u"
+fi
+
 
 if [ -f $HOME/.localrc ]; then
   source $HOME/.localrc
