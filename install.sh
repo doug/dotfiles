@@ -38,7 +38,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       bash-it disable plugin all
       bash-it disable alias all
       bash-it disable completion all
-      bash-it enable plugin alias-completion base battery docker explain extract git history jekyll node nvm ssh tmux todo
+      bash-it enable plugin alias-completion battery extract git history tmux todo
       bash-it enable alias ag atom docker general git npm tmux todo vim
       bash-it enable completion bash-it docker git git_flow gulp npm pip ssh system tmux todo
       if [[ "$platform" == "Linux" ]]; then
@@ -295,7 +295,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install todo-show
       apm install vim-mode
       apm install xml-formatter
-      
+
       apm disable link
       apm disable language-mustache
       apm disable language-ruby-on-rails
