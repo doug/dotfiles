@@ -65,6 +65,9 @@ if [ -d $HOME/.nvm ]; then
   nvm() { . "$HOME/.nvm/nvm.sh" ; nvm $@ ; }
 fi
 
+# Git aliases
+alias s="git status"
+
 # Load Bash It
 source $BASH_IT/bash_it.sh
 
