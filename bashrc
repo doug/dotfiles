@@ -12,8 +12,6 @@ fi
 # bind "set show-all-if-ambiguous on"
 # use inputrc instead
 
-alias week="date +%Y-W%02V-%u"
-
 # Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
@@ -59,8 +57,27 @@ export SCM_CHECK=true
 # https://github.com/xvzf/vcprompt
 #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
 
+# Explicit node path because nvm.sh is too slow for including in prompt
+if [ -d $HOME/.nvm ]; then
+  NODE_PATH=$(ls -d $HOME/.nvm/versions/node/* | tail -1)
+  export PATH=$PATH:$NODE_PATH/bin
+  # alias nvm="$HOME/.nvm/nvm.sh; nvm"
+  nvm() { . "$HOME/.nvm/nvm.sh" ; nvm $@ ; }
+fi
+
+# Git aliases
+alias s="git status"
+
 # Load Bash It
 source $BASH_IT/bash_it.sh
+
+# Aliases
+if which gdate >/dev/null; then
+  alias week="gdate +%Y-W%02V-%u"
+else
+  alias week="date +%Y-W%02V-%u"
+fi
+
 
 if [ -f $HOME/.localrc ]; then
   source $HOME/.localrc
