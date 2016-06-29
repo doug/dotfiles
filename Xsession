@@ -1,7 +1,8 @@
 #!/bin/sh
 
 #gnome-settings-daemon &
-unity-settings-daemon &
+#unity-settings-daemon &
+cinnamon-settings-daemon &
 
 #gnome-terminal &
 
@@ -18,9 +19,7 @@ xautolock -time 5 -locker "i3lock -c 333333" &
 export DESKTOP_SESSION=gnome
 
 # Disable audible bell
-xset -b
-
-export GTK_IM_MODULE=xim
+# xset -b
 
 # Background color
 xsetroot -solid "#333333"
