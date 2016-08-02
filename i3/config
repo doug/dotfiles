@@ -125,6 +125,7 @@ bindsym $mod+period exec "amixer -D pulse sset Master 5%+ unmute"
 
 # take a screenshot
 bindsym $mod+Shift+y exec "gnome-screenshot -i"
+bindsym $mod+Shift+u exec "screenrecord"
 # set a timeout lock
 # `exec xautolock -time 1 -locker "i3lock -c 333333"`
 # lock the screen
