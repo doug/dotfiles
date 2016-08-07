@@ -17,13 +17,17 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # Homebrew
-export HOMEBREW_PREFIX=$HOME/.homebrew
-export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
-export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
-export PKG_CONFIG_PATH=$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
-export LD_LIBRARY_PATH=$HOMEBREW_PREFIX/lib
-# git config --file="$(brew --repository)/.git/config" --replace-all homebrew.analyticsdisabled true
-HOMEBREW_NO_ANALYTICS=1
+if [ -d $HOME/.homebrew ]; then
+  export HOMEBREW_PREFIX=$HOME/.homebrew
+  export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
+  export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
+  export PKG_CONFIG_PATH=$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
+  export LD_LIBRARY_PATH=$HOMEBREW_PREFIX/lib
+  # git config --file="$(brew --repository)/.git/config" --replace-all homebrew.analyticsdisabled true
+  HOMEBREW_NO_ANALYTICS=1
+else
+  export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+fi
 
 export PATH=$HOME/bin:$PATH
 
