@@ -7,7 +7,7 @@ fi
 
 mkdir -p $FONTDIR
 for x in Roboto Roboto-Slab Roboto-Condensed Anonymous-Pro source-sans-pro open-sans Raleway quicksand dosis source-code-pro code Museo League-Gothic; do
-  curl -O http://www.fontsquirrel.com/fonts/download/$x
+  curl -L -O http://www.fontsquirrel.com/fonts/download/$x
   unzip -o $x -d $FONTDIR
   rm $x
 done
