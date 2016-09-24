@@ -38,7 +38,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       bash-it disable plugin all
       bash-it disable alias all
       bash-it disable completion all
-      bash-it enable plugin alias-completion extract git history tmux
+      bash-it enable plugin alias-completion extract git history tmux todo
       bash-it enable alias ag atom docker general git npm tmux todo vim
       bash-it enable completion bash-it docker git git_flow gulp npm pip ssh system tmux todo
       if [[ "$platform" == "Linux" ]]; then
