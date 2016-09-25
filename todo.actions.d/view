@@ -17,6 +17,9 @@ shift
 # Get rest of them
 term="$@"
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 function usage() {
     echo "  $(basename $0) [OPTION] [TERM]"
     echo "    Show todo items containing TERM, grouped by OPTION, and displayed in"
@@ -58,7 +61,7 @@ function project_view() {
         # Use core _list function, does numbering and colouring for us
         PROJECT_LIST=$(_list "$TODO_FILE" "+$project\b" "$term" | sed 's/\(^+\|\ *+\)[a-zA-Z0-9\{._\-\}]*\ */ /g')
         if [[ -n "${PROJECT_LIST}" ]]; then
-            echo "---  $project  ---"
+            echo -e "${RED}---  $project  ---${NC}"
             echo "${PROJECT_LIST}"
             echo ""
         fi
@@ -67,7 +70,7 @@ function project_view() {
     # Show todo items not associated to a project
     PROJECT_LIST=$(_list "$TODO_FILE" "$term" | grep -v "+\w")
     if  [[ -n "${PROJECT_LIST}" ]]; then
-        echo "---  Items without project  ---"
+        echo -e "${RED}---  Items without project  ---${NC}"
         echo "${PROJECT_LIST}"
     fi
 }
@@ -85,7 +88,7 @@ function context_view() {
         # Use core _list function, does numbering and colouring for us
         CONTEXT_LIST=$(_list "$TODO_FILE" "@$context\b" "$term" | sed 's/(^@|\ *@)[^[:cntrl:] ]\ */ /g')
         if [[ -n "${CONTEXT_LIST}" ]]; then
-            echo "---  $context  ---"
+            echo -e "${RED}---  $context  ---${NC}"
             echo "${CONTEXT_LIST}"
             echo ""
         fi
@@ -94,7 +97,7 @@ function context_view() {
     # Show todo items not associated to a context
     CONTEXT_LIST=$(_list "$TODO_FILE" "$term" | grep -v "@[^ ]*\ *")
     if [[ -n "${CONTEXT_LIST}" ]]; then
-        echo "---  Items without context  ---"
+        echo -e "${RED}---  Items without context  ---${NC}"
         echo "${CONTEXT_LIST}"
     fi
 }
@@ -126,7 +129,7 @@ function date_view() {
         #  Use core _list function, does numbering and colouring for us
         DATE_LIST=$(_list "$TODO_FILE" "t:$date" "$term" | sed 's/\(^t:\|\ *t:\)[0-9-]*\ */ /g')
         if [ -n "${DATE_LIST}" ]; then
-            echo  "---  $date  ---"
+            echo  -e "${RED}---  $date  ---${NC}"
             echo  "${DATE_LIST}"
             echo  ""
         fi
@@ -137,7 +140,7 @@ function date_view() {
     if [[ "$option" =~ $re ]]; then
         DATE_LIST=$(_list "$TODO_FILE" "$term" | grep -v "t:[0-9-]*")
         if [ -n "${DATE_LIST}" ]; then
-            echo "---  Items without date  ---"
+            echo -e "${RED}---  Items without date  ---${NC}"
             echo "${DATE_LIST}"
         fi
     fi
