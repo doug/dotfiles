@@ -19,5 +19,6 @@ $TODO_FULL_SH archive
 cd "$TODO_DIR"
 git diff
 if [ "$mode" != "-v" ]; then
+	git add .
 	git commit -a $mode --allow-empty-message -m ""
 fi
