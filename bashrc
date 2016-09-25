@@ -16,6 +16,9 @@ fi
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# Editor
+export EDITOR=vim
+
 # Homebrew
 if [ -d $HOME/.homebrew ]; then
   export HOMEBREW_PREFIX=$HOME/.homebrew
@@ -53,6 +56,7 @@ export IRC_CLIENT='irssi'
 
 # Set this to the command you use for todo.txt-cli
 export TODO="t"
+alias tt="t view project"
 
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true

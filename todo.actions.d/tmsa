@@ -1,0 +1,182 @@
+#!/usr/bin/env python
+# Time Management for Systems Administrators helper scripts
+#
+# Copyright (C) 2013 Mark Harrison
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+import datetime
+import glob
+import os
+import re
+import sys
+
+commands = {
+    'bringforward': ["Bring forward any unmanaged tasks to today"],
+    'bump': ["Bump a task to the next day", "For example, bump 2"],
+    'bumpall': ["Bump all tasks to the next day"],
+    'verify': ["Print out to do files that have unmanaged tasks"],
+    'tmsa': [
+        "Time management for systems administrators helper script.",
+        "Provides a set of commands to help with the Cycle, which",
+        "makes use of daily to do lists.",
+        "This command will create symlinks for the other commands"
+    ]
+}
+
+
+def make_symlinks():
+    "Makes symlinks for the various tmsa commands"
+    os.chdir(os.environ["TODO_ACTIONS_DIR"])
+    for command in commands:
+        if command == 'tmsa':
+            continue
+        try:
+            os.symlink('tmsa', command)
+            print "Created symlink for %s" % command
+        except OSError, e:
+            if e.errno == 17:
+                print "Symlink for %s already created" % command
+            else:
+                raise
+
+
+def strip_priority(line):
+    "Removes the priority, if any, from a todo item"
+    return re.sub('^\([A-Z]\) ', '', line)
+
+
+def find_unmanaged():
+    "Find files with unmanaged tasks"
+    unmanaged = []
+    os.chdir(os.environ["TODO_DIR"])
+    now = datetime.datetime.now().replace(hour=0, minute=0, second=0,
+                                          microsecond=0)
+    for f in glob.glob("????-??-??.txt"):
+        d, e = f.split(".")
+        size = os.stat(f).st_size
+        if datetime.datetime.strptime(d, "%Y-%m-%d") < now and size > 0:
+            unmanaged.append(f)
+    return unmanaged
+
+
+def bump(from_file, to_file, line_num=None):
+    "Bumps a task, or all if no line is provided"
+    auto_archive = "TODOTXT_AUTO_ARCHIVE" in os.environ and \
+        os.environ["TODOTXT_AUTO_ARCHIVE"] == "1"
+    preserve_line_numbers = "TODOTXT_PRESERVE_LINE_NUMBERS" in \
+        os.environ and os.environ["TODOTXT_PRESERVE_LINE_NUMBERS"] == "1"
+
+    os.chdir(os.environ["TODO_DIR"])
+    now = datetime.datetime.now()
+    today = now.strftime("%Y-%m-%d")
+    ifh = open(from_file)  # File to bump from
+    ofh = open(to_file, "a")  # File to bump to
+    tfh = open("%s.tmp" % from_file, "w")  # Temporary file
+    if auto_archive:
+        dfh = open("%s-done.txt" % from_file[:-4], "a")  # Done file
+    else:
+        dfh = tfh
+    bumped = []
+    for n, line in enumerate(ifh):
+        n += 1  # 1-indexed lines
+        if not line_num or line_num == n:
+            ## Bump the item
+            # Copy line to today's file
+            ofh.write(line)
+            # Mark as done (and bumped) in the done file
+            dfh.write("x %s %s bumped:%s\n" % (today,
+                      strip_priority(line).rstrip(),
+                      to_file[:-4]))
+            if auto_archive and preserve_line_numbers and line_num:
+                tfh.write("\n")
+            bumped.append(line.rstrip())
+        else:
+            # Don't bump the item
+            tfh.write(line)
+    ifh.close()
+    if auto_archive:
+        dfh.close()
+    ofh.close()
+    tfh.close()
+    # Now move the temp file (with the bumped entries remove) to the original
+    # from file
+    os.remove(from_file)
+    os.rename("%s.tmp" % from_file, from_file)
+    # Status message
+    print "\n".join(bumped)
+    if line_num:
+        print "TODO: %s bumped from %s to %s" % (line_num, from_file, to_file)
+    else:
+        print "TODO: all items bumped from %s to %s" % (from_file, to_file)
+
+
+def usage(command):
+    if command in commands:
+        print "    %s" % command
+        print "\n".join("      %s" % i for i in commands[command])
+
+if __name__ == '__main__':
+    action = sys.argv[1]
+    if action == 'usage':
+        prog = os.path.basename(sys.argv[0])  # Identify command
+        usage(prog)
+        sys.exit(0)
+
+    if action == 'verify':
+        unmanaged = find_unmanaged()
+        if unmanaged:
+            print '\n'.join(find_unmanaged())
+        sys.exit(0)
+
+    if action == 'bump' or action == 'bumpall':
+        to_bump = None
+        if action == 'bump':
+            if len(sys.argv) < 3:
+                usage('bump')
+                sys.exit(1)
+            try:
+                to_bump = int(sys.argv[2])
+            except ValueError:
+                usage('bump')
+                sys.exit(1)
+        now = datetime.datetime.now()
+        weekday = now.weekday()
+        if weekday == '5':
+            # Today is friday, skip to monday
+            days = 3
+        else:
+            days = 1
+        next_day = now + datetime.timedelta(days=days)
+        today = now.strftime("%Y-%m-%d.txt")
+        next_file = next_day.strftime("%Y-%m-%d.txt")
+        bump(today, next_file, to_bump)
+        sys.exit(0)
+
+    if action == 'bringforward':
+        now = datetime.datetime.now()
+        unmanaged = find_unmanaged()
+        today = now.strftime("%Y-%m-%d.txt")
+        for f in unmanaged:
+            bump(f, today)
+        sys.exit(0)
+
+    if action == 'tmsa':
+        make_symlinks()
+        sys.exit(0)

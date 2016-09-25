@@ -1,0 +1,8 @@
+#! /bin/bash
+
+if [[ $1 = "usage" ]]; then
+	exit
+fi
+
+$TODO_FULL_SH command archive
+$TODO_FULL_SH outline import

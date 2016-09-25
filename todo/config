@@ -1,0 +1,10 @@
+export TODO_DIR="$HOME/todo"
+export TODO_FILE="$TODO_DIR/$(date +%Y-%m-%d).txt"
+export DONE_FILE="$TODO_DIR/$(date +%Y-%m-%d)-done.txt"
+export REPORT_FILE="$TODO_DIR/report.txt"
+export TMP_FILE="/tmp/todo.tmp"
+export TODOTXT_DEFAULT_ACTION=add
+export TODO_ACTIONS_DIR="$HOME/.todo.actions.d"
+export TODOTXT_DATE_ON_ADD=0
+export TODOTXT_AUTO_ARCHIVE=1
+export OL_INDENT_CHARS="\t"
