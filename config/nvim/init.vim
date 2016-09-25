@@ -146,6 +146,9 @@ let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
 let g:formatter_js = ['jscs']
 " au BufWrite * :Autoformat
 
+" Todo Outline
+autocmd BufRead,BufNewFile *.ol.txt set autoindent ts=4 sw=4 noexpandtab
+
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local

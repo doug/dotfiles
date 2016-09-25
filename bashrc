@@ -16,6 +16,9 @@ fi
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# Editor
+export EDITOR=vim
+
 # Homebrew
 if [ -d $HOME/.homebrew ]; then
   export HOMEBREW_PREFIX=$HOME/.homebrew
