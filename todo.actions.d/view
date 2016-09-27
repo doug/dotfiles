@@ -78,7 +78,7 @@ function project_view() {
 
 function context_view() {
     # Show contexts in alphabetical order and todo items in priority order
-    echo "=====  Contexts  ====="
+    echo -e "${TITLECOLOR}=====  Contexts =====${NC}"
     # echo ""
 
     # Find all contexts and sort
@@ -105,7 +105,7 @@ function context_view() {
 
 function date_view() {
     #  Show dates in alphabetical order and todo items in priority order
-    echo "=====  Dates  ====="
+    echo -e "${TITLECOLOR}=====  Dates =====${NC}"
     # echo ""
 
     #  Find all dates and sort
