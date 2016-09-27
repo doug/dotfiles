@@ -64,6 +64,7 @@ else
   NeoBundle 'clausreinke/typescript-tools.vim'
   NeoBundle 'leafgarland/typescript-vim'
   NeoBundle 'Chiel92/vim-autoformat'
+  NeoBundle 'freitass/todo.txt-vim'
 endif
 
 call neobundle#end()
