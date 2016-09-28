@@ -52,7 +52,7 @@ function usage() {
 function project_view() {
     # Show projects in alphabetical order and todo items in priority order
     echo -e "${TITLECOLOR}=====  Projects  =====${NC}"
-    echo ""
+    # echo ""
 
     # Find all projects and sort
     PROJECTS=$(grep -o '[^  ]*+[^  ]\+' "$TODO_FILE" | grep '^+' | sort -u | sed 's/^+//g')
@@ -64,7 +64,7 @@ function project_view() {
         if [[ -n "${PROJECT_LIST}" ]]; then
             echo -e "${SUBCOLOR}---  $project  ---${NC}"
             echo "${PROJECT_LIST}"
-            echo ""
+            # echo ""
         fi
     done
 
@@ -78,8 +78,8 @@ function project_view() {
 
 function context_view() {
     # Show contexts in alphabetical order and todo items in priority order
-    echo "=====  Contexts  ====="
-    echo ""
+    echo -e "${TITLECOLOR}=====  Contexts =====${NC}"
+    # echo ""
 
     # Find all contexts and sort
     CONTEXTS=$(grep -o '[^  ]*@[^  ]\+' "$TODO_FILE" | grep '^@' | sort -u | sed 's/@//g')
@@ -91,7 +91,7 @@ function context_view() {
         if [[ -n "${CONTEXT_LIST}" ]]; then
             echo -e "${SUBCOLOR}---  $context  ---${NC}"
             echo "${CONTEXT_LIST}"
-            echo ""
+            # echo ""
         fi
     done
 
@@ -105,8 +105,8 @@ function context_view() {
 
 function date_view() {
     #  Show dates in alphabetical order and todo items in priority order
-    echo "=====  Dates  ====="
-    echo ""
+    echo -e "${TITLECOLOR}=====  Dates =====${NC}"
+    # echo ""
 
     #  Find all dates and sort
     DATES=$(grep -o '[^  ]*t:[^  ]\+' "$TODO_FILE" | grep '^t:' | sort -u | sed 's/^t://g')

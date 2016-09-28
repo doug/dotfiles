@@ -64,6 +64,7 @@ else
   NeoBundle 'clausreinke/typescript-tools.vim'
   NeoBundle 'leafgarland/typescript-vim'
   NeoBundle 'Chiel92/vim-autoformat'
+  NeoBundle 'freitass/todo.txt-vim'
 endif
 
 call neobundle#end()
@@ -145,9 +146,6 @@ let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
 " Autoformat
 let g:formatter_js = ['jscs']
 " au BufWrite * :Autoformat
-
-" Todo Outline
-autocmd BufRead,BufNewFile *.ol.txt set autoindent ts=4 sw=4 noexpandtab
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))
