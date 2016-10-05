@@ -6,7 +6,7 @@ cinnamon-settings-daemon &
 
 #gnome-terminal &
 
-#drive-sync &
+drive-sync &
 
 xautolock -time 5 -locker "i3lock -c 333333" &
 

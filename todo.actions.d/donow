@@ -5,7 +5,7 @@
 # Configuration
 # ====================================================
 DESKTOP_NOTIFICATION=true        # Requires libnotify (on Ubuntu based: sudo apt-get install libnotify-bin)
-REMINDER_INTERVAL=10             # Intervals between desktop notifications
+REMINDER_INTERVAL=25          # Intervals between desktop notifications
 #EVIDENCE_LOG=$TODO_DIR/evidence.log
 
 
@@ -73,8 +73,12 @@ signal()
     if [[ $DESKTOP_NOTIFICATION = true ]]; then
         if [ "$(uname)" == "Darwin" ]; then
             osascript -e "display notification \"$2\" with title \"$1\""
+            say "Please, take a break."
         else
             notify-send -u critical -i appointment-soon -t 300 "$1" "$2"
+            if [ -x "$(command -v espeak)" ]; then
+              espeak -v en-sc+f2 "Please, take a break."
+            fi
         fi
     fi
 }
