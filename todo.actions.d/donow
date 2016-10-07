@@ -72,9 +72,11 @@ signal()
 {
     if [[ $DESKTOP_NOTIFICATION = true ]]; then
         if [ "$(uname)" == "Darwin" ]; then
+            say -v "Daniel" "Grab a cuppa tea"
             osascript -e "display notification \"$2\" with title \"$1\""
             say "Please, take a break."
         else
+            echo -e "\a"
             notify-send -u critical -i appointment-soon -t 300 "$1" "$2"
             if [ -x "$(command -v espeak)" ]; then
               espeak -v en-sc+f2 "Please, take a break."
