@@ -15,7 +15,7 @@ if [ -x `which xautolock` ]; then
 fi
 
 if [ -x `which compton` ]; then
-  compton --backend glx --inactive-dim 0.5 &
+  compton --backend glx --inactive-dim 0.75 &
 fi
 
 #gnome-power-manager &
