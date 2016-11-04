@@ -6,9 +6,17 @@ cinnamon-settings-daemon &
 
 #gnome-terminal &
 
-drive-sync &
+if [ -x `which drive-sync` ]; then
+  drive-sync &
+fi
 
-xautolock -time 5 -locker "i3lock -c 333333" &
+if [ -x `which xautolock` ]; then
+  xautolock -time 5 -locker "i3lock -c 333333" &
+fi
+
+if [ -x `which compton` ]; then
+  compton --backend glx --inactive-dim 0.5 &
+fi
 
 #gnome-power-manager &
 
@@ -22,6 +30,8 @@ export DESKTOP_SESSION=gnome
 # xset -b
 
 # Background color
-xsetroot -solid "#333333"
+if [ -x `which xsetroot` ]; then
+  xsetroot -solid "#333333"
+fi
 
 exec i3
