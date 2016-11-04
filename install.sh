@@ -259,27 +259,25 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install atom-material-syntax
       apm install atom-material-syntax-light
       apm install atom-material-ui
-      apm install atom-ternjs
       apm install atom-typescript
-      apm install atomic-chrome
       apm install autocomplete-glsl
+      apm install autocomplete-python
       apm install autoprefixer
       apm install color-picker
       apm install clang-format
       apm install docblockr
       apm install editorconfig
+      apm install file-icons
       apm install git-time-machine
       apm install git-plus
       apm install go-plus
       apm install go-debug
+      apm install graphviz-preview-plus
       apm install language-babel
       apm install language-docker
-      apm install language-ejs
       apm install language-fish-shell
       apm install language-glsl
-      apm install language-gradle
       apm install language-lua
-      apm install language-openscad
       apm install language-protobuf
       apm install language-viml
       apm install linter
@@ -292,8 +290,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       apm install pigments
       apm install pdf-view
       apm install pretty-json
-      apm install react
-      apm install remote-atom
       apm install todo-show
       apm install vim-mode
       apm install xml-formatter
