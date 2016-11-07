@@ -68,7 +68,7 @@ export SCM_CHECK=true
 # Explicit node path because nvm.sh is too slow for including in prompt
 if [ -d $HOME/.nvm ]; then
   NODE_PATH=$(ls -d $HOME/.nvm/versions/node/* | tail -1)
-  export PATH=$PATH:$NODE_PATH/bin
+  export PATH=$NODE_PATH/bin:$PATH
   # alias nvm="$HOME/.nvm/nvm.sh; nvm"
   nvm() { . "$HOME/.nvm/nvm.sh" ; nvm $@ ; }
 fi
