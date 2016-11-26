@@ -4,74 +4,41 @@ if &shell =~# 'fish$'
   set shell=sh
 endif
 
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+call plug#begin('~/.config/nvim/bundle')
 
-  " Required:
-  set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
-endif
-
-
-call neobundle#begin(expand('~/.config/nvim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Load local overides for bundles
 if filereadable(expand('~/.vimrc.bundle.local'))
   source ~/.vimrc.bundle.local
 else
-  NeoBundle 'tpope/vim-sensible'
-  NeoBundle 'tpope/vim-commentary'
-  NeoBundle 'scrooloose/nerdtree'
-  NeoBundle 'kien/ctrlp.vim'
-  NeoBundle 'terryma/vim-multiple-cursors'
-  NeoBundle 'scrooloose/syntastic'
+
+  function! BuildYCM(info)
+    " info is a dictionary with 3 fields
+    " - name:   name of the plugin
+    " - status: 'installed', 'updated', or 'unchanged'
+    " - force:  set on PlugInstall! or PlugUpdate!
+    if a:info.status == 'installed' || a:info.force
+      !./install.py
+    endif
+  endfunction
+
+  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'tomtom/tcomment_vim'
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+  Plug 'scrooloose/syntastic'
+  Plug 'kien/ctrlp.vim'
+  Plug 'bling/vim-airline'
+  Plug 'sjl/gundo.vim'
+  Plug 'Shougo/vimproc.vim', { 'do' : 'make' } | Plug 'quramy/tsuquyomi'
+  Plug 'pangloss/vim-javascript'
+	Plug 'leafgarland/typescript-vim'
+	Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
   if executable('ctags')
-    NeoBundle 'majutsushi/tagbar'
+    Plug 'majutsushi/tagbar'
   endif
-  NeoBundle 'elzr/vim-json'
-  NeoBundle 'bling/vim-airline'
-  NeoBundle 'fatih/vim-go'
-  NeoBundle 'tikhomirov/vim-glsl'
-  NeoBundle 'editorconfig/editorconfig-vim'
-  NeoBundle 'mkarmona/colorsbox'
-  NeoBundle 'Valloric/YouCompleteMe'
-  " NeoBundle 'Valloric/YouCompleteMe', {
-  " \ 'build': {
-  "       \ 'mac': 'install.py --clang-completer --gocode-completer',
-  "       \ 'linux': 'install.py --clang-completer --gocode-completer',
-  "       \ 'unix': 'install.py --clang-completer --gocode-completer'
-  " \ }
-  " \ }
-  NeoBundleLazy 'flowtype/vim-flow', {
-        \ 'autoload': {'filetypes': 'javascript'},
-        \ 'build': {
-        \   'mac': 'npm install -g flow-bin',
-        \   'unix': 'npm install -g flow-bin'
-        \ }}
-  " NeoBundle 'Shougo/vimproc.vim', {
-  "       \ 'build' : {
-  "       \     'windows' : 'tools\\update-dll-mingw',
-  "       \     'cygwin' : 'make -f make_cygwin.mak',
-  "       \     'mac' : 'make',
-  "       \     'linux' : 'make',
-  "       \     'unix' : 'gmake',
-  "       \    },
-  "       \ }
-  " NeoBundle 'Quramy/tsuquyomi'
-  NeoBundle 'clausreinke/typescript-tools.vim'
-  NeoBundle 'leafgarland/typescript-vim'
-  NeoBundle 'Chiel92/vim-autoformat'
-  NeoBundle 'freitass/todo.txt-vim'
+
 endif
 
-call neobundle#end()
-
-filetype plugin indent on
-
-NeoBundleCheck
+call plug#end()
 
 " basic setup
 set t_Co=256
@@ -120,32 +87,41 @@ if !exists("g:ycm_semantic_triggers")
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 
-" " make YCM compatible with UltiSnips (using supertab)
-" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" " better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = '<tab>'
-" let g:UltiSnipsJumpForwardTrigger = '<tab>'
-" let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-let g:synastic_javascript_checkers=['jscs']
-
 " automatically remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
-" flow config
-let g:flow#autoclose=1
-let g:flow#flowpath="/home/dougfritz/.nvm/versions/node/v5.0.0/bin/flow"
-let g:flow#omnifunc=1
+" Typescript
+let g:tsuquyomi_disable_quickfix = 1 " Use syntastic instead.
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_typescript_checkers = ['tsuquyomi'] " Instead of tsc.
+" let g:syntastic_javascript_checkers = ['tern', 'closurecompiler', 'jscs','jshint']
+" let g:syntastic_javascript_checkers = ['tern_lint', 'jscs', 'eslint']
+let g:syntastic_javascript_checkers = ['tern_lint']
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['closurecompiler']
+let g:syntastic_javascript_closurecompiler_script = '$HOME/.homebrew/bin/closure-compiler'
+
+" '/Users/dougfritz//bin/google-closure-compiler'
+" --compiler_flags="--language_in=ES6"'
 
 " Ctrl+P
 let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
 
-" Autoformat
-let g:formatter_js = ['jscs']
-" au BufWrite * :Autoformat
+" Paste toggle
+set pastetoggle=<leader>p
+
+" Omni complete spliting
+set splitbelow
+set splitright
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))

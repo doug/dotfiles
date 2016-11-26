@@ -16,9 +16,6 @@ fi
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-# Editor
-export EDITOR=vim
-
 # Homebrew
 if [ -d $HOME/.homebrew ]; then
   export HOMEBREW_PREFIX=$HOME/.homebrew
@@ -33,6 +30,12 @@ else
 fi
 
 export PATH=$HOME/bin:$PATH
+
+# Editor
+if which nvim >/dev/null; then
+  export EDITOR=nvim
+  alias vim=nvim
+fi
 
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
