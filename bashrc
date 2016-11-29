@@ -97,9 +97,11 @@ function screenrecord {
   ffmpeg -f x11grab -s $(xwininfo | grep 'geometry' | awk '{split($2,a,"+"); split(a[1],b,"x"); print b[1]-b[1]%2 "x" b[2]-b[2]%2 " -i :0.0+" a[2]-a[2]%2 "," a[3]-a[3]%2;}') -r 25 -vcodec libx264 ~/output.mkv
 }
 
-if [ -f $HOME/virtualenv/tensorflow/bin/activate ]; then
-  source $HOME/virtualenv/tensorflow/bin/activate
-fi
+# if [ -f $HOME/virtualenv/tensorflow/bin/activate ]; then
+#   source $HOME/virtualenv/tensorflow/bin/activate
+# fi
+
+export PATH=$HOME/.local/bin:$PATH
 
 if [ -f $HOME/.localrc ]; then
   source $HOME/.localrc
