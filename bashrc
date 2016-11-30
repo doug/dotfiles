@@ -29,7 +29,7 @@ else
   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 fi
 
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:$PATH
 
 # Editor
 if which nvim >/dev/null; then
@@ -100,8 +100,6 @@ function screenrecord {
 # if [ -f $HOME/virtualenv/tensorflow/bin/activate ]; then
 #   source $HOME/virtualenv/tensorflow/bin/activate
 # fi
-
-export PATH=$HOME/.local/bin:$PATH
 
 if [ -f $HOME/.localrc ]; then
   source $HOME/.localrc
