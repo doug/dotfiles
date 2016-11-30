@@ -30,8 +30,8 @@ else
   Plug 'sjl/gundo.vim'
   Plug 'Shougo/vimproc.vim', { 'do' : 'make' } | Plug 'quramy/tsuquyomi'
   Plug 'pangloss/vim-javascript'
-	Plug 'leafgarland/typescript-vim'
-	Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+  Plug 'leafgarland/typescript-vim'
+  Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
   if executable('ctags')
     Plug 'majutsushi/tagbar'
   endif

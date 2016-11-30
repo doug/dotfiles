@@ -119,15 +119,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     fi
   fi
 
-  if [[ ! -d $HOME/.config/nvim/bundle/neobundle.vim ]]; then
-    echo "Install Vim NeoBundle? [yN] "
-    read vimneobundle
-    if [[ "$vimneobundle" =~ ^[Yy]$ ]]; then
-      mkdir -p $HOME/.config/nvim/bundle
-      git clone https://github.com/Shougo/neobundle.vim $HOME/.config/nvim/bundle/neobundle.vim
-    fi
-  fi
-
   if [[ ! -d $HOME/bin/dart ]]; then
     echo "Install Dart SDK? [yN] "
     read dartsdk
