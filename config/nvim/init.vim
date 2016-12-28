@@ -35,6 +35,8 @@ else
   if executable('ctags')
     Plug 'majutsushi/tagbar'
   endif
+  Plug 'vimwiki/vimwiki'
+  Plug 'mattn/calendar-vim'
 
 endif
 
@@ -122,6 +124,24 @@ set pastetoggle=<leader>p
 " Omni complete spliting
 set splitbelow
 set splitright
+
+" Vimwiki for markdown
+let g:vimwiki_list = [{'path': '~/wiki/', 'index': '_Sidebar', 'syntax': 'markdown', 'ext': '.md'}]
+:autocmd FileType vimwiki map <leader>d :VimwikiMakeDiaryNote<CR>
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+:autocmd FileType vimwiki map <leader>c :call ToggleCalendar()<CR>
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))
