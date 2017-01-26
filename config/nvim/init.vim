@@ -31,6 +31,7 @@ else
   Plug 'Shougo/vimproc.vim', { 'do' : 'make' } | Plug 'quramy/tsuquyomi'
   Plug 'pangloss/vim-javascript'
   Plug 'leafgarland/typescript-vim'
+  Plug 'othree/html5.vim'
   Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
   if executable('ctags')
     Plug 'majutsushi/tagbar'
@@ -83,7 +84,7 @@ nnoremap <leader>l <C-w>l
 
 " YCM YouCompleteMe configurations
 if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
+let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 
@@ -109,6 +110,10 @@ let g:syntastic_javascript_checkers = ['tern_lint']
 " let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_javascript_checkers = ['closurecompiler']
 let g:syntastic_javascript_closurecompiler_script = '$HOME/.homebrew/bin/closure-compiler'
+let g:syntastic_html_tidy_ignore_errors = [
+      \ 'discarding unexpected',
+      \ 'is not recognized!'
+      \ ]
 
 " '/Users/dougfritz//bin/google-closure-compiler'
 " --compiler_flags="--language_in=ES6"'
@@ -128,3 +133,4 @@ if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
 
+set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
