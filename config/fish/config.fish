@@ -1,6 +1,6 @@
 # Use vi mode ###########################################################
-if type fish_vi_mode > /dev/null
-  fish_vi_mode
+if type fish_vi_key_bindings > /dev/null
+  fish_vi_key_bindings
 end
 
 # Set local vars ########################################################
