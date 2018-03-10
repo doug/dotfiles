@@ -1,5 +1,5 @@
 # Use vi mode ###########################################################
-if type fish_vi_key_bindings > /dev/null
+if type -q fish_vi_key_bindings
   fish_vi_key_bindings
 end
 
@@ -7,7 +7,7 @@ end
 set -x PATH $HOME/bin $PATH
 
 set -x GOPATH $HOME/go
-set -x PATH $GOPATH/bin /usr/local/go/bin $PATH
+set -x PATH $GOPATH/bin $PATH
 
 set -x EDITOR vim
 
@@ -38,7 +38,7 @@ switch (uname)
   case Darwin
     set -x HOMEBREW_CASK_OPTS "--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
     set -x HOMEBREW_PREFIX $HOME/.homebrew
-    set -x PATH $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin $PATH
+    set -x PATH $HOMEBREW_PREFIX/bin $PATH
 
     set -x PKG_CONFIG_PATH $PKG_CONFIG_PATH $HOMEBREW_PREFIX/lib $HOMEBREW_PREFIX/include
     set -x C_INCLUDE_PATH $C_INCLUDE_PATH $HOMEBREW_PREFIX/include
@@ -91,7 +91,7 @@ alias ocean "play -c 2 -r 41k -t sl - synth $len brownnoise tremolo .13 70 < /de
 alias brown "hplay -c 2 -n synth 60:00 brownnoise"
 
 # Useful abbreviations ##################################################
-if type abbr > /dev/null
+if type -q abbr
   abbr -a gco git checkout
 end
 
@@ -148,7 +148,7 @@ alias decrypt="openssl aes-256-cbc -d"
 
 # Fish greeting #########################################################
 
-if type fortune > /dev/null
+if type -q fortune
   function fish_greeting
     fortune -s
   end
