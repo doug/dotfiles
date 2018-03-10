@@ -1,0 +1,304 @@
+#!/usr/bin/env python
+
+import getopt
+import os
+import socket
+import sys
+import shutil
+import tempfile
+
+if sys.version_info >= (3,0):
+	import configparser
+	import io as ioio
+else:
+	import ConfigParser as configparser
+	import StringIO as ioio
+
+DATE           = '2016-11-03'
+VERSION        = '1.0.3'
+VERSION_STRING = 'rmate-python version %s (%s)' % (DATE, VERSION)
+
+def log(msg):
+	if settings.verbose:
+		sys.stderr.write(msg.strip() + '\n')
+
+def enc(string):
+	if sys.version_info >= (3,0):
+		return bytes(string, 'utf-8')
+	else:
+		return string
+
+def dec(byte_string):
+	if sys.version_info >= (3,0):
+		return str(byte_string, 'utf-8')
+	else:
+		return byte_string
+
+def handle_save(textmate, variables, data):
+	path = variables['token']
+
+	if path == '|':
+		if settings.tmpFile is not None:
+			settings.tmpFile.seek(0)
+			settings.tmpFile.truncate()
+			settings.tmpFile.write(data)
+		else:
+			log("Save failed!")
+		return
+
+	try:
+		log('Saving %s' % path)
+		backup_path = '%s~' % path
+		while os.path.isfile(backup_path): backup_path = '%s~' % backup_path
+		if os.path.isfile(path): shutil.copy2(path, backup_path)
+		file = open(path, 'wb')
+		file.write(data)
+		if os.path.isfile(backup_path): os.remove(backup_path)
+	except (IOError, OSError):
+		log("Save failed!")
+
+def handle_close(textmate, variables, data):
+	if settings.tmpFile is not None:
+		settings.tmpFile.seek(0)
+		print(dec(settings.tmpFile.read()))
+		settings.tmpFile.close()
+		settings.tmpFile = None
+
+	if 'token' in variables:
+		path = variables['token']
+		log("Closed %s" % path)
+	else:
+		log("Unknown file closed")
+
+def handle_cmd(textmate, cmd):
+	variables = {}
+	data = enc('')
+	for line in textmate:
+		line = dec(line)
+		if line.strip() == "": break
+		s = line.split(': ', 2)
+		name = s[0].strip()
+		value = s[1].strip()
+		variables[name] = value
+		if name == 'data':
+			data += textmate.read(int(value))
+
+	if 'data' in variables: del variables['data']
+	if   cmd == 'save':  handle_save(textmate, variables, data)
+	elif cmd == 'close': handle_close(textmate, variables, data)
+
+def connect_to_tm():
+	socket.setdefaulttimeout(5)
+
+	error = 0
+	for option in socket.getaddrinfo(settings.host, settings.port, 0, socket.SOCK_STREAM):
+		family, socktype, proto, canonname, sockaddr = option
+
+		tm_sock = socket.socket(family, socktype, proto)
+		error = tm_sock.connect_ex(sockaddr)
+		if error == 0:
+			break
+
+	if error:
+		raise Exception('Could not connect to textmate: %s' % (os.strerror(error)))
+
+	tm_sock.setblocking(True)
+	textmate = tm_sock.makefile('rwb')
+
+	server_info = dec(textmate.readline())
+
+	if server_info.strip() == "":
+		sys.stderr.write("Couldn't connect to TextMate!\n")
+		exit(1)
+
+	log('Connect: %s' % server_info)
+
+	return textmate
+
+def handle_cmds(textmate, host, port, cmds):
+	if len(cmds) == 0: return
+
+	for cmd in cmds: cmd.send(textmate)
+	textmate.write(enc('.\n'))
+
+	textmate.flush()
+	for command in textmate:
+		handle_cmd(textmate, dec(command).strip())
+	textmate.close()
+	log('Done')
+
+class Settings:
+	def __init__(self):
+		self.host    = 'localhost'
+		self.port    = 52698
+		self.wait    = False
+		self.force   = False
+		self.verbose = False
+		self.lines   = []
+		self.names   = []
+		self.types   = []
+		self.files   = []
+		self.tmpFile = None
+
+		self.read_disk_settings()
+
+		# Environment settings
+		self.host = os.getenv('RMATE_HOST', self.host)
+		self.port = int(os.getenv('RMATE_PORT', self.port))
+
+		self.parse_cli_options()
+
+		if self.host == 'auto' and os.environ.get('SSH_CONNECTION') != None:
+			self.host = os.getenv('SSH_CONNECTION', 'localhost').split(' ')[0]
+
+	def usage(self):
+		print("usage: %s [OPTION]... FILE...\n\n"
+		      "      --host HOST  Connect to HOST. Use 'auto' to detect the host from\n"
+		      "                   SSH. Defaults to %s\n"
+		      "  -p, --port PORT  Port number to use for connection. Defaults to %d\n"
+		      "  -w, --[no-]wait  Wait for file to be closed by TextMate\n"
+		      "  -l, --line LINE  Place carat on line LINE after loading the file.\n"
+		      "                   TextMate selection strings can be used\n"
+		      "  -m, --name NAME  The display name shown in TextMate\n"
+		      "  -t, --type TYPE  Treat file as having TYPE\n"
+		      "  -f, --force      Open even if the file is not wratable\n"
+		      "  -v, --verbose    Verbose logging messages\n"
+		      "  -h, --help       Show this help and exit\n"
+		      "      --version    Show version and exit\n\n"
+		      "When FILE is -, read standard input.\n"
+		      % (sys.argv[0], self.host, self.port))
+
+	def read_disk_settings(self):
+		config = Parser()
+		try:
+			config.read(['/etc/rmate.rc', '/usr/local/etc/rmate.rc', os.path.expanduser('~/.rmate.rc')])
+		except:
+			sys.stderr.write('Could not read settings from disk.\n')
+		if config.has_option('NOSECTION', 'host'): self.host = config.get('NOSECTION', 'host')
+		if config.has_option('NOSECTION', 'port'): self.port = config.get('NOSECTION', 'port')
+
+	def parse_cli_options(self):
+		try:
+			optlist, args = getopt.gnu_getopt(sys.argv[1:], 'hp:wl:m:t:fv', ['host=', 'port=', 'wait', 'no-wait', 'line=', 'name=', 'type=', 'force', 'verbose', 'help', 'version'])
+		except getopt.GetoptError:
+			self.usage()
+			sys.exit(2)
+
+		for name, value in optlist:
+			if name == '--version':           print(VERSION_STRING); sys.exit()
+			elif name in ('-h', '--help'):    self.usage(); sys.exit()
+			elif name == '--host':            self.host = value
+			elif name in ('-p', '--port'):    self.port = int(value)
+			elif name in ('-w', '--wait'):    self.wait = True
+			elif name == '--no-wait':         self.wait = False
+			elif name in ('-l', '--line'):    self.lines.append(value)
+			elif name in ('-m', '--name'):    self.names.append(value)
+			elif name in ('-t', '--type'):    self.types.append(value)
+			elif name in ('-f', '--force'):   self.force = True
+			elif name in ('-v', '--verbose'): self.verbose = True
+
+		if '-' in sys.argv[1:] and '-' not in args: args.append('-')
+		self.files = args
+		if not self.files: self.files = ['=']
+
+class Parser(configparser.ConfigParser):
+	def read(self, filenames):
+		if isinstance(filenames, str):
+			filenames = [filenames]
+		read_ok = []
+		for filename in filenames:
+			try:
+				file = open(filename)
+				fp = ioio.StringIO("[NOSECTION]\n" + file.read())
+				self._read(fp, filename)
+				file.close()
+			except:
+				continue
+			read_ok.append(filename)
+		return read_ok
+
+class Command:
+	def __init__(self, command):
+		self.command = command
+		self.variables = {}
+		self.data = None
+		self.size = None
+
+	def __setitem__(self, index, value):
+		self.variables[index] = value
+
+	def read_stdin(self):
+		self.data = enc(sys.stdin.read())
+		self.size = len(self.data)
+
+	def read_file(self, path):
+		file = open(path, 'rb')
+		self.data = file.read()
+		self.size = file.tell()
+		file.close()
+
+	def send(self, textmate):
+		textmate.write(enc(self.command + '\n'))
+		for name in self.variables.keys():
+			value = self.variables[name]
+			textmate.write(enc('%s: %s\n' % (name, value)))
+		if self.data != None:
+			textmate.write(enc('data: %d\n' % self.size))
+			textmate.write(self.data)
+		textmate.write(enc('\n'))
+
+def main():
+	cmds = []
+	for idx, path in enumerate(settings.files):
+		if path == '=':
+			if sys.stdin.isatty(): continue
+			else: path = '-'
+		elif path == '-' and sys.stdin.isatty():
+			sys.stderr.write('Reading from stdin, press ^D to stop\n')
+		elif os.path.isdir(path):
+			sys.stderr.write("'%s' is a directory!\n" % path)
+			continue
+		elif os.path.isfile(path) and not os.access(path, os.W_OK):
+			if settings.force:
+				log("File %s is not writable. Opening anyway." % path)
+			else:
+				sys.stderr.write("File %s is not writable! Use -f/--force to open anyway.\n" % path)
+				continue
+
+		cmd = Command("open")
+		if   len(settings.names) > idx: cmd['display-name'] = settings.names[idx]
+		elif path == '-':               cmd['display-name'] = '%s:untitled (stdin)' % socket.gethostname()
+		else:                           cmd['display-name'] = '%s:%s' % (socket.gethostname(), path)
+		if   len(settings.types) > idx: cmd['file-type']    = settings.types[idx]
+		elif path == '-':               cmd['file-type']    = 'txt'
+		if   path != '-':               cmd['real-path']    = os.path.abspath(path)
+		if   len(settings.lines) > idx: cmd['selection']    = settings.lines[idx]
+
+		cmd["data-on-save"] = 'yes'
+		cmd["re-activate"] = 'yes'
+		cmd["token"] = path
+		if path == '-':
+			cmd.read_stdin()
+		elif os.path.isfile(path):
+			cmd.read_file(path)
+		else:
+			cmd['data'] = "0"
+
+		if path == '-' and not sys.stdout.isatty() and settings.tmpFile is None:
+			settings.tmpFile = tempfile.TemporaryFile()
+			settings.tmpFile.write(cmd.data)
+			settings.tmpFile.seek(0)
+			cmd["token"] = '|'
+
+		cmds.append(cmd)
+
+	s = connect_to_tm()
+
+	if not settings.wait and os.fork():
+		sys.exit()
+
+	handle_cmds(s, settings.host, settings.port, cmds)
+
+if __name__ == "__main__":
+	settings = Settings()
+	main()
