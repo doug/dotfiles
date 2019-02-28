@@ -38,6 +38,7 @@ else
   endif
   Plug 'vimwiki/vimwiki'
   Plug 'mattn/calendar-vim'
+  Plug 'epeli/slimux'
 
 endif
 
@@ -147,6 +148,15 @@ function! ToggleCalendar()
   end
 endfunction
 :autocmd FileType vimwiki map <leader>c :call ToggleCalendar()<CR>
+
+" Slimux
+map <Leader>s :SlimuxREPLSendLine<CR>
+vmap <Leader>s :SlimuxREPLSendSelection<CR>
+map <Leader>a :SlimuxShellLast<CR>
+map <Leader>k :SlimuxSendKeysLast<CR>
+
+let g:slimux_select_from_current_window = 1
+
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))
