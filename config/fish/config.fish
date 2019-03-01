@@ -95,6 +95,11 @@ if type -q abbr
   abbr -a gco git checkout
 end
 
+# Editor setup ##################################################
+if type -q nvim
+  alias vim nvim
+end
+
 #################################
 ### Network Related
 #################################
