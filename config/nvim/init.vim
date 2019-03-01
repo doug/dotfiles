@@ -37,7 +37,7 @@ else
     Plug 'majutsushi/tagbar'
   endif
   Plug 'vimwiki/vimwiki'
-  Plug 'mattn/calendar-vim'
+  Plug 'itchyny/calendar.vim'
   Plug 'epeli/slimux'
 
 endif
