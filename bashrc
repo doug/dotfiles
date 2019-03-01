@@ -19,7 +19,6 @@ export PATH=$PATH:$GOPATH/bin
 # Homebrew
 if [ -d $HOME/.homebrew ]; then
   export HOMEBREW_PREFIX=$HOME/.homebrew
-  export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
   export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
   export PKG_CONFIG_PATH=$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
   export LD_LIBRARY_PATH=$HOMEBREW_PREFIX/lib
