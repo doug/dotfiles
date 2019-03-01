@@ -36,7 +36,6 @@ end
 # Platform dependent ####################################################
 switch (uname)
   case Darwin
-    set -x HOMEBREW_CASK_OPTS "--caskroom=$HOME/.caskroom --binarydir=$HOME/bin"
     set -x HOMEBREW_PREFIX $HOME/.homebrew
     set -x PATH $HOMEBREW_PREFIX/bin $PATH
 
