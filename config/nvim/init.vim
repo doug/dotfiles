@@ -20,35 +20,51 @@ else
     endif
   endfunction
 
+  " Autocomplete
   Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-  Plug 'tomtom/tcomment_vim'
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-  Plug 'scrooloose/syntastic'
-  Plug 'kien/ctrlp.vim'
-  Plug 'bling/vim-airline'
-  Plug 'sjl/gundo.vim'
-  Plug 'Shougo/vimproc.vim', { 'do' : 'make' } | Plug 'quramy/tsuquyomi'
-  Plug 'pangloss/vim-javascript'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'othree/html5.vim'
-  Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
   if executable('ctags')
     Plug 'majutsushi/tagbar'
   endif
+
+  " Navigation
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  " Plug 'bling/vim-airline'
+  Plug 'itchyny/lightline.vim'
+  " Plug 'kien/ctrlp.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'epeli/slimux'
+
+  " Code Editing
+  " Plug 'tomtom/tcomment_vim'
+  Plug 'tpope/vim-commentary'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'w0rp/ale'
+  Plug 'scrooloose/syntastic'
+
+  " Languages
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+  Plug 'Shougo/vimproc.vim', { 'do' : 'make' } | Plug 'quramy/tsuquyomi'
+  Plug 'leafgarland/typescript-vim'
+
+  " Organization
   Plug 'vimwiki/vimwiki'
   Plug 'itchyny/calendar.vim'
-  Plug 'epeli/slimux'
 
 endif
 
+" Color schemes
+Plug 'vim-scripts/peaksea'
+
 call plug#end()
 
+
 " basic setup
-set t_Co=256
-" colorscheme colorsbox-material
 set background=dark
 set number
+syntax enable
+set t_Co=256
+colorscheme peaksea
 
 " Add a local leader which is also ,
 let mapleader=" "
@@ -59,6 +75,7 @@ inoremap jj <esc>
 inoremap kk <esc>
 
 " Indentation
+"
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -90,6 +107,7 @@ if !exists("g:ycm_semantic_triggers")
 let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
+let g:ycm_semantic_triggers['python'] = ['.']
 
 " automatically remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -117,15 +135,19 @@ let g:syntastic_html_tidy_ignore_errors = [
       \ 'discarding unexpected',
       \ 'is not recognized!'
       \ ]
+let g:syntastic_quiet_messages = { 'regex': ['google_type_annotations'] }
+let g:syntastic_python_checkers = ['gpylint']
 
 " '/Users/dougfritz//bin/google-closure-compiler'
 " --compiler_flags="--language_in=ES6"'
 
 " Ctrl+P
-let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
+" let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|DS_Store\|git'
+" Use FZF instead of ctrl-p
+map <C-p> :FZF<CR>
 
 " Paste toggle
-set pastetoggle=<leader>p
+" set pastetoggle=<leader>p
 
 " Omni complete spliting
 set splitbelow
