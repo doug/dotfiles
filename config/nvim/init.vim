@@ -114,6 +114,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " Typescript
 let g:tsuquyomi_disable_quickfix = 1 " Use syntastic instead.
+" Show type hint info
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#
