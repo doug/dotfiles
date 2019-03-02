@@ -179,6 +179,9 @@ map <Leader>k :SlimuxSendKeysLast<CR>
 
 let g:slimux_select_from_current_window = 1
 
+" Ale
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))
