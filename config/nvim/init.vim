@@ -6,13 +6,15 @@ endif
 
 " Ale Config
 " Must set ale config before load.
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_set_ballons = 1
 " Error and warning signs.
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
+" Linters
+let g:ale_linters = {'python': ['pyls']}
 
 call plug#begin('~/.config/nvim/bundle')
 
@@ -35,6 +37,19 @@ else
   if executable('ctags')
     Plug 'majutsushi/tagbar'
   endif
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  let g:deoplete#enable_at_startup = 1
+  Plug 'deoplete-plugins/deoplete-jedi'
+
+  " Snippets
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
 
   " Navigation
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -167,7 +182,7 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <C-f> <Plug>(ale_fix)
 nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
-autocmd FileType python          nnoremap <buffer> <C-]> :call jedi#goto()<CR>
+" autocmd FileType python          nnoremap <buffer> <C-]> :call jedi#goto()<CR>
 
 
 
