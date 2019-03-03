@@ -10,14 +10,14 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   echo "Update symlinked dotfiles (.bashrc .vimrc, .tmux.conf, ...)? [yN]"
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
-    rcfiles=(bashrc bash_profile jscsrc i3 gitconfig gitignore irssi nvimrc
-    tmux.conf vimrc Xmodmap Xsession config/fish/config.fish config/nvim todo
-    todo.actions.d)
+    rcfiles=(bashrc bash_profile ctags jscsrc i3 gitconfig gitignore irssi
+    nvimrc tmux.conf vimrc Xmodmap Xsession config/fish/config.fish
+    config/nvim todo todo.actions.d)
     for rcfile in "${rcfiles[@]}"; do
       echo "Linking $rcfile to $HOME/.$rcfile"
       ln -fns "$current/$rcfile" "$HOME/.$rcfile"
     done
-    
+
     echo "----"
     mkdir -p $HOME/.config/fish/functions
     for fishfn in config/fish/functions/*; do

@@ -32,9 +32,9 @@ else
 
   " Autocomplete
   " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  " if executable('ctags')
-  "   Plug 'majutsushi/tagbar'
-  " endif
+  if executable('ctags')
+    Plug 'majutsushi/tagbar'
+  endif
 
   " Navigation
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -91,6 +91,21 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Omni complete spliting
 set splitbelow
 set splitright
+
+" Tagbar config
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+  \ }
 
 " Vimwiki for markdown
 let g:vimwiki_list = [{'path': '~/wiki/', 'index': '_Sidebar', 'syntax': 'markdown', 'ext': '.md'}]
