@@ -69,6 +69,37 @@ switch (uname)
     # Enable Spotlight
     alias spoton="sudo mdutil -a -i on"
 
+    # Brew install functions
+    function bip --description "Install brew plugins"
+      set -l inst (brew search | eval "fzf $FZF_DEFAULT_OPTS -m --header='[brew:install]'")
+
+      if not test (count $inst) = 0
+        for prog in $inst
+          brew install "$prog"
+        end
+      end
+    end
+
+    function bup --description "Update brew plugins"
+      set -l inst (brew leaves | eval "fzf $FZF_DEFAULT_OPTS -m --header='[brew:update]'")
+
+      if not test (count $inst) = 0
+        for prog in $inst
+          brew upgrade "$prog"
+        end
+      end
+    end
+
+    function bcp --description "Remove brew plugins"
+      set -l inst (brew leaves | eval "fzf $FZF_DEFAULT_OPTS -m --header='[brew:uninstall]'")
+
+      if not test (count $inst) = 0
+        for prog in $inst
+          brew uninstall "$prog"
+        end
+      end
+    end
+
   case Linux
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
@@ -103,13 +134,13 @@ end
 ### Network Related
 #################################
 
-alias localip="ipconfig getifaddr en1"
+alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ and print $1'"
 alias whois="whois -h whois-servers.net"
 
 # View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+alias sniff="sudo ngrep -d 'en0' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en0 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 function server --description "Start an HTTP server from a directory"
   open http://localhost:8080/
@@ -120,7 +151,7 @@ function digga --description "All the dig info"
   dig +nocmd $argv[1] any +multiline +noall +answer
 end
 
-alias myip="curl ip.appspot.com"
+alias myip="curl https://api.ipify.org"
 
 ################################
 ###  Unix Related
@@ -148,6 +179,26 @@ end
 
 alias encrypt="openssl aes-256-cbc"
 alias decrypt="openssl aes-256-cbc -d"
+
+# Manage Processes
+function kp --description "Kill processes"
+  set -l __kp__pid ''
+
+  if contains -- '--tcp' $argv
+    set __kp__pid (lsof -Pwni tcp | sed 1d | eval "fzf -m --header='[kill:tcp]'" | awk '{print $2}')
+  else
+    set __kp__pid (ps -ef | sed 1d | eval "fzf -m --header='[kill:process]'" | awk '{print $2}')
+  end
+
+  if test "x$__kp__pid" != "x"
+    if test "x$argv[1]" != "x"
+      echo $__kp__pid | xargs kill $argv[1]
+    else
+      echo $__kp__pid | xargs kill -9
+    end
+    kp
+  end
+end
 
 
 # Fish greeting #########################################################

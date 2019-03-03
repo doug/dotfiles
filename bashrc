@@ -107,3 +107,5 @@ fi
 # finished=`$gd +%s%3N`
 # total=$((finished-started))
 # echo "Took $total milliseconds."
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
