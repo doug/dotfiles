@@ -49,8 +49,9 @@ export BASH_IT="$HOME/.bash_it"
 # export BASH_IT_THEME='sexy'
 export BASH_IT_THEME='powerline-multiline'
 export THEME_CLOCK_FORMAT="%H:%M:%S"
-export POWERLINE_LEFT_PROMPT="scm python_venv cwd"
-export POWERLINE_RIGHT_PROMPT="clock battery user_info"
+export POWERLINE_LEFT_PROMPT="scm cwd"
+export POWERLINE_RIGHT_PROMPT="battery clock"
+# export POWERLINE_PROMPT_USER_INFO_MODE="sudo"
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
