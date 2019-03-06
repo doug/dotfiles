@@ -14,7 +14,8 @@ let g:ale_sign_warning = '⚠'
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 " Linters
-let g:ale_linters = {'python': ['pyls']}
+let g:ale_linters = {'python': ['pylint']}
+let g:ale_python_pylint_executable = 'gpylint'
 
 call plug#begin('~/.config/nvim/bundle')
 
@@ -70,6 +71,9 @@ else
   " Organization
   Plug 'vimwiki/vimwiki'
   Plug 'itchyny/calendar.vim'
+
+  " Focus
+  Plug 'junegunn/goyo.vim'
 
 endif
 

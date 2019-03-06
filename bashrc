@@ -82,11 +82,7 @@ alias s="git status"
 source $BASH_IT/bash_it.sh
 
 # Aliases
-if which gdate >/dev/null; then
-  alias week="gdate +%Y-W%02V-%u"
-else
-  alias week="date +%Y-W%02V-%u"
-fi
+alias week="date +%Y-W%V-%u"
 
 if which avconv >/dev/null; then
   alias ffmpeg="avconv"
@@ -96,9 +92,35 @@ function screenrecord {
   ffmpeg -f x11grab -s $(xwininfo | grep 'geometry' | awk '{split($2,a,"+"); split(a[1],b,"x"); print b[1]-b[1]%2 "x" b[2]-b[2]%2 " -i :0.0+" a[2]-a[2]%2 "," a[3]-a[3]%2;}') -r 25 -vcodec libx264 ~/output.mkv
 }
 
+if which fzf >/dev/null; then
+
+  function cd() {
+      if [[ "$#" != 0 ]]; then
+          builtin cd "$@";
+          return
+      fi
+      while true; do
+          local lsd=$(echo ".." && ls -p | grep '/$' | sed 's;/$;;')
+          local dir="$(printf '%s\n' "${lsd[@]}" |
+              fzf --reverse --preview '
+                  __cd_nxt="$(echo {})";
+                  __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
+                  echo $__cd_path;
+                  echo;
+                  ls -p "${__cd_path}";
+          ')"
+          [[ ${#dir} != 0 ]] || return 0
+          builtin cd "$dir" &> /dev/null
+      done
+  }
+
+fi
+
 # if [ -f $HOME/virtualenv/tensorflow/bin/activate ]; then
 #   source $HOME/virtualenv/tensorflow/bin/activate
 # fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 if [ -f $HOME/.localrc ]; then
   source $HOME/.localrc
@@ -108,4 +130,3 @@ fi
 # total=$((finished-started))
 # echo "Took $total milliseconds."
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
