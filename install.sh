@@ -105,7 +105,16 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   echo "Install additional fonts? [yN]"
   read fonts
   if [[ "$fonts" =~ ^[Yy]$ ]]; then
+    # Google Fonts
     sh "$current/download-fonts.sh"
+    # Powerline fonts
+    git clone https://github.com/powerline/fonts.git --depth=1 .powerlinefonts
+    # install
+    cd .powerlinefonts
+    ./install.sh
+    # cleanup
+    cd ..
+    rm -rf .powerlinefonts
   fi
 
   echo "Update gitconfig.local? [yN] "
