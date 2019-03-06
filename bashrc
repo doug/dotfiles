@@ -49,7 +49,7 @@ export BASH_IT="$HOME/.bash_it"
 # export BASH_IT_THEME='sexy'
 export BASH_IT_THEME='powerline-multiline'
 export THEME_CLOCK_FORMAT="%H:%M:%S"
-export POWERLINE_LEFT_PROMPT="scm cwd"
+export POWERLINE_LEFT_PROMPT="cwd"
 export POWERLINE_RIGHT_PROMPT="battery clock"
 # export POWERLINE_PROMPT_USER_INFO_MODE="sudo"
 
