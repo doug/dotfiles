@@ -32,8 +32,13 @@ export PATH=$HOME/.local/bin:$HOME/bin:$PATH
 
 # Editor
 if which nvim >/dev/null; then
-  export EDITOR=nvim
   alias vim=nvim
+fi
+
+if which code >/dev/null; then
+  export EDITOR=code
+else
+  export EDITOR=vim
 fi
 
 # Path to the bash it configuration
@@ -83,6 +88,7 @@ source $BASH_IT/bash_it.sh
 
 # Aliases
 alias week="date +%Y-W%V-%u"
+alias home="cd $HOME"
 
 if which avconv >/dev/null; then
   alias ffmpeg="avconv"
@@ -93,6 +99,21 @@ function screenrecord {
 }
 
 if which fzf >/dev/null; then
+
+  # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
+  function fkill() {
+      local pid
+      if [ "$UID" != "0" ]; then
+          pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+      else
+          pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+      fi
+
+      if [ "x$pid" != "x" ]
+      then
+          echo $pid | xargs kill -${1:-9}
+      fi
+  }
 
   function cd() {
       if [[ "$#" != 0 ]]; then
@@ -113,6 +134,69 @@ if which fzf >/dev/null; then
           builtin cd "$dir" &> /dev/null
       done
   }
+
+  # Modified version where you can press
+  #   - CTRL-O to open with `open` command,
+  #   - CTRL-E or Enter key to open with the $EDITOR
+  function fo() {
+    local out file key
+    IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
+    key=$(head -1 <<< "$out")
+    file=$(head -2 <<< "$out" | tail -1)
+    if [ -n "$file" ]; then
+      [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+    fi
+  }
+
+  if which ag >/dev/null; then
+    function fc() {
+      local file
+      file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1}')"
+      if [[ -n $file ]]
+      then
+        $EDITOR $file
+      fi
+    }
+  fi
+
+  if which brew >/dev/null; then
+
+    # Install (one or multiple) selected application(s)
+    # using "brew search" as source input
+    # mnemonic [B]rew [I]nstall [P]lugin
+    function bip() {
+      local inst=$(brew search | fzf -m)
+
+      if [[ $inst ]]; then
+        for prog in $(echo $inst); do
+          brew install $prog
+        done
+      fi
+    }
+    # Update (one or multiple) selected application(s)
+    # mnemonic [B]rew [U]pdate [P]lugin
+    function bup() {
+      local upd=$(brew leaves | fzf -m)
+
+      if [[ $upd ]]; then
+        for prog in $(echo $upd); do
+          brew upgrade $prog
+        done
+      fi
+    }
+    # Delete (one or multiple) selected application(s)
+    # mnemonic [B]rew [C]lean [P]lugin (e.g. uninstall)
+    function bcp() {
+      local uninst=$(brew leaves | fzf -m)
+
+      if [[ $uninst ]]; then
+        for prog in $(echo $uninst); do
+          brew uninstall $prog
+        done
+      fi
+    }
+
+  fi
 
 fi
 
