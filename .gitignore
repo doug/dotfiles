@@ -1,3 +1,4 @@
-config/fish/fishd*
-config/fish/fish_history
+fish/.config/fish/fishd*
+fish/.config/fish/fish_history
+vim/.config/nvim/bundle
 *-rplugin~
