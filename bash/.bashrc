@@ -2,6 +2,10 @@
 # gd=/Users/dougfritz/.homebrew/bin/gdate
 # started=`$gd +%s%3N`
 
+# If not running interactively don't do anything.
+[[ $- == *i* ]] || return
+
+
 # Google Cloud SDK completions.
 if [ -d $HOME/bin/google-cloud-sdk ]; then
   source $HOME/bin/google-cloud-sdk/path.bash.inc
