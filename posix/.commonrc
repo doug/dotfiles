@@ -38,12 +38,12 @@ else
   export EDITOR=vim
 fi
 
-alias ls="ls -G"
-
 platform=`uname`
 
 # Platform dependent ####################################################
 if [[ "$platform" == "Darwin" ]]; then
+    alias ls="ls -G"
+
     alias signalstrength="while true; /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed -e 's/^.*://g' | xargs -I SIGNAL printf \"\rRSSI dBm: SIGNAL\"; sleep 0.5; end"
 
     # Flush Directory Service cache
@@ -68,6 +68,7 @@ if [[ "$platform" == "Darwin" ]]; then
     # Enable Spotlight
     alias spoton="sudo mdutil -a -i on"
 else
+    alias ls="ls --color=auto"
     alias pbcopy="xclip -selection clipboard"
     alias pbpaste="xclip -selection clipboard -o"
     # alias open="xdg-open" # open is native in fish
