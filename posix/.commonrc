@@ -1,4 +1,4 @@
-## Path
+## PATH
 
 # Golang
 export GOPATH=$HOME/go

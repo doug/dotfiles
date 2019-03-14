@@ -1,0 +1,120 @@
+----- SETUP -----
+-- For this conky configuration to work, you have to install:
+-- * conky
+-- * conky-colors (AUR)
+-- * lm_sensors
+-- * nvidia-smi
+-----------------
+
+conky.config = {
+    --- Conky settings ---
+    update_interval = 2,
+    total_run_times = 0,
+    net_avg_samples = 1,
+    cpu_avg_samples = 1,
+
+    imlib_cache_size = 0,
+    double_buffer = true,
+    no_buffers = true,
+    background = true,
+
+    --- Text settings ---
+    use_xft = true,
+    font = 'Ubuntu:size=10',
+    override_utf8_locale = true,
+    text_buffer_size = 2048,
+
+    --- Window specifications ---
+    own_window_class = 'Conky',
+    own_window = true,
+    own_window_type = 'normal',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+
+    alignment = 'top_right',
+    gap_x = 25,
+    gap_y = 50,
+    minimum_width = 200, minimum_height = 0,
+    maximum_width = 200,
+
+    default_bar_width = 60, default_bar_height = 8,
+
+    --- Graphics settings ---
+    draw_shades = false,
+
+    default_color = '#cccccc',
+
+    color0 = 'white',
+    color1 = '#E07A1F',
+    color2 = 'white',
+};
+
+conky.text = [[
+${font Arial Black:size=26}${alignc}${time %H:%M}${font}
+${alignc}${time %A, %B %d, %Y}
+
+SYSTEM ${hr 2}
+${goto 6}${voffset 6}${font conkycolorslogos:size=32}a${font}${goto 55}${voffset -25}$machine
+${goto 55}Kernel: ${kernel}
+\
+${voffset 8}${loadgraph F57900 FCAF3E}
+\
+${goto 6}${voffset 4}${font conkycolors:size=16}o${font}${voffset -6}${goto 32}Uptime: ${alignr}${uptime}
+
+CPU ${hr 2}
+${goto 6}${voffset 4}${font conkycolors:size=16}d${font}${voffset -5}${goto 32}Frequency: ${alignr}${freq_g (1)} GHz
+\
+${goto 6}${voffset 15}${font conkycolors:size=16}8${font}\
+${goto 35}${voffset -14}${execigraph 4 "sensors | grep 'Core ' | awk '{total += $3; count++} END {print total/count}' | sed 's/+//' | sed 's/\.0//g'" 20,125 F57900 FCAF3E -t}\
+${alignr}${voffset -12}${execi 4 sensors | grep 'Core ' | awk '{total += $3; count++} END {printf "%.0f", total/count}' | sed 's/+//' | sed 's/\.0//g'} °C
+\
+${goto 6}${voffset 15}${font conkycolors:size=16}l${font}\
+${goto 35}${voffset -14}${cpugraph 20,125 F57900 FCAF3E -t}\
+${alignr}${voffset -12}${cpu} %
+\
+${goto 35}${voffset 10}${cpubar cpu1 8,37}  ${cpubar cpu2 8,37}  ${cpubar cpu3 8,37}  ${cpubar cpu4 8,37}
+${goto 35}${cpubar cpu5 8,37}  ${cpubar cpu6 8,37}  ${cpubar cpu7 8,37}  ${cpubar cpu8 8,37}
+
+Discrete GPU ${hr 2}
+${if_match ${exec lsmod | grep nvidia -c} > 0}\
+${goto 6}${voffset 5}${font conkycolorslogos:size=16}n${font}${voffset -6}${goto 32}${exec nvidia-smi --query-gpu=name --format=csv,noheader}
+${goto 6}${voffset 5}${font conkycolors:size=16}8${font}${voffset -6}${goto 32}\
+Temperature: ${alignr}${color #FCAF3E}${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits} °C$color
+${goto 6}${voffset 5}${font conkycolors:size=16}e${font}${voffset -6}${goto 32}\
+Memory:${alignr}${exec nvidia-smi --query-gpu=memory.used --format=csv,noheader} / ${exec nvidia-smi --query-gpu=memory.total --format=csv,noheader}
+${else}\
+${goto 6}${voffset 5}${font conkycolors:size=16}r${font}${voffset -6}${goto 32}OFF
+${endif}\
+
+General ${hr 2}
+${goto 6}${voffset 4}${font conkycolors:size=16}g${font}${voffset -6}${goto 32}RAM: ${mem} ${alignr}${membar 8,60}
+\
+${goto 6}${voffset 4}${font conkycolors:size=16}C${font}${voffset -6}${goto 32}Processes: ${alignr}$processes ($running_processes running)
+${voffset 4}${goto 32}Threads: ${alignr}$threads ($running_threads running)
+${voffset 4}Highest: ${alignr 22}CPU${alignr}RAM
+${voffset -5.5}${hr 1}
+${voffset -1}${top name 1} ${goto 124}${top cpu 1}${alignr}${top mem 1}
+${voffset -1}${top name 2} ${goto 124}${top cpu 2}${alignr}${top mem 2}
+${voffset -1}${top name 3} ${goto 124}${top cpu 3}${alignr}${top mem 3}
+
+Disk ${hr 2}
+${diskiograph F57900 FCAF3E}
+${voffset 4}${font conkycolors:size=16}i${font} ${voffset -5} ${fs_used /} / ${fs_size /} ${alignr}${fs_bar 8,60 /}
+
+Network ${hr 2}
+Down: ${downspeed eth0} k/s ${alignr}Up: ${upspeed eth0} k/s
+${color lightgray}${downspeedgraph eno1 20,80 444444 eeeeee} ${alignr}${upspeedgraph eno1 20,80 444444 eeeeee}$color
+Total: ${totaldown eno1} ${alignr}Total: ${totalup eno1}
+
+Network ${hr 2}
+${voffset 2} Ethernet ${hr 1}
+${voffset 15}${font conkycolors:size=14}x${font}${goto 32}${voffset -15}Up: ${upspeed eno1}${font} ${alignr}${upspeedgraph eno1 20,60 F57900 FCAF3E}
+${goto 32}${voffset -15}Total: ${totalup eno1}
+\
+${voffset 15}${font conkycolors:size=14}w${font}${goto 32}${voffset -15}Down: ${downspeed eno1}${font} ${alignr}${downspeedgraph eno1 20,60 F57900 FCAF3E}
+${goto 32}${voffset -15}Total: ${totaldown eno1}
+\
+${voffset 8}${font conkycolors:size=13}A${font}${goto 32}${voffset -4}Local IP: ${alignr}${addr eno1}
+
+
+]];
