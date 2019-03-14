@@ -1,3 +1,5 @@
+# Skip if not interactive
+[[ -o interactive ]] || return
 
 # Check if zplug is installed
 if [[ ! -d ~/.zplug ]]; then
@@ -40,28 +42,6 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 setopt interactivecomments
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# source /etc/bash_completion.d/g4d
-
-# fpath=(/google/src/files/head/depot/google3/devtools/blaze/scripts/zsh_completion $fpath)
-
-# Homebrew
-if [ -d $HOME/.homebrew ]; then
-  export HOMEBREW_PREFIX=$HOME/.homebrew
-  export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
-  export PKG_CONFIG_PATH=$HOMEBREW_PREFIX/lib:$HOMEBREW_PREFIX/include
-  export LD_LIBRARY_PATH=$HOMEBREW_PREFIX/lib
-  export HOMEBREW_NO_ANALYTICS=1
-else
-  export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-fi
-
-EDITOR='vim'
-VISUAL='vim'
-CHEAT_EDITOR='vim'
-
 setopt PROMPT_SUBST
 
 HISTSIZE=10000000
@@ -83,4 +63,6 @@ zplug load
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[ -f ~/.local.zsh ] && source ~/.local.zsh
+[ -f ~/.commonrc ] && source ~/.commonrc
+
+[ -f ~/.localrc ] && source ~/.localrc
