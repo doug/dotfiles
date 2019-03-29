@@ -43,3 +43,7 @@ source $BASH_IT/bash_it.sh
 # total=$((finished-started))
 # echo "Took $total milliseconds."
 
+# Unified history
+shopt -s histappend
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
