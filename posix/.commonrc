@@ -40,6 +40,7 @@ fi
 
 platform=`uname`
 
+
 # Platform dependent ####################################################
 if [[ "$platform" == "Darwin" ]]; then
     alias ls="ls -G"
@@ -120,6 +121,11 @@ alias fs="stat -f \"%z bytes\""
 function md() {
   mkdir -p "$1"
   cd "$1"
+}
+
+# Global find and replace with Ag
+function agr() { 
+  ag -0 -l $1 | xargs -0 sed -ri -e "s/$1/$2/g"; 
 }
 
 # Generate random password
