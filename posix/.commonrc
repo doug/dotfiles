@@ -32,12 +32,6 @@ fi
 export VISUAL=$EDITOR
 export CHEAT_EDITOR=$EDITOR
 
-if which code >/dev/null; then
-  export EDITOR=code
-else
-  export EDITOR=vim
-fi
-
 platform=`uname`
 
 
