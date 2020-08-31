@@ -96,7 +96,7 @@ zstyle ':completion:*' rehash true
 
 # History.
 HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
-HISTSIZE=100000
+HISTSIZE=1000000000
 SAVEHIST=5000
 setopt appendhistory notify
 unsetopt beep nomatch
