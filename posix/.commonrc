@@ -173,7 +173,7 @@ if which fzf >/dev/null; then
       fi
   }
 
-  function cd() {
+  function fcd() {
       if [[ "$#" != 0 ]]; then
           builtin cd "$@";
           return
@@ -196,7 +196,7 @@ if which fzf >/dev/null; then
   # Modified version where you can press
   #   - CTRL-O to open with `open` command,
   #   - CTRL-E or Enter key to open with the $EDITOR
-  function fo() {
+  function fopen() {
     local out file key
     IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
     key=$(head -1 <<< "$out")
@@ -207,7 +207,7 @@ if which fzf >/dev/null; then
   }
 
   if which ag >/dev/null; then
-    function fc() {
+    function fcode() {
       local file
       file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1}')"
       if [[ -n $file ]]
