@@ -164,7 +164,6 @@ zinit wait lucid light-mode for \
       OMZ::lib/diagnostics.zsh \
       OMZ::lib/git.zsh \
       OMZ::lib/grep.zsh \
-      OMZ::lib/key-bindings.zsh \
       OMZ::lib/misc.zsh \
       OMZ::lib/spectrum.zsh \
       OMZ::lib/termsupport.zsh \
