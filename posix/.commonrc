@@ -81,7 +81,7 @@ alias theta="play -n synth sin 315 sin 320 remix 1 2"
 alias delta="play -n synth sin 315 sin 317 remix 1 2"
 alias gammap="play -n synth sin 315 sin 365 pinknoise remix 1,3 2,3"
 alias ocean="play -c 2 -r 41k -t sl - synth $len brownnoise tremolo .13 70 < /dev/zero"
-alias brown="hplay -c 2 -n synth 60:00 brownnoise"
+alias brown="play -c 2 -n synth 60:00 brownnoise"
 
 #################################
 ### Network Related
