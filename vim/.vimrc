@@ -186,8 +186,11 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <C-f> <Plug>(ale_fix)
 nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
-" autocmd FileType python          nnoremap <buffer> <C-]> :call jedi#goto()<CR>
+autocmd FileType python          nnoremap <buffer> <C-]> :call jedi#goto()<CR>
 
+" Nvim terminal
+" Escape the terminal
+tnoremap <Esc> <C-\><C-n>
 
 
 " Load local overides and extensions
