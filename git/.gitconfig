@@ -32,3 +32,6 @@
   required = true
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
+[user]
+	email = doug@dougfritz.com
+	name = Doug
