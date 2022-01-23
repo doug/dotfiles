@@ -16,3 +16,6 @@ packages with
 
 etc
 
+Auto install is handled with `install.sh`.
+
+

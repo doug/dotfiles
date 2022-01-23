@@ -10,6 +10,13 @@ if ! hash unzip 2>/dev/null; then
   exit
 fi
 
+# Powerline fonts
+git clone https://github.com/powerline/fonts.git --depth=1 .powerlinefonts
+cd .powerlinefonts
+./install.sh
+cd ..
+rm -rf .powerlinefonts
+
 mkdir -p $FONTDIR
 for x in Roboto Roboto-Slab Roboto-Condensed Anonymous-Pro source-sans-pro open-sans Raleway quicksand dosis source-code-pro code Museo League-Gothic; do
   curl -L -O http://www.fontsquirrel.com/fonts/download/$x
