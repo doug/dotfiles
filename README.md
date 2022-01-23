@@ -16,6 +16,11 @@ packages with
 
 etc
 
+## install.sh
+
 Auto install is handled with `install.sh`.
 
+## Tmux
+
+Be sure to install tmux plugins and prefix + I to install tpm plugins
 
