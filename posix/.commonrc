@@ -19,11 +19,11 @@ export PATH=$HOME/.local/bin:$HOME/bin:$PATH
 
 ## Editor
 
-if which nvim >/dev/null; then
+if hash nvim 2>/dev/null; then
   alias vim=nvim
 fi
 
-if which code >/dev/null; then
+if hash code 2>/dev/null; then
   export EDITOR=code
 else
   export EDITOR=vim
@@ -118,8 +118,8 @@ function md() {
 }
 
 # Global find and replace with Ag
-function agr() { 
-  ag -0 -l $1 | xargs -0 sed -ri -e "s/$1/$2/g"; 
+function agr() {
+  ag -0 -l $1 | xargs -0 sed -ri -e "s/$1/$2/g";
 }
 
 # Generate random password
@@ -137,7 +137,7 @@ alias week="date +%Y-W%V-%u"
 alias home="cd $HOME"
 
 # Audio and video
-if which avconv >/dev/null; then
+if hash avconv 2>/dev/null; then
   alias ffmpeg="avconv"
 fi
 
@@ -150,7 +150,7 @@ alias decrypt="openssl aes-256-cbc -d"
 
 # FZF
 
-if which fzf >/dev/null; then
+if hash fzf 2>/dev/null; then
 
   # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
   function fkill() {
@@ -200,7 +200,7 @@ if which fzf >/dev/null; then
     fi
   }
 
-  if which ag >/dev/null; then
+  if hash ag 2>/dev/null; then
     function fcode() {
       local file
       file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1}')"
@@ -211,7 +211,7 @@ if which fzf >/dev/null; then
     }
   fi
 
-  if which brew >/dev/null; then
+  if hash brew 2>/dev/null; then
 
     # Install (one or multiple) selected application(s)
     # using "brew search" as source input

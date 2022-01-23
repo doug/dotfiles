@@ -30,6 +30,25 @@ if [ -d $HOME/.nvm ]; then
   nvm() { . "$HOME/.nvm/nvm.sh" ; nvm $@ ; }
 fi
 
+if [! -d $BASH_IT ]; then
+  git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+  source $BASH_IT/bash_it.sh
+  bash-it disable plugin all
+  bash-it disable alias all
+  bash-it disable completion all
+  bash-it enable plugin base alias-completion extract git history tmux todo
+  bash-it enable alias ag atom docker general git npm tmux todo vim
+  bash-it enable completion bash-it docker git git_flow gulp npm pip ssh system tmux todo
+  platform=`uname`
+  if [[ "$platform" == "Linux" ]]; then
+    bash-it enable alias apt clipboard
+    bash-it enable completion brew
+  elif [[ "$platform" == "Darwin" ]]; then
+    bash-it enable plugin osx-timemachine osx
+    bash-it enable alias homebrew-cask homebrew osx
+  fi
+fi
+
 # Load Bash It
 source $BASH_IT/bash_it.sh
 
