@@ -169,7 +169,7 @@ zinit wait lucid light-mode for \
       OMZ::lib/termsupport.zsh \
       OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh \
   atinit"zicompinit; zicdreplay" \
-        zdharma/fast-syntax-highlighting \
+        zdharma-continuum/fast-syntax-highlighting \
       OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
       OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
   atload"_zsh_autosuggest_start" \
