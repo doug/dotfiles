@@ -70,6 +70,13 @@ else
     alias trash="gvfs-trash"
 fi
 
+# The most important aliases ever (the only thing I borrowed from OMZ)
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls -G'
+alias lsa='ls -lah'
+
 # Useful aliases ########################################################
 alias s="git status"
 

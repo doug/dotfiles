@@ -1,19 +1,30 @@
 # Skip if not interactive
 [[ -o interactive ]] || return
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# We require specific tools to be installed for this configuration to work properly.
+# brew install starship
+# brew install fzf
+# brew install zoxide
+if ! command -v fzf >/dev/null 2>&1; then
+    echo "Error: fzf is not installed. Aborting .zshrc."
+    return 1
 fi
+if ! command -v starship >/dev/null 2>&1; then
+    echo "Error: starship is not installed. Aborting .zshrc."
+    return 1
+fi
+if ! command -v zoxide >/dev/null 2>&1; then
+    echo "Error: zoxide is not installed. Aborting .zshrc."
+    return 1
+fi
+
 
 # - - - - - - - - - - - - - - - - - - - -
 # ZSH Core
 # - - - - - - - - - - - - - - - - - - - -
 
 
-# Load The Prompt System And Completion System And Initilize Them.
+# Load The Prompt System And Completion System And Initialize Them.
 autoload -Uz compinit promptinit
 
 # Load And Initialize The Completion System Ignoring Insecure Directories With A
@@ -97,7 +108,7 @@ zstyle ':completion:*' rehash true
 # History.
 HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
 HISTSIZE=1000000000
-SAVEHIST=5000
+SAVEHIST=10000
 setopt appendhistory notify
 unsetopt beep nomatch
 
@@ -113,83 +124,17 @@ setopt hist_save_no_dups        # Do Not Write A Duplicate Event To The History 
 setopt hist_verify              # Do Not Execute Immediately Upon History Expansion.
 setopt extended_history         # Show Timestamp In History.
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
-# - - - - - - - - - - - - - - - - - - - -
-# Zinit Configuration
-# - - - - - - - - - - - - - - - - - - - -
+# Set up zoxide to move between folders efficiently
+eval "$(zoxide init zsh)"
 
-__ZINIT="${ZDOTDIR:-$HOME}/.zinit/bin/zinit.zsh"
+# Set up the Starship prompt
+eval "$(starship init zsh)"
 
-if [[ ! -f "$__ZINIT" ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-. "$__ZINIT"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-
-# - - - - - - - - - - - - - - - - - - - -
-# Theme
-# - - - - - - - - - - - - - - - - - - - -
-
-# Most Themes Use This Option.
-setopt promptsubst
-
-# These plugins provide many aliases - atload''
-zinit wait lucid for \
-        OMZ::plugins/mercurial/mercurial.plugin.zsh \
-        OMZ::lib/git.zsh \
-    atload"unalias grv" \
-        OMZ::plugins/git/git.plugin.zsh
-
-# Provide A Simple Prompt Till The Theme Loads
-PS1="READY >"
-zinit ice wait'!' lucid
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-
-# - - - - - - - - - - - - - - - - - - - -
-# Plugins
-# - - - - - - - - - - - - - - - - - - - -
-
-zinit wait lucid light-mode for \
-      OMZ::lib/compfix.zsh \
-      OMZ::lib/completion.zsh \
-      OMZ::lib/functions.zsh \
-      OMZ::lib/diagnostics.zsh \
-      OMZ::lib/git.zsh \
-      OMZ::lib/grep.zsh \
-      OMZ::lib/misc.zsh \
-      OMZ::lib/spectrum.zsh \
-      OMZ::lib/termsupport.zsh \
-      OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh \
-  atinit"zicompinit; zicdreplay" \
-        zdharma-continuum/fast-syntax-highlighting \
-      OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
-      OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
-  as"completion" \
-      OMZ::plugins/docker/_docker \
-
-# Recommended Be Loaded Last.
-zinit ice wait blockf lucid atpull'zinit creinstall -q .'
-zinit load zsh-users/zsh-completions
-
-# - - - - - - - - - - - - - - - - - - - -
-# Local
-# - - - - - - - - - - - - - - - - - - - -
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# Shared posix configurations valid for both zsh and bash.
 [ -f ~/.commonrc ] && source ~/.commonrc
 
+# User-specific local configurations.
 [ -f ~/.localrc ] && source ~/.localrc
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
