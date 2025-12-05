@@ -1,197 +1,94 @@
-" Ensure POSIX shell
+" -----------------------------------------------------------------------------
+" 1. PREAMBLE: THE ESSENTIALS
+" -----------------------------------------------------------------------------
+set nocompatible            " Abandon Vi legacy support for modern Vim features
+filetype plugin indent on   " Enable filetype detection and indentation
+syntax on                   " Enable syntax highlighting
 
-if &shell =~# 'fish$'
-  set shell=sh
+" -----------------------------------------------------------------------------
+" 2. AESTHETICS & UI
+" -----------------------------------------------------------------------------
+set number                  " Show line numbers
+set relativenumber          " Relative numbers for easier jumping (e.g., '10j')
+set cursorline              " Highlight the current line for visual clarity
+set scrolloff=8             " Keep 8 lines of context above/below cursor
+set signcolumn=yes          " Always show sign column (prevents text shifting)
+set termguicolors           " Enable 24-bit True Color
+set background=dark         " Assume a dark background
+
+
+" -----------------------------------------------------------------------------
+" 3. TABULATIONS & INDENTATION (The "Spaces > Tabs" Standard)
+" -----------------------------------------------------------------------------
+set tabstop=2               " A tab is 4 spaces wide
+set shiftwidth=2            " Indents are 4 spaces wide
+set expandtab               " Convert tabs to spaces (essential for Python/YAML)
+set autoindent              " Copy indentation from previous line
+set smartindent             " Smarter indentation logic for C-like languages
+
+" -----------------------------------------------------------------------------
+" 4. SEARCH & NAVIGATION
+" -----------------------------------------------------------------------------
+set ignorecase              " Case insensitive search...
+set smartcase               " ...unless you type a capital letter
+set incsearch               " Show search matches as you type
+set hlsearch                " Highlight all search matches
+" Press <Esc> to clear search highlights
+nnoremap <silent> <Esc> :nohlsearch<CR><Esc>
+
+" -----------------------------------------------------------------------------
+" 5. SYSTEM INTEGRATION
+" -----------------------------------------------------------------------------
+set clipboard+=unnamed      " Sync Vim's clipboard with the system clipboard
+" set clipboard+=unnamedplus      " Sync Vim's clipboard with the system clipboard
+set undofile                " Persist undo history across sessions
+set noswapfile              " Disable swap files (modern systems rarely need them)
+vnoremap p "_dP             " Prevent replacing visual selection from overwriting the clipboard
+
+" -----------------------------------------------------------------------------
+" 6. PLUGINS (Requires vim-plug)
+" -----------------------------------------------------------------------------
+" Automatic installation of vim-plug if missing
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Ale Config
-" Must set ale config before load.
-let g:ale_completion_enabled = 0
-let g:ale_set_ballons = 1
-" Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
-" Enable integration with airline.
-let g:airline#extensions#ale#enabled = 1
-" Linters
-let g:ale_linters = {'python': ['pylint']}
-let g:ale_python_pylint_executable = 'gpylint'
+call plug#begin('~/.vim/plugged')
 
-call plug#begin('~/.config/nvim/bundle')
+" The Essentials
+Plug 'tpope/vim-sensible'       " A universal set of defaults
+Plug 'tpope/vim-commentary'     " Comment stuff out with 'gc'
+Plug 'tpope/vim-surround'       " Manipulate quotes/brackets (e.g., 'cs"')
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy finder binary
+Plug 'junegunn/fzf.vim'         " Fuzzy finder mappings
 
-if filereadable(expand('~/.vimrc.bundle.local'))
-  source ~/.vimrc.bundle.local
-else
-
-  function! BuildYCM(info)
-    " info is a dictionary with 3 fields
-    " - name:   name of the plugin
-    " - status: 'installed', 'updated', or 'unchanged'
-    " - force:  set on PlugInstall! or PlugUpdate!
-    if a:info.status == 'installed' || a:info.force
-      !./install.py
-    endif
-  endfunction
-
-  " Autocomplete
-  " Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-  if executable('ctags')
-    Plug 'majutsushi/tagbar'
-  endif
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
-  let g:deoplete#enable_at_startup = 1
-  Plug 'deoplete-plugins/deoplete-jedi'
-
-  " Snippets
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
-
-  " Navigation
-  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-  Plug 'bling/vim-airline'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'epeli/slimux'
-
-  " Code Editing
-  Plug 'tpope/vim-commentary'
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'w0rp/ale'
-
-  " Languages
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-  Plug 'leafgarland/typescript-vim'
-
-  " Organization
-  Plug 'vimwiki/vimwiki'
-  Plug 'itchyny/calendar.vim'
-
-  " Focus
-  Plug 'junegunn/goyo.vim'
-
-endif
-
-" Color schemes
-Plug 'vim-scripts/peaksea'
+" Visuals
+Plug 'ellisonleao/gruvbox.nvim' " A high-quality retro theme (Neovim optimised)
+Plug 'vim-airline/vim-airline'  " Lean status line
 
 call plug#end()
 
-" basic setup
-set background=dark
-set number
-set mouse=a
-syntax enable
-set t_Co=256
-colorscheme peaksea
+" -----------------------------------------------------------------------------
+" 7. CONFIGURATION
+" -----------------------------------------------------------------------------
+" Theme Setup
+try
+    colorscheme gruvbox
+catch
+    try 
+        colorscheme retrobox
+    catch
+        colorscheme default     " Fallback if gruvbox isn't installed
+    endtry
+endtry
 
-" Map leader and localleader
-let mapleader=" "
-let maplocalleader=" "
-
-" Indentation
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-" Column width 80 marker
-set colorcolumn=80
-set textwidth=80
-
-" automatically remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-
-" Omni complete spliting
-set splitbelow
-set splitright
-
-" Tagbar config
-let g:tagbar_type_typescript = {
-  \ 'ctagstype': 'typescript',
-  \ 'kinds': [
-    \ 'c:classes',
-    \ 'n:modules',
-    \ 'f:functions',
-    \ 'v:variables',
-    \ 'v:varlambdas',
-    \ 'm:members',
-    \ 'i:interfaces',
-    \ 'e:enums',
-  \ ]
-  \ }
-
-" Vimwiki for markdown
-let g:vimwiki_list = [{'path': '~/wiki/', 'index': '_Sidebar', 'syntax': 'markdown', 'ext': '.md'}]
-function! ToggleCalendar()
-  execute ":Calendar"
-  if exists("g:calendar_open")
-    if g:calendar_open == 1
-      execute "q"
-      unlet g:calendar_open
-    else
-      g:calendar_open = 1
-    end
-  else
-    let g:calendar_open = 1
-  end
-endfunction
-
-" Slimux
-let g:slimux_select_from_current_window = 1
-
-" Keybindings ================================================================
-
-" Extra easy escape with jj or kk
-inoremap jj <esc>
-inoremap kk <esc>
-
-
-" stop highlighting after I searched
-nmap <silent> // :nohlsearch<cr>
-
-" toggle paste mode
-nmap <leader>pp :set paste!<cr>
-
-
-" Nerdtree
-map <C-e> :NERDTreeToggle<CR>
-
-" Navigation without <c-w> (which closes tabs)
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
-
-" Vimwiki
-:autocmd FileType vimwiki map <leader>d :VimwikiMakeDiaryNote<CR>
-:autocmd FileType vimwiki map <leader>c :call ToggleCalendar()<CR>
-
-" FZF instead of ctrl-p
-map <C-p> :Files<CR>
-
-" Slimux
-map <Leader>s :SlimuxREPLSendLine<CR>
-vmap <Leader>s :SlimuxREPLSendSelection<CR>
-map <Leader>a :SlimuxShellLast<CR>
-map <Leader>k :SlimuxSendKeysLast<CR>
-
-" Ale keybindings
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nmap <C-f> <Plug>(ale_fix)
-nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
-autocmd FileType python          nnoremap <buffer> <C-]> :call jedi#goto()<CR>
-
-" Nvim terminal
-" Escape the terminal
-tnoremap <Esc> <C-\><C-n>
-
+" Key Mappings
+let mapleader = " "         " Spacebar is the best Leader key
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>w :w<CR>   " Quick save
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))

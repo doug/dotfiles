@@ -20,6 +20,8 @@
   pretty = %C(yellow)%h%Creset %s %C(magenta)(%an, %cr)%Creset
 [branch "master"]
   remote = origin
+[branch "main"]
+  remote = origin
 [push]
   default = current
 [merge]

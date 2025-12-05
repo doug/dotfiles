@@ -4,4 +4,3 @@ vim/.config/nvim/bundle
 tmux/.tmux/plugins/tmux-*
 *-rplugin~
 .DS_Store
-**/.DS_Store
