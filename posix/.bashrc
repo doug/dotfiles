@@ -22,3 +22,4 @@ eval "$(starship init bash)"
 # User-specific local configurations.
 [ -f ~/.localrc ] && source ~/.localrc
 
+. "$HOME/.cargo/env"
