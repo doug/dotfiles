@@ -111,6 +111,7 @@ let g:wiki_root = '~/notes'             " SET YOUR VAULT PATH HERE
 let g:wiki_filetypes = ['md']
 let g:wiki_link_extension = '.md'
 let g:wiki_link_target_type = 'md'
+let g:wiki_fzf_pages_opts = '--reverse'
 
 let g:vim_markdown_folding_level = 2    " Sensible default folding
 let g:vim_markdown_frontmatter = 1      " Support YAML metadata
@@ -118,13 +119,15 @@ let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_edit_url_in_browser = 1
 
 " Note Navigation
-nnoremap <leader>wf :WikiFzfPages<CR>
-nnoremap <leader>wb :WikiFzfBacklinks<CR>
-nnoremap <leader>wt :WikiFzfTags<CR>
+nnoremap <leader>wf :WikiPages<CR>
+nnoremap <leader>wt :WikiTags<CR>
 
-" Search across the entire vault (Requires ripgrep)
-nnoremap <leader>fg :Rg<CR>
+" Backlinks: This will list all files that link to your current note
+nnoremap <leader>wb :WikiGraphRelated<CR>
+
+" General Search (The standard fzf.vim commands)
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :Rg<CR>
 
 " Markdown Preview
 nnoremap <leader>mp :MarkdownPreviewToggle<CR>
