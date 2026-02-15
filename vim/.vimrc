@@ -41,6 +41,11 @@ nnoremap <silent> <Esc> :nohlsearch<CR><Esc>
 " -----------------------------------------------------------------------------
 set clipboard+=unnamed      " Sync Vim's clipboard with the system clipboard
 " set clipboard+=unnamedplus      " Sync Vim's clipboard with the system clipboard
+" Create the directory if it doesn't exist
+if !isdirectory($HOME . '/.vim/undo')
+    call mkdir($HOME . '/.vim/undo', 'p', 0700)
+endif
+set undodir=~/.vim/undo  " Set the central undo directory
 set undofile                " Persist undo history across sessions
 set noswapfile              " Disable swap files (modern systems rarely need them)
 vnoremap p "_dP             " Prevent replacing visual selection from overwriting the clipboard
@@ -68,6 +73,15 @@ Plug 'junegunn/fzf.vim'         " Fuzzy finder mappings
 Plug 'ellisonleao/gruvbox.nvim' " A high-quality retro theme (Neovim optimised)
 Plug 'vim-airline/vim-airline'  " Lean status line
 
+" Navigation & Knowledge Graph
+Plug 'lervag/wiki.vim'                " The 'articulate' linking engine
+
+" Markdown Sovereignty
+Plug 'preservim/vim-markdown'         " Folding and syntax
+Plug 'godlygeek/tabular'              " Necessary for table alignment
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
+
 call plug#end()
 
 " -----------------------------------------------------------------------------
@@ -89,6 +103,47 @@ let mapleader = " "         " Spacebar is the best Leader key
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>w :w<CR>   " Quick save
+
+" -----------------------------------------------------------------------------
+" 8. WIKI CONFIG
+" -----------------------------------------------------------------------------
+let g:wiki_root = '~/notes'             " SET YOUR VAULT PATH HERE
+let g:wiki_filetypes = ['md']
+let g:wiki_link_extension = '.md'
+let g:wiki_link_target_type = 'md'
+
+let g:vim_markdown_folding_level = 2    " Sensible default folding
+let g:vim_markdown_frontmatter = 1      " Support YAML metadata
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_edit_url_in_browser = 1
+
+" Note Navigation
+nnoremap <leader>wf :WikiFzfPages<CR>
+nnoremap <leader>wb :WikiFzfBacklinks<CR>
+nnoremap <leader>wt :WikiFzfTags<CR>
+
+" Search across the entire vault (Requires ripgrep)
+nnoremap <leader>fg :Rg<CR>
+nnoremap <leader>ff :Files<CR>
+
+" Markdown Preview
+nnoremap <leader>mp :MarkdownPreviewToggle<CR>
+
+" Quick Wikilink Creation (Visual Mode: select text and press [[ )
+vnoremap [[ s[[<C-r>"]][<Esc>
+
+" --- AUTOCMDS ---
+augroup FoamStyle
+  autocmd!
+  " Enable spellcheck for notes
+  autocmd FileType markdown setlocal spell
+  " Wrap text at 80 characters for readability
+  autocmd FileType markdown setlocal textwidth=80
+augroup END
+
+" -----------------------------------------------------------------------------
+" 9. LOCAL
+" -----------------------------------------------------------------------------
 
 " Load local overides and extensions
 if filereadable(expand('~/.vimrc.local'))
