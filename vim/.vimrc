@@ -117,6 +117,7 @@ let g:vim_markdown_folding_level = 2    " Sensible default folding
 let g:vim_markdown_frontmatter = 1      " Support YAML metadata
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_edit_url_in_browser = 1
+set foldlevelstart = 99                 " Default to open everything
 
 " Note Navigation
 nnoremap <leader>wf :WikiPages<CR>
