@@ -20,8 +20,8 @@ set background=dark         " Assume a dark background
 " -----------------------------------------------------------------------------
 " 3. TABULATIONS & INDENTATION (The "Spaces > Tabs" Standard)
 " -----------------------------------------------------------------------------
-set tabstop=2               " A tab is 4 spaces wide
-set shiftwidth=2            " Indents are 4 spaces wide
+set tabstop=2               " A tab is 2 spaces wide
+set shiftwidth=2            " Indents are 2 spaces wide
 set expandtab               " Convert tabs to spaces (essential for Python/YAML)
 set autoindent              " Copy indentation from previous line
 set smartindent             " Smarter indentation logic for C-like languages
@@ -39,8 +39,7 @@ nnoremap <silent> <Esc> :nohlsearch<CR><Esc>
 " -----------------------------------------------------------------------------
 " 5. SYSTEM INTEGRATION
 " -----------------------------------------------------------------------------
-set clipboard+=unnamed      " Sync Vim's clipboard with the system clipboard
-" set clipboard+=unnamedplus      " Sync Vim's clipboard with the system clipboard
+set clipboard+=unnamedplus  " Sync Vim's clipboard with the system clipboard
 " Create the directory if it doesn't exist
 if !isdirectory($HOME . '/.vim/undo')
     call mkdir($HOME . '/.vim/undo', 'p', 0700)
@@ -117,7 +116,7 @@ let g:vim_markdown_folding_level = 2    " Sensible default folding
 let g:vim_markdown_frontmatter = 1      " Support YAML metadata
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_edit_url_in_browser = 1
-set foldlevelstart = 99                 " Default to open everything
+set foldlevelstart=99                 " Default to open everything
 
 " Note Navigation
 nnoremap <leader>wf :WikiPages<CR>

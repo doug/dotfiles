@@ -26,6 +26,11 @@
 *.zip
 
 
+# Environment #
+###############
+.env
+.env.*
+
 # OS generated files #
 ######################
 .DS_Store
@@ -37,6 +42,3 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-# Other reps types #
-####################
-.svn
