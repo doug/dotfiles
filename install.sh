@@ -110,7 +110,15 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     pushd "$HOME/.dotfiles"
-    stow zsh vim tmux git
+    if ! stow zsh vim tmux git 2>/tmp/stow_err; then
+      cat /tmp/stow_err
+      echo "Stow failed due to conflicts. Force overwrite existing files? [yN]"
+      read force
+      if [[ "$force" =~ ^[Yy]$ ]]; then
+        stow --adopt zsh vim tmux git
+        git checkout -- zsh vim tmux git
+      fi
+    fi
     popd
   fi
 
