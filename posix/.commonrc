@@ -155,6 +155,9 @@ function screenrecord {
 alias encrypt="openssl aes-256-cbc"
 alias decrypt="openssl aes-256-cbc -d"
 
+# Podman
+export PODMAN_COMPOSE_PROVIDER_NO_WARNING=1
+
 # FZF
 
 if hash fzf 2>/dev/null; then
