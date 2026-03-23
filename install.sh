@@ -38,10 +38,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$platform" == "Linux" ]]; then
       if command -v apt-get >/dev/null 2>&1; then
         sudo apt-get -y install git build-essential libclang-dev \
-          tmux vim neovim stow ripgrep fzf ffmpeg imagemagick
+          tmux vim neovim stow ripgrep fzf ffmpeg imagemagick podman uv
       elif command -v pacman >/dev/null 2>&1; then
         sudo pacman -S git vim tmux base-devel \
-          libclang-dev stow neovim ripgrep fzf starship zoxide ffmpeg imagemagick
+          libclang-dev stow neovim ripgrep fzf starship zoxide ffmpeg imagemagick podman uv
       else
         echo 'unknown package manager.'
       fi
@@ -68,7 +68,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         if [[ ! -d "$HOME/.nvm" ]] && ! command -v nvm >/dev/null 2>&1; then
           nvm_was_missing=true
         fi
-        brew install git wget tmux stow neovim ripgrep fzf starship zoxide ffmpeg imagemagick nvm claude-code
+        brew install git wget tmux stow neovim ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code
         brew install --cask google-chrome vscodium ghostty
         if [[ "$nvm_was_missing" == true ]]; then
           export NVM_DIR="$HOME/.nvm"
@@ -79,6 +79,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
       else
         echo 'Must have homebrew installed, rerun this script.'
       fi
+    fi
+    # Install podman-compose via uv
+    if command -v uv >/dev/null 2>&1 && ! command -v podman-compose >/dev/null 2>&1; then
+      uv tool install podman-compose
     fi
   fi
 
