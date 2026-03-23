@@ -41,7 +41,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
           tmux vim neovim stow ripgrep fzf ffmpeg imagemagick podman uv
       elif command -v pacman >/dev/null 2>&1; then
         sudo pacman -S git vim tmux base-devel \
-          libclang-dev stow neovim ripgrep fzf starship zoxide ffmpeg imagemagick podman uv
+          libclang-dev stow neovim helix ripgrep fzf starship zoxide ffmpeg imagemagick podman uv
       else
         echo 'unknown package manager.'
       fi
@@ -53,6 +53,15 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         if ! command -v zoxide >/dev/null 2>&1; then
           curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
         fi
+        if ! command -v hx >/dev/null 2>&1; then
+          sudo add-apt-repository -y ppa:maveonair/helix-editor
+          sudo apt-get update
+          sudo apt-get -y install helix
+        fi
+      fi
+      # jj is not in apt/pacman, install via cargo
+      if ! command -v jj >/dev/null 2>&1 && command -v cargo >/dev/null 2>&1; then
+        cargo install jj-cli
       fi
       # nvm is not available via apt/pacman, install via official script
       if ! command -v nvm >/dev/null 2>&1 && [[ ! -d "$HOME/.nvm" ]]; then
@@ -68,8 +77,8 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         if [[ ! -d "$HOME/.nvm" ]] && ! command -v nvm >/dev/null 2>&1; then
           nvm_was_missing=true
         fi
-        brew install git wget tmux stow neovim ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code
-        brew install --cask google-chrome vscodium ghostty
+        brew install git wget tmux stow neovim helix jj ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code
+        brew install --cask google-chrome vscodium ghostty tailscale
         if [[ "$nvm_was_missing" == true ]]; then
           export NVM_DIR="$HOME/.nvm"
           . "$(brew --prefix nvm)/nvm.sh"

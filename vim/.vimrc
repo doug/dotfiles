@@ -53,9 +53,13 @@ vnoremap p "_dP             " Prevent replacing visual selection from overwritin
 " 6. PLUGINS (Requires vim-plug)
 " -----------------------------------------------------------------------------
 " Automatic installation of vim-plug if missing
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let s:plug_path = '~/.vim/autoload/plug.vim'
+if has('nvim')
+  let s:plug_path = stdpath('data') . '/site/autoload/plug.vim'
+endif
+if empty(glob(s:plug_path))
+  execute 'silent !curl -fLo ' . s:plug_path . ' --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -78,7 +82,7 @@ Plug 'lervag/wiki.vim'                " The 'articulate' linking engine
 " Markdown Sovereignty
 Plug 'preservim/vim-markdown'         " Folding and syntax
 Plug 'godlygeek/tabular'              " Necessary for table alignment
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 
 call plug#end()
