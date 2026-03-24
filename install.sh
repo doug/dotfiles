@@ -123,13 +123,17 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     pushd "$HOME/.dotfiles"
-    if ! stow zsh vim tmux git ghostty claude gemini 2>/tmp/stow_err; then
+    stow_packages=(zsh vim tmux git ghostty claude gemini)
+    if [[ "$platform" == "Linux" ]]; then
+      stow_packages+=(i3 linux conky)
+    fi
+    if ! stow "${stow_packages[@]}" 2>/tmp/stow_err; then
       cat /tmp/stow_err
       echo "Stow failed due to conflicts. Force overwrite existing files? [yN]"
       read force
       if [[ "$force" =~ ^[Yy]$ ]]; then
-        stow --adopt zsh vim tmux git
-        git checkout -- zsh vim tmux git
+        stow --adopt "${stow_packages[@]}"
+        git checkout -- "${stow_packages[@]}"
       fi
     fi
     popd
