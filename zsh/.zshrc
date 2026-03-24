@@ -222,6 +222,47 @@ function screenrecord {
   fi
 }
 
+function dev() {
+  local name="${1:-dev}"
+  local dir="${2:-.}"
+
+  # If session exists, attach to it
+  if tmux has-session -t "$name" 2>/dev/null; then
+    if [[ -n "$TMUX" ]]; then
+      tmux switch-client -t "$name"
+    else
+      tmux attach-session -t "$name"
+    fi
+    return
+  fi
+
+  # Resolve directory
+  dir="$(cd "$dir" 2>/dev/null && pwd)" || { echo "Invalid directory: $2"; return 1; }
+
+  # Create new session
+  tmux new-session -d -s "$name" -n main -c "$dir"
+
+  # Bottom terminal (20% height)
+  tmux split-window -t "$name" -v -p 20 -c "$dir"
+
+  # Claude on right (35% width of top pane)
+  tmux select-pane -t "$name":main.0
+  tmux split-window -t "$name" -h -p 35 -c "$dir" 'claude'
+
+  # Helix in left pane
+  tmux send-keys -t "$name":main.0 'hx .' Enter
+
+  # Focus editor
+  tmux select-pane -t "$name":main.0
+
+  # Attach or switch
+  if [[ -n "$TMUX" ]]; then
+    tmux switch-client -t "$name"
+  else
+    tmux attach-session -t "$name"
+  fi
+}
+
 
 # - - - - - - - - - - - - - - - - - - - -
 # FZF Functions
