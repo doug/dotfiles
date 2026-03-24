@@ -209,6 +209,12 @@ function randpw() {
   dd if=/dev/urandom bs=1 count=16 2>/dev/null | base64 | rev | cut -b 2- | rev
 }
 
+function img() {
+  local opts=(--format=kitty --scale=max --align=center --polite=on)
+  [[ -n "$TMUX" ]] && opts+=(--passthrough=tmux)
+  chafa "${opts[@]}" "$@"
+}
+
 function jjpush() {
   jj describe -m "$1" && jj bookmark set main -r @ && jj git push
 }
@@ -242,18 +248,18 @@ function dev() {
   # Create new session
   tmux new-session -d -s "$name" -n main -c "$dir"
 
-  # Bottom terminal (20% height)
-  tmux split-window -t "$name" -v -p 20 -c "$dir"
+  # Bottom terminal (fixed 5 lines)
+  tmux split-window -t "$name" -v -l 5 -c "$dir"
 
-  # Claude on right (35% width of top pane)
+  # AI on right (35% width of top pane)
   tmux select-pane -t "$name":main.0
   tmux split-window -t "$name" -h -p 35 -c "$dir" 'claude'
 
   # Helix in left pane
   tmux send-keys -t "$name":main.0 'hx .' Enter
 
-  # Focus editor
-  tmux select-pane -t "$name":main.0
+  # Focus Claude pane
+  tmux select-pane -t "$name":main.1
 
   # Attach or switch
   if [[ -n "$TMUX" ]]; then
@@ -353,6 +359,16 @@ fi
 command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+if [[ "$(uname)" == "Darwin" ]] && command -v brew >/dev/null 2>&1; then
+  [ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"
+  [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
+else
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
 
 # User-specific local configurations
 [ -f ~/.localrc ] && source ~/.localrc
