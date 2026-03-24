@@ -153,6 +153,9 @@ alias lsa='ls -lah'
 # Git
 alias s="git status"
 
+# tmux attach or create session
+alias ta='tmux new-session -A -s'
+
 # Sound (requires sox)
 alias noise="play -c 2 -n synth pinknoise band -n 2500 4000 reverb 20"
 alias gamma="play -n synth sin 315 sin 365 remix 1 2"
@@ -204,6 +207,10 @@ function replace-all() {
 
 function randpw() {
   dd if=/dev/urandom bs=1 count=16 2>/dev/null | base64 | rev | cut -b 2- | rev
+}
+
+function jjpush() {
+  jj describe -m "$1" && jj bookmark set main -r @ && jj git push
 }
 
 function screenrecord {
