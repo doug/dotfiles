@@ -1,0 +1,7 @@
+[[plugin.deps]]
+use = "yazi-rs/flavors:gruvbox-dark"
+rev = "9511cb0"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[flavor]
+deps = []
