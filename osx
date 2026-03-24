@@ -1,57 +1,53 @@
+#!/bin/bash
 # macOS defaults
 
+# Keyboard
 echo "Re-enable key repeat"
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
+defaults write -g ApplePressAndHoldEnabled -bool false
 echo "Set a blazingly fast keyboard repeat rate"
-defaults write NSGlobalDomain KeyRepeat -int 1
-
-echo "Set a shorter Delay until key repeat"
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
-
+defaults write -g KeyRepeat -int 1
+echo "Set a shorter delay until key repeat"
+defaults write -g InitialKeyRepeat -int 10
 echo "Disable auto-correct"
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 
-echo "Show all filename extensions in Finder"
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-echo "Show the ~/Library folder"
-chflags nohidden ~/Library
-
-echo "Require password immediately after sleep or screen saver begins"
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-echo "Enable tap to click (Trackpad)"
+# Trackpad
+echo "Enable tap to click"
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-
 echo "Enable two-finger tap for right-click"
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+defaults write -currentHost -g com.apple.trackpad.enableSecondaryClick -bool true
 
+# Finder
+echo "Show all filename extensions"
+defaults write -g AppleShowAllExtensions -bool true
+echo "Show the ~/Library folder"
+chflags nohidden ~/Library
 echo "Disable the warning when changing a file extension"
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-echo "Use current directory as default search scope in Finder"
+echo "Use current directory as default search scope"
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
-echo "Show Path bar in Finder"
+echo "Show Path bar"
 defaults write com.apple.finder ShowPathbar -bool true
-
-echo "Show Status bar in Finder"
+echo "Show Status bar"
 defaults write com.apple.finder ShowStatusBar -bool true
-
-#echo "Show hidden files in Finder"
+#echo "Show hidden files"
 #defaults write com.apple.finder AppleShowAllFiles -bool true
 
+# Dock & UI
 echo "Auto-hide the Dock"
 defaults write com.apple.dock autohide -bool true
-
 echo "Hide scroll bars unless scrolling"
-defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+defaults write -g AppleShowScrollBars -string "WhenScrolling"
+
+# Screen saver
+echo "Require password immediately after sleep or screen saver"
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Apply changes
+killall Finder
+killall Dock
 
 echo "Reminder: Map Caps Lock to Control in System Settings > Keyboard > Keyboard Shortcuts > Modifier Keys"
-
-killall Finder /System/Library/CoreServices/Finder.app
-killall Dock

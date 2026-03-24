@@ -123,7 +123,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     pushd "$HOME/.dotfiles"
-    if ! stow zsh vim tmux git 2>/tmp/stow_err; then
+    if ! stow zsh vim tmux git ghostty claude gemini 2>/tmp/stow_err; then
       cat /tmp/stow_err
       echo "Stow failed due to conflicts. Force overwrite existing files? [yN]"
       read force
@@ -138,7 +138,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   echo "Install Nerd Fonts? (JetBrains Mono, Fira Code) [yN]"
   read fonts
   if [[ "$fonts" =~ ^[Yy]$ ]]; then
-    NERD_FONTS=(JetBrainsMono FiraCode)
+    NERD_FONTS=(JetBrains-Mono Fira-Code Iosevka)
     if [[ "$platform" == "Darwin" ]] && command -v brew >/dev/null 2>&1; then
       for font in "${NERD_FONTS[@]}"; do
         lower=$(echo "$font" | tr '[:upper:]' '[:lower:]')
