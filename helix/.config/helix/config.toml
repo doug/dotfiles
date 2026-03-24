@@ -1,0 +1,20 @@
+theme = "gruvbox"
+
+[editor]
+line-number = "relative"
+cursorline = true
+scrolloff = 8
+true-color = true
+auto-save = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]

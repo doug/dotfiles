@@ -38,10 +38,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$platform" == "Linux" ]]; then
       if command -v apt-get >/dev/null 2>&1; then
         sudo apt-get -y install git build-essential libclang-dev \
-          tmux vim neovim stow ripgrep fzf ffmpeg imagemagick podman uv
+          tmux vim neovim mosh stow ripgrep fzf ffmpeg imagemagick podman uv
       elif command -v pacman >/dev/null 2>&1; then
         sudo pacman -S git vim tmux base-devel \
-          libclang-dev stow neovim helix ripgrep fzf starship zoxide ffmpeg imagemagick podman uv
+          libclang-dev stow neovim helix mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv
       else
         echo 'unknown package manager.'
       fi
@@ -77,7 +77,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         if [[ ! -d "$HOME/.nvm" ]] && ! command -v nvm >/dev/null 2>&1; then
           nvm_was_missing=true
         fi
-        brew install git wget tmux stow neovim helix jj ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code
+        brew install git wget tmux stow neovim helix jj mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code
         brew install --cask google-chrome vscodium ghostty tailscale
         if [[ "$nvm_was_missing" == true ]]; then
           export NVM_DIR="$HOME/.nvm"
@@ -123,7 +123,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     pushd "$HOME/.dotfiles"
-    stow_packages=(zsh vim tmux git ghostty claude gemini)
+    stow_packages=(zsh vim tmux git ghostty helix claude gemini)
     if [[ "$platform" == "Linux" ]]; then
       stow_packages+=(i3 linux conky)
     fi
