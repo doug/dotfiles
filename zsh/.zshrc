@@ -228,9 +228,40 @@ function screenrecord {
   fi
 }
 
+function ai() {
+  local name="${1:-ai}"
+  local dir="${2:-.}"
+  local ai_cmd="claude"
+
+  # If session exists, attach to it
+  if tmux has-session -t "$name" 2>/dev/null; then
+    if [[ -n "$TMUX" ]]; then
+      tmux switch-client -t "$name"
+    else
+      tmux attach-session -t "$name"
+    fi
+    return
+  fi
+
+  # Resolve directory
+  dir="$(cd "$dir" 2>/dev/null && pwd)" || { echo "Invalid directory: $2"; return 1; }
+
+  # Create new session running AI fullscreen
+  tmux new-session -d -s "$name" -n main -c "$dir" "$ai_cmd"
+
+  # Attach or switch
+  if [[ -n "$TMUX" ]]; then
+    tmux switch-client -t "$name"
+  else
+    tmux attach-session -t "$name"
+  fi
+}
+
 function dev() {
   local name="${1:-dev}"
   local dir="${2:-.}"
+  local editor_cmd="hx ."
+  local ai_cmd="claude"
 
   # If session exists, attach to it
   if tmux has-session -t "$name" 2>/dev/null; then
@@ -253,12 +284,12 @@ function dev() {
 
   # AI on right (35% width of top pane)
   tmux select-pane -t "$name":main.0
-  tmux split-window -t "$name" -h -p 35 -c "$dir" 'claude'
+  tmux split-window -t "$name" -h -p 35 -c "$dir" "$ai_cmd"
 
-  # Helix in left pane
-  tmux send-keys -t "$name":main.0 'hx .' Enter
+  # Editor in left pane
+  tmux send-keys -t "$name":main.0 "$editor_cmd" Enter
 
-  # Focus Claude pane
+  # Focus AI pane
   tmux select-pane -t "$name":main.1
 
   # Attach or switch
