@@ -129,7 +129,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     pushd "$HOME/.dotfiles"
-    stow_packages=(zsh vim tmux git ghostty helix claude gemini yazi)
+    stow_packages=(zsh vim tmux git ghostty helix claude gemini yazi ssh)
     if [[ "$platform" == "Linux" ]]; then
       stow_packages+=(i3 linux conky)
     fi
@@ -173,6 +173,13 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         fc-cache -fv
       fi
     fi
+  fi
+
+  # Ensure ~/.ssh/config.local exists for machine-specific SSH hosts
+  if [[ ! -f "$HOME/.ssh/config.local" ]]; then
+    mkdir -p "$HOME/.ssh"
+    touch "$HOME/.ssh/config.local"
+    chmod 600 "$HOME/.ssh/config.local"
   fi
 
   echo "Update gitconfig.local? [yN] "

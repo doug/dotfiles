@@ -22,7 +22,7 @@ Personal dotfiles repo for macOS and Linux. Shell is zsh. Configs are symlinked 
 
 ## Stow Packages
 
-Default packages stowed on both platforms: `zsh vim tmux git ghostty helix claude gemini`
+Default packages stowed on both platforms: `zsh vim tmux git ghostty helix claude gemini ssh`
 
 Linux-only packages: `i3 linux conky`
 
