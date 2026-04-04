@@ -8,6 +8,10 @@ scrolloff    = 5
 max_width  = 4000
 max_height = 4000
 
+[[plugin.prepend_previewers]]
+mime = "application/pdf"
+run  = "pdf-preview"
+
 [[plugin.prepend_fetchers]]
 id  = "git"
 url = "*"
