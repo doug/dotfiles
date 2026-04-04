@@ -1,3 +1,20 @@
 [mgr]
-show_hidden = true
+show_hidden  = true
+linemode     = "size"
+sort_by      = "natural"
+scrolloff    = 5
+
+[preview]
+max_width  = 4000
+max_height = 4000
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*/"
+run = "git"
 
