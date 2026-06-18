@@ -8,6 +8,7 @@
 ## Language & Tool Preferences
 - Python: use `uv` for package management, virtual environments, and builds. Not pip, pipenv, or poetry.
 - Node: use `nvm` for version management.
+- TypeScript: never use `npx tsc`. Use `./node_modules/.bin/tsc` or run via the project's package.json scripts (e.g., `npm run build`, `npm run typecheck`). If neither exists, install typescript locally first (`npm install typescript`), then use `./node_modules/.bin/tsc`.
 - Containers: use `podman` and `podman-compose`, not docker.
 - Search: use `rg` (ripgrep), not grep or ag.
 - Git: default branch is `main`, pull with rebase, merge with diff3 conflict style.

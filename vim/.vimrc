@@ -149,6 +149,19 @@ augroup FoamStyle
 augroup END
 
 " -----------------------------------------------------------------------------
+" Auto-reload files changed on disk (e.g. by Claude Code in another tmux pane)
+" -----------------------------------------------------------------------------
+" 'autoread' is already set by vim-sensible; these make it actually fire in a
+" terminal by polling on focus / buffer-enter / cursor-hold.
+augroup AutoReloadDisk
+  autocmd!
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+        \ if mode() !=# 'c' && getcmdwintype() ==# '' | checktime | endif
+  autocmd FileChangedShellPost *
+        \ echohl WarningMsg | echo 'File reloaded from disk' | echohl None
+augroup END
+
+" -----------------------------------------------------------------------------
 " 9. LOCAL
 " -----------------------------------------------------------------------------
 
