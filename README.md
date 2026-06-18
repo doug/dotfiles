@@ -1,26 +1,45 @@
 dotfiles
 ========
 
-everybody has one, these are mine
+everybody has one, these are mine.
 
-Main setup (OSX or Linux): bash + tmux + vim + vscode + mosh + i3
+macOS (Apple Silicon) and Linux. Shell is zsh; editor is neovim. Core setup is
+zsh + tmux + neovim + ghostty + yazi + mosh, with i3 on Linux. Version control is
+git and jj (jujutsu).
 
-(also has some fish config support)
+Configs are symlinked into `$HOME` with GNU stow — each top-level directory is a
+stow package that mirrors the `$HOME` layout.
 
-Installation is managed with GNU stow.
+## Install
 
-After installing stow with your packagemanager of choice then install individual
-packages with
+Interactive setup (prompts for each section: OS defaults, packages, toolchains,
+symlinks, fonts, git identity):
 
-`stow vim`
+```
+bash install.sh
+```
 
-etc
+Or symlink packages by hand:
 
-## install.sh
+```
+cd ~/.dotfiles
+stow zsh vim tmux git ghostty claude gemini yazi ssh   # both platforms
+stow i3 linux conky                                     # Linux only
+```
 
-Auto install is handled with `install.sh`.
+Force past conflicts: `stow --adopt <packages>` then `git checkout -- <packages>`.
 
-## Tmux
+## Local overrides
 
-Be sure to install tmux plugins and prefix + I to install tpm plugins
+Machine-specific settings stay out of git via local include files:
+`~/.gitconfig.local`, `~/.ssh/config.local`, `~/.vimrc.local`, `~/.localrc`.
 
+## tmux
+
+After stowing, install the plugin manager and plugins:
+
+```
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Then open tmux and press `prefix + I` to install the configured plugins.

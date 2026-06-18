@@ -1,0 +1,26 @@
+# jj (jujutsu) user config — shared, tracked in dotfiles.
+# Machine-specific identity lives in ~/.config/jj/conf.d/00-identity.toml
+# (untracked), written by install.sh. jj merges config.toml with conf.d/*.toml.
+
+[ui]
+default-command = "log"   # bare `jj` shows the log
+editor = "nvim"           # for `jj describe` / commit messages
+merge-editor = "vimdiff"  # 3-way conflict resolution in nvim
+pager = ":builtin"        # jj's built-in pager (no external dependency)
+diff-formatter = ":git"   # familiar git-style diffs
+
+[git]
+# Automatically create a local bookmark tracking each fetched remote bookmark —
+# smoother for a git-centric / git-colocated workflow.
+auto-local-bookmark = true
+
+[revset-aliases]
+# Nearest bookmark at or behind a given revision — used by `jj tug`.
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+
+[aliases]
+# Move the closest bookmark up to the parent of the working copy (the classic
+# "tug" — keeps a branch pointer following your work).
+tug = ['bookmark', 'move', '--from', 'closest_bookmark(@-)', '--to', '@-']
+# Log including the operation/remote bookmarks view.
+la = ['log', '-r', 'all()']

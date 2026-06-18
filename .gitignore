@@ -1,7 +1,4 @@
-fish/.config/fish/fishd*
-fish/.config/fish/fish_history
 vim/.config/nvim/bundle
-tmux/.tmux/plugins/tmux-*
 *-rplugin~
 .DS_Store
 .claude/settings.local.json

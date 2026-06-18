@@ -56,8 +56,6 @@ unsetopt bg_nice
 unsetopt hup
 unsetopt check_jobs
 
-setopt correct                  # Command corrections
-
 # Completion
 setopt complete_in_word
 setopt always_to_end
@@ -148,7 +146,6 @@ fi
 alias l='ls -lah'
 alias la='ls -lAh'
 alias ll='ls -lh'
-alias lsa='ls -lah'
 
 # Git
 alias s="git status"
@@ -184,12 +181,13 @@ alias decrypt="openssl aes-256-cbc -d"
 # - - - - - - - - - - - - - - - - - - - -
 
 function server() {
-  python3 -m http.server 8080 &
-  if [[ "$(uname)" == "Darwin" ]]; then
-    open http://localhost:8080/
-  else
-    xdg-open http://localhost:8080/
-  fi
+  local port="${1:-8080}"
+  local opener
+  [[ "$(uname)" == "Darwin" ]] && opener=open || opener=xdg-open
+  # Open the browser after the server has had a moment to bind the port, then run
+  # the server in the foreground so Ctrl-C stops it cleanly.
+  ( sleep 1; "$opener" "http://localhost:$port/" ) &
+  python3 -m http.server "$port"
 }
 
 function digga() {
@@ -224,7 +222,15 @@ function screenrecord {
   if [[ "$(uname)" == "Darwin" ]]; then
     ffmpeg -f avfoundation -i "1:none" -r 25 -vcodec libx264 "$output"
   else
-    ffmpeg -f x11grab -s $(xwininfo | grep 'geometry' | awk '{split($2,a,"+"); split(a[1],b,"x"); print b[1]-b[1]%2 "x" b[2]-b[2]%2 " -i :0.0+" a[2]-a[2]%2 "," a[3]-a[3]%2;}') -r 25 -vcodec libx264 "$output"
+    # Click a window to select it; libx264 requires even dimensions, so round down.
+    local info w h x y
+    info=$(xwininfo)
+    w=$(awk '/Width:/  {print $2}'                <<< "$info")
+    h=$(awk '/Height:/ {print $2}'                <<< "$info")
+    x=$(awk '/Absolute upper-left X:/ {print $4}' <<< "$info")
+    y=$(awk '/Absolute upper-left Y:/ {print $4}' <<< "$info")
+    w=$(( w - w % 2 )); h=$(( h - h % 2 ))
+    ffmpeg -f x11grab -s "${w}x${h}" -i ":0.0+${x},${y}" -r 25 -vcodec libx264 "$output"
   fi
 }
 
@@ -260,7 +266,7 @@ function ai() {
 function dev() {
   local name="${1:-dev}"
   local dir="${2:-.}"
-  local editor_cmd="hx ."
+  local editor_cmd="nvim ."
   local ai_cmd="claude"
 
   # If session exists, attach to it

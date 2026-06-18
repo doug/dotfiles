@@ -41,7 +41,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
           tmux vim neovim mosh stow ripgrep fzf ffmpeg imagemagick podman uv yazi
       elif command -v pacman >/dev/null 2>&1; then
         sudo pacman -S git vim tmux base-devel \
-          libclang-dev stow neovim helix mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv yazi
+          libclang-dev stow neovim mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv yazi
       else
         echo 'unknown package manager.'
       fi
@@ -52,11 +52,6 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         fi
         if ! command -v zoxide >/dev/null 2>&1; then
           curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-        fi
-        if ! command -v hx >/dev/null 2>&1; then
-          sudo add-apt-repository -y ppa:maveonair/helix-editor
-          sudo apt-get update
-          sudo apt-get -y install helix
         fi
       fi
       # jj and viu are not in apt/pacman, install via cargo
@@ -83,7 +78,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         if [[ ! -d "$HOME/.nvm" ]] && ! command -v nvm >/dev/null 2>&1; then
           nvm_was_missing=true
         fi
-        brew install git wget tmux stow neovim helix jj mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code yazi viu glow soft-serve
+        brew install git wget tmux stow neovim jj mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code yazi viu glow soft-serve
         brew install --cask google-chrome vscodium ghostty tailscale
         if [[ "$nvm_was_missing" == true ]]; then
           export NVM_DIR="$HOME/.nvm"
@@ -129,7 +124,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
   read symlinks
   if [[ "$symlinks" =~ ^[Yy]$ ]]; then
     pushd "$HOME/.dotfiles"
-    stow_packages=(zsh vim tmux git ghostty helix claude gemini yazi ssh)
+    # Ensure ~/.config/jj exists as a real dir so stow symlinks only config.toml
+    # (prevents stow from folding the whole dir and capturing local conf.d files).
+    mkdir -p "$HOME/.config/jj/conf.d"
+    stow_packages=(zsh vim tmux git ghostty claude gemini yazi jj ssh)
     if [[ "$platform" == "Linux" ]]; then
       stow_packages+=(i3 linux conky)
     fi
@@ -182,7 +180,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     chmod 600 "$HOME/.ssh/config.local"
   fi
 
-  echo "Update gitconfig.local? [yN] "
+  echo "Set git + jj identity (name/email)? [yN] "
   read gitconfig
   if [[ "$gitconfig" =~ ^[Yy]$ ]]; then
     echo > "$HOME/.gitconfig.local"
@@ -201,13 +199,23 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     elif [[ "$platform" == "Darwin" ]]; then
       git config -f "$HOME/.gitconfig.local" credential.helper osxkeychain
     fi
+    # jj identity: machine-specific, kept out of the tracked jj config.
+    # jj merges ~/.config/jj/config.toml with ~/.config/jj/conf.d/*.toml.
+    mkdir -p "$HOME/.config/jj/conf.d"
+    cat > "$HOME/.config/jj/conf.d/00-identity.toml" <<EOF
+# Machine-specific jj identity. Not tracked in dotfiles.
+[user]
+name = "$name"
+email = "$email"
+EOF
   fi
 
-  if [[ ! -d "$HOME/.tmux" ]]; then
-    echo "Install tmux plugins? [yN] "
+  if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+    echo "Install tmux plugin manager (tpm)? [yN] "
     read tmux
     if [[ "$tmux" =~ ^[Yy]$ ]]; then
       git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+      echo "tpm installed. Open tmux and press 'prefix + I' to install plugins."
     fi
   fi
 

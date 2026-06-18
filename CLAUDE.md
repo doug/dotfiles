@@ -22,9 +22,13 @@ Personal dotfiles repo for macOS and Linux. Shell is zsh. Configs are symlinked 
 
 ## Stow Packages
 
-Default packages stowed on both platforms: `zsh vim tmux git ghostty helix claude gemini ssh`
+Default packages stowed on both platforms: `zsh vim tmux git ghostty claude gemini yazi jj ssh`
 
 Linux-only packages: `i3 linux conky`
+
+The `jj` package ships shared jujutsu config in `jj/.config/jj/config.toml`.
+Machine-specific jj identity stays untracked in `~/.config/jj/conf.d/00-identity.toml`
+(written by `install.sh`); jj merges that with the shared config.
 
 ## Tool Installation
 

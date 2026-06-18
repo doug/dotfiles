@@ -19,8 +19,8 @@ export PATH=$HOME/.local/bin:$HOME/bin:$PATH
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # Editor
-if command -v code >/dev/null 2>&1; then
-  export EDITOR=code
+if command -v nvim >/dev/null 2>&1; then
+  export EDITOR=nvim
 else
   export EDITOR=vim
 fi

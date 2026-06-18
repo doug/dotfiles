@@ -1,14 +1,6 @@
 [alias]
   co = checkout
   l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
-  branchpoint = codereview branchpoint
-  change = codereview change
-  gofmt = codereview gofmt
-  mail = codereview mail
-  pending = codereview pending
-  rebase-work = codereview rebase-work
-  submit = codereview submit
-  sync = codereview sync
 [color]
   ui = true
 [core]
@@ -18,16 +10,14 @@
   whitespace = nowarn
 [format]
   pretty = %C(yellow)%h%Creset %s %C(magenta)(%an, %cr)%Creset
-[branch "master"]
-  remote = origin
-[branch "main"]
-  remote = origin
 [push]
   default = current
 [merge]
   tool = vimdiff
   prompt = false
-  conflictstyle = diff3
+  conflictstyle = zdiff3
+[rerere]
+  enabled = true
 [include]
   path = ~/.gitconfig.local
 [filter "lfs"]
