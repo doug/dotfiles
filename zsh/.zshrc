@@ -306,6 +306,11 @@ function dev() {
   fi
 }
 
+# For preview of markdown side by side in tmux and vim
+function glowatch() {
+  # If $1 is empty, default to "*.md". Otherwise, use $1.
+  find . -name "${1:-*.md}" | entr -c glow /_
+}
 
 # - - - - - - - - - - - - - - - - - - - -
 # FZF Functions
