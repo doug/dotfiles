@@ -38,10 +38,10 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
     if [[ "$platform" == "Linux" ]]; then
       if command -v apt-get >/dev/null 2>&1; then
         sudo apt-get -y install git build-essential libclang-dev \
-          tmux vim neovim mosh stow ripgrep fzf ffmpeg imagemagick podman uv yazi
+          tmux vim neovim mosh stow ripgrep fzf ffmpeg imagemagick podman uv yazi git-delta
       elif command -v pacman >/dev/null 2>&1; then
         sudo pacman -S git vim tmux base-devel \
-          libclang-dev stow neovim mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv yazi
+          libclang-dev stow neovim mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv yazi git-delta
       else
         echo 'unknown package manager.'
       fi
@@ -54,10 +54,12 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
           curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
         fi
       fi
-      # jj and viu are not in apt/pacman, install via cargo
+      # jj and viu are not in apt/pacman, install via cargo.
+      # delta (git-delta) ships in newer apt/pacman; fall back to cargo otherwise.
       if command -v cargo >/dev/null 2>&1; then
         command -v jj >/dev/null 2>&1 || cargo install jj-cli
         command -v viu >/dev/null 2>&1 || cargo install viu
+        command -v delta >/dev/null 2>&1 || cargo install git-delta
       fi
       # glow and soft-serve are not in apt/pacman, install via go
       if command -v go >/dev/null 2>&1; then
@@ -78,7 +80,7 @@ if [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
         if [[ ! -d "$HOME/.nvm" ]] && ! command -v nvm >/dev/null 2>&1; then
           nvm_was_missing=true
         fi
-        brew install git wget tmux stow neovim jj mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code yazi viu glow soft-serve
+        brew install git wget tmux stow neovim jj mosh ripgrep fzf starship zoxide ffmpeg imagemagick podman uv nvm claude-code yazi viu glow soft-serve git-delta
         brew install --cask google-chrome vscodium ghostty tailscale
         if [[ "$nvm_was_missing" == true ]]; then
           export NVM_DIR="$HOME/.nvm"

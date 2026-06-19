@@ -5,9 +5,12 @@
 [ui]
 default-command = "log"   # bare `jj` shows the log
 editor = "nvim"           # for `jj describe` / commit messages
-merge-editor = "vimdiff"  # 3-way conflict resolution in nvim
-pager = ":builtin"        # jj's built-in pager (no external dependency)
-diff-formatter = ":git"   # familiar git-style diffs
+merge-editor = ":builtin" # jj's built-in 3-way TUI for `jj resolve`
+                          # (day-to-day: just edit the conflict markers in nvim)
+# delta renders the git-style diffs; it handles its own paging (via less) and
+# passes non-diff lines (e.g. the log graph) through untouched.
+pager = "delta"
+diff-formatter = ":git"   # git-style diffs, which delta knows how to render
 
 [git]
 # Automatically create a local bookmark tracking each fetched remote bookmark —

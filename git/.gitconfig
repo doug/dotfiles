@@ -6,6 +6,16 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true        # use n / N to move between diff sections
+  line-numbers = true
+  side-by-side = true     # old version on the left, new on the right
+  hyperlinks = true
+[diff]
+  colorMoved = default
 [apply]
   whitespace = nowarn
 [format]
@@ -13,9 +23,15 @@
 [push]
   default = current
 [merge]
-  tool = vimdiff
+  tool = fugitive
   prompt = false
   conflictstyle = zdiff3
+[mergetool "fugitive"]
+  # `git mergetool` opens fugitive's 3-way (target // working // merge) in nvim;
+  # use :diffget //2 (ours) / //3 (theirs). Day-to-day, just edit zdiff3 markers.
+  cmd = nvim -f -c "Gdiffsplit!" "$MERGED"
+[mergetool]
+  keepBackup = false
 [rerere]
   enabled = true
 [include]
