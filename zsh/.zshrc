@@ -403,13 +403,27 @@ command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-if [[ "$(uname)" == "Darwin" ]] && command -v brew >/dev/null 2>&1; then
-  [ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"
-  [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
-else
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Resolve Homebrew's nvm without calling the slow `brew` binary
+BREW_NVM_DIR=""
+for d in /opt/homebrew/opt/nvm /usr/local/opt/nvm; do
+  [[ -s "$d/nvm.sh" ]] && { BREW_NVM_DIR="$d"; break; }
+done
+
+# Source under `emulate zsh` so nvm's functions keep default options when
+# called later: extendedglob turns `${x%%#*}` in nvm_alias into a bad pattern.
+if [[ -n "$BREW_NVM_DIR" ]]; then
+  emulate zsh -c '\. "$BREW_NVM_DIR/nvm.sh"'
+  [ -s "$BREW_NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$BREW_NVM_DIR/etc/bash_completion.d/nvm"
+elif [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  # Linux, or a standard git install on macOS
+  emulate zsh -c '\. "$NVM_DIR/nvm.sh"'
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
+unset BREW_NVM_DIR d
+
+# User-installed CLIs (claude, uv tools, etc.)
+export PATH="$HOME/.local/bin:$PATH"
 
 # User-specific local configurations
 [ -f ~/.localrc ] && source ~/.localrc
