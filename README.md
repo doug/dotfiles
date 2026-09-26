@@ -32,7 +32,8 @@ Force past conflicts: `stow --adopt <packages>` then `git checkout -- <packages>
 ## Local overrides
 
 Machine-specific settings stay out of git via local include files:
-`~/.gitconfig.local`, `~/.ssh/config.local`, `~/.vimrc.local`, `~/.localrc`.
+`~/.gitconfig.local`, `~/.ssh/config.local`, `~/.vimrc.local`, `~/.localrc`,
+`~/.zprofile.local`.
 
 ## tmux
 
