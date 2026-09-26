@@ -2,10 +2,17 @@
 # Environment (loaded for ALL zsh invocations)
 # - - - - - - - - - - - - - - - - - - - -
 
-# Homebrew
-if [ -d /opt/homebrew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+typeset -U path fpath
+
+# Homebrew (equivalent to `brew shellenv`, without spawning brew on every shell)
+if [[ -d /opt/homebrew ]]; then
+  export HOMEBREW_PREFIX=/opt/homebrew
+  export HOMEBREW_CELLAR=$HOMEBREW_PREFIX/Cellar
+  export HOMEBREW_REPOSITORY=$HOMEBREW_PREFIX
+  export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
   export HOMEBREW_NO_ANALYTICS=1
+  path=($HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin $path)
+  fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 fi
 
 # Golang
@@ -19,7 +26,7 @@ export PATH=$HOME/.local/bin:$HOME/bin:$PATH
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # Editor
-if command -v nvim >/dev/null 2>&1; then
+if (( $+commands[nvim] )); then
   export EDITOR=nvim
 else
   export EDITOR=vim

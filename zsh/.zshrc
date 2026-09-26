@@ -7,7 +7,7 @@ typeset -U path
 
 # Check for required tools
 for _tool in fzf starship zoxide; do
-    if ! command -v $_tool >/dev/null 2>&1; then
+    if (( ! $+commands[$_tool] )); then
         echo "Warning: $_tool is not installed. Run install.sh or: brew install $_tool"
     fi
 done
@@ -120,7 +120,7 @@ if command -v nvim >/dev/null 2>&1; then
 fi
 
 # Platform-dependent
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$OSTYPE" == darwin* ]]; then
     alias ls="ls -G"
     alias flush="dscacheutil -flushcache"
     alias emptytrash="rm -rfv ~/.Trash"
@@ -401,30 +401,68 @@ fi
 # Tool Init (interactive only)
 # - - - - - - - - - - - - - - - - - - - -
 
-command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
-command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
-command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+# Cache each tool's generated init script, keyed on the resolved binary path so
+# an upgrade (which changes the Cellar/versioned path) regenerates it.
+function _cached_init() {
+  local name=$1 bin=${commands[$2]}
+  shift
+  [[ -n $bin ]] || return
+  local cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/$name.zsh key="# ${bin:A}" line
+  [[ -r $cache ]] && read -r line < $cache
+  if [[ $line != $key ]]; then
+    mkdir -p ${cache:h}
+    { print -r -- $key; "$@" } >| $cache
+  fi
+  source $cache
+}
+_cached_init fzf fzf --zsh
+_cached_init zoxide zoxide init zsh
+_cached_init starship starship init zsh --print-full-init
+unfunction _cached_init
 
-# NVM
+# NVM: sourcing nvm.sh takes ~1s, so put the default node on PATH directly and
+# only load nvm itself the first time it's used.
 export NVM_DIR="$HOME/.nvm"
-
-# Resolve Homebrew's nvm without calling the slow `brew` binary
-BREW_NVM_DIR=""
-for d in /opt/homebrew/opt/nvm /usr/local/opt/nvm; do
-  [[ -s "$d/nvm.sh" ]] && { BREW_NVM_DIR="$d"; break; }
+_nvm_sh=""
+for _d in /opt/homebrew/opt/nvm /usr/local/opt/nvm $NVM_DIR; do
+  [[ -s "$_d/nvm.sh" ]] && { _nvm_sh="$_d/nvm.sh"; break; }
 done
 
-# Source under `emulate zsh` so nvm's functions keep default options when
-# called later: extendedglob turns `${x%%#*}` in nvm_alias into a bad pattern.
-if [[ -n "$BREW_NVM_DIR" ]]; then
-  emulate zsh -c '\. "$BREW_NVM_DIR/nvm.sh"'
-  [ -s "$BREW_NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$BREW_NVM_DIR/etc/bash_completion.d/nvm"
-elif [[ -s "$NVM_DIR/nvm.sh" ]]; then
-  # Linux, or a standard git install on macOS
-  emulate zsh -c '\. "$NVM_DIR/nvm.sh"'
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+if [[ -n "$_nvm_sh" ]]; then
+  # Source under `emulate zsh` so nvm's functions keep default options when
+  # called later: extendedglob turns `${x%%#*}` in nvm_alias into a bad pattern.
+  function _nvm_load() {
+    unfunction nvm nvm_ls _nvm_load
+    emulate zsh -c '. "$_nvm_sh" --no-use'
+    unset _nvm_sh
+  }
+  function nvm() { _nvm_load && nvm "$@" }
+  function nvm_ls() { _nvm_load && nvm_ls "$@" }   # used by nvm's completion
+
+  # Resolve the default alias (e.g. "24", "v24.14.0", "node") to the newest
+  # matching installed version. Anything fancier (lts/*, nested aliases) falls
+  # back to loading nvm now.
+  _nvm_default=""
+  [[ -r "$NVM_DIR/alias/default" ]] && read -r _nvm_default < "$NVM_DIR/alias/default"
+  case $_nvm_default in
+    node|stable) _nvm_bin=($NVM_DIR/versions/node/v*(N/nOn)) ;;
+    v#<->*)      _nvm_bin=($NVM_DIR/versions/node/v${_nvm_default#v}(N/) \
+                           $NVM_DIR/versions/node/v${_nvm_default#v}.*(N/nOn)) ;;
+    *)           _nvm_bin=() ;;
+  esac
+  if (( $#_nvm_bin )); then
+    path=("$_nvm_bin[1]/bin" $path)
+    export NVM_BIN="$_nvm_bin[1]/bin" NVM_INC="$_nvm_bin[1]/include/node"
+  elif [[ -n $_nvm_default ]]; then
+    _nvm_load && nvm use --silent default
+  fi
+
+  _d=${_nvm_sh:h}
+  for _c in $_d/etc/bash_completion.d/nvm $_d/bash_completion; do
+    [[ -s $_c ]] && { source $_c; break; }
+  done
 fi
-unset BREW_NVM_DIR d
+unset _nvm_default _nvm_bin _d _c
 
 # User-installed CLIs (claude, uv tools, etc.)
 path=("$HOME/.local/bin" $path)
