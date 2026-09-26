@@ -30,6 +30,12 @@ The `jj` package ships shared jujutsu config in `jj/.config/jj/config.toml`.
 Machine-specific jj identity stays untracked in `~/.config/jj/conf.d/00-identity.toml`
 (written by `install.sh`); jj merges that with the shared config.
 
+The `claude` package's `CLAUDE.md` imports `~/.claude/CLAUDE.local.md` for
+machine-specific instructions (local tools, VMs, network details). That file stays
+untracked; keep anything personal there, since this repo is public.
+`settings.json` has no include mechanism, so keep it free of machine-specific
+blocks such as `autoMode.environment`.
+
 ## Tool Installation
 
 - Rust: rustup (not brew)

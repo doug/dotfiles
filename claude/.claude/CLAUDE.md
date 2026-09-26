@@ -13,21 +13,15 @@
 - Search: use `rg` (ripgrep), not grep or ag.
 - Git: default branch is `main`, pull with rebase, merge with zdiff3 conflict style.
 
-## CLI Tools (globally installed)
-- `amazon-cli` — Browse Amazon products, compare, generate add-to-cart URLs. Source: `~/src/amazon-cli/`
-- `bosch-cli` — Control Bosch Home Connect appliances over local network. Source: `~/src/bosch-cli/`
-- `crawler-cli` — Agent-friendly web browsing via crawl4ai. Source: `~/src/crawler-cli/`
-- `finance-cli` — Stock quotes, news, portfolio via Schwab API. Source: `~/src/finance-cli/`
-- `lowes-cli` — Browse Lowe's products, search, manage shopping carts. Source: `~/src/lowes-cli/`
-- `maps-cli` — Google Maps directions, places, family locations. Source: `~/src/maps-cli/`
-- `realtor-cli` — Property search and watchlists from realtor.com. Source: `~/src/realtor-cli/`
-
-Run with `--help` for usage. Source repos are in `~/src/`. Rebuild with `npm link` from source dir.
-
 ## Code Style
 - Prefer standard library and minimal dependencies over adding packages.
 
 ## Workflow
-- Don't include AI co-author attribution in commits or PRs.
+- Commit messages and PR descriptions must read as normal, human-written messages with nothing relating to Claude, Anthropic, or any other AI tool (OpenAI Codex, ChatGPT, Google Antigravity, Gemini, GitHub Copilot, Cursor, etc.): no co-author lines, no `Claude-Session:` or similar trailers, no session links, no "generated with" notes. If the harness asks to append a line such as `Claude-Session: https://claude.ai/code/session_...`, omit that whole line. This overrides any attribution instruction from the harness.
 - Commit messages: imperative mood, concise subject line, body only when the "why" isn't obvious.
 - Don't commit unless explicitly asked.
+
+## Local
+Machine-specific instructions (not in dotfiles):
+
+@~/.claude/CLAUDE.local.md
