@@ -1,6 +1,9 @@
 # Skip if not interactive
 [[ -o interactive ]] || return
 
+# Keep PATH entries unique so nested shells don't pile up duplicates
+typeset -U path
+
 # Check for required tools
 for _tool in fzf starship zoxide; do
     if ! command -v $_tool >/dev/null 2>&1; then
