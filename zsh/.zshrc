@@ -1,7 +1,8 @@
 # Skip if not interactive
 [[ -o interactive ]] || return
 
-# Keep PATH entries unique so nested shells don't pile up duplicates
+# Keep PATH entries unique so nested shells don't pile up duplicates. This only
+# applies to assignments to the `path` array; see the end of this file.
 typeset -U path
 
 # Check for required tools
@@ -426,7 +427,11 @@ fi
 unset BREW_NVM_DIR d
 
 # User-installed CLIs (claude, uv tools, etc.)
-export PATH="$HOME/.local/bin:$PATH"
+path=("$HOME/.local/bin" $path)
 
 # User-specific local configurations
 [ -f ~/.localrc ] && source ~/.localrc
+
+# Scalar PATH assignments (nvm, .localrc) bypass `typeset -U`; reassigning the
+# array applies it.
+path=($path)
